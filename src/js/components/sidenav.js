@@ -22,24 +22,25 @@ var SideNav = React.createClass({
   render: function () {
 
   	var rightNav = this.props.isLoggedIn ? (
-      <ul className="right">
-        <li className="has-dropdown">
-          <a href="#">{this.props.email}</a>
-          <ul className="dropdown">
-            <li><a href='#' onClick={this.logout}>Logout</a></li>
-          </ul>
+      <ul className="pure-menu-list">
+        <li className="pure-menu-item">
+          <a href="#" className="pure-menu-link">{this.props.email}</a>
         </li> 
+        <li className="pure-menu-item">
+          <a href='#' className="pure-menu-link" onClick={this.logout}>Logout</a>
+        </li>
+        
       </ul>
     ) : (
-      <ul className="right">
-        <li><Link to="login">Login</Link></li>
+      <ul className="pure-menu-list">
+        <li className="pure-menu-item">
+            <Link to="login" className="pure-menu-link">Login</Link>
+        </li>
       </ul>
     );
 
     var leftNav = this.props.isLoggedIn ? (
-      <ul className="left">
-       <li>we are logged in</li>
-      </ul>
+      <div></div>
     ) : (
       <div></div>
     );
@@ -54,8 +55,9 @@ var SideNav = React.createClass({
 
     <div id="menu">
         <div className="pure-menu">
-            <a className="pure-menu-heading" href="#">Company</a>
-
+            <a className="pure-menu-heading" href="#">Future Elite Sports</a>
+            {leftNav}
+            {rightNav}
             <ul className="pure-menu-list">
                 <li className="pure-menu-item"><Link to="about" className="pure-menu-link">About</Link></li>
 
@@ -66,8 +68,7 @@ var SideNav = React.createClass({
 
                 <li className="pure-menu-item"><a href="#" className="pure-menu-link">Contact</a></li>
             </ul>
-            {leftNav}
-            {rightNav}
+            
         </div>
     </div>
 

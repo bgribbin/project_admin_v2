@@ -3,6 +3,14 @@ var SmallConstants = require('../constants/constants.js');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
+var Router = require('react-router');
+var routes = require('../config/routes.js');
+
+var router = Router.create({
+  routes: routes,
+  location: null
+});
+
 var ActionTypes = SmallConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
@@ -61,6 +69,8 @@ SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
       if (action.errors) {
         _errors = action.errors;
       }
+      router.transitionTo('/profile');
+      console.log("should be done now");
       SessionStore.emitChange();
       break;
 

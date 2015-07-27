@@ -7,7 +7,8 @@ module.exports = {
   APIEndpoints: {
     LOGIN:          APIRoot + "/v1/login",
     REGISTRATION:   APIRoot + "/v1/users",
-    STORIES:        APIRoot + "/v1/stories"
+    USER:           APIRoot + "/v1/profile?id=2",
+    VIDEO:          APIRoot + "/v1/video"
   },
 
   PayloadSources: keyMirror({
@@ -23,8 +24,8 @@ module.exports = {
     // Routes
     REDIRECT: null,
 
-    LOAD_STORIES: null,
-    RECEIVE_STORIES: null,
+    LOAD_USER: null,
+    RECEIVE_USER: null,
     LOAD_STORY: null,
     RECEIVE_STORY: null,
     CREATE_STORY: null,

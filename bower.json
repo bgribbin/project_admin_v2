@@ -1,0 +1,8 @@
+{
+  "name": "project_admin",
+  "version": "0.0.1",
+  "dependencies": { 
+    "foundation": "~5.5.0",
+    "modernizr": "^2.8.3"
+  }
+}

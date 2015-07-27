@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var sass = require('gulp-sass');
 var browserify = require('browserify');
 var reactify = require('reactify');
 var source = require('vinyl-source-stream');
@@ -18,6 +19,16 @@ gulp.task('copy',function() {
       .pipe(gulp.dest('dist/assets'));
 });
 
-gulp.task('default',['browserify', 'copy'], function() {
+gulp.task('scss_that_shit', function () {
+    gulp.src('./src/assets/scss/*.scss')
+  .pipe(sass({
+    includePaths: ['bower_components/foundation/scss']
+  }))
+  .pipe(gulp.dest('dist/assets'));
+
+});
+
+
+gulp.task('default',['browserify', 'copy', 'scss_that_shit'], function() {
     return gulp.watch('src/**/*.*', ['browserify', 'copy'])
 });

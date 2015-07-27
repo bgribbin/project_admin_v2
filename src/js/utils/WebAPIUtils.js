@@ -57,14 +57,15 @@ module.exports = {
       });
   },
 
-  loadStories: function() {
-    request.get(APIEndpoints.STORIES)
+  loadUser: function() {
+    request.get(APIEndpoints.USER)
       .set('Accept', 'application/json')
       .set('Authorization', sessionStorage.getItem('accessToken'))
       .end(function(error, res){
         if (res) {
           json = JSON.parse(res.text);
-          ServerActionCreators.receiveStories(json);
+          console.log(json);
+          ServerActionCreators.receiveUser(json);
         }
       });
   },

@@ -12,6 +12,13 @@ module.exports = {
       errors: errors
     });
   },
+  receiveUser: function(json, errors) {
+    SmallAppDispatcher.handleServerAction({
+      type: ActionTypes.RECEIVE_USER,
+      json: json,
+      errors: errors
+    });
+  }
 
- // ... 
 };
+
