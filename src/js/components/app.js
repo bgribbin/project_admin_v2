@@ -35,7 +35,7 @@ var App = React.createClass({
         <SideNav 
           isLoggedIn={this.state.isLoggedIn}
           email={this.state.email} />
-          <div id="main">
+          <div id="main-content">
 
          <div className="content">
    	 		<RouteHandler />

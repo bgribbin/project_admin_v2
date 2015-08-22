@@ -28,7 +28,7 @@ var Profile = React.createClass({
   },
    render: function() {
       return (
-         <div>
+         <div className="profile">
          <p>Username + { this.state.user.username }</p>
          <p>email</p>
          <p>user id</p>

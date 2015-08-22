@@ -1,3 +1,5 @@
-body {
-  background-color: #cccccc;
-}
+@import 'bourbon';
+@import 'neat';
+@import 'base';
+@import 'components/profile';
+

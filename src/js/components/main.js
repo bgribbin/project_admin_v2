@@ -23,10 +23,11 @@ var Main = React.createClass({
 
     return (
 
-    <div id="main">
+    <div id="main2">
         <div className="header">
             <h1>Athlete Admin Center</h1>
             <h2>Welcome to Future Elite Sports</h2>
+            <button>This is a refills button </button>
         </div>
     </div>
    

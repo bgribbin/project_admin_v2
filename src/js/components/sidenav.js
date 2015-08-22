@@ -62,8 +62,8 @@ var SideNav = React.createClass({
                 <li className="pure-menu-item"><Link to="about" className="pure-menu-link">About</Link></li>
 
 
-                <li className="pure-menu-item" className="menu-item-divided pure-menu-selected">
-                    <a href="#" className="pure-menu-link">Services</a>
+                <li className="pure-menu-item pure-menu-selected">
+                    <Link to="profile" className="pure-menu-link">Profile</Link>
                 </li>
 
                 <li className="pure-menu-item"><a href="#" className="pure-menu-link">Contact</a></li>

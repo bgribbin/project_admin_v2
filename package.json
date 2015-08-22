@@ -9,6 +9,8 @@
     "gulp": "^3.9.0",
     "gulp-sass": "^2.0.4",
     "keymirror": "^0.1.1",
+    "node-bourbon": "^4.2.3",
+    "node-neat": "^1.7.2",
     "object-assign": "^3.0.0",
     "react": "^0.13.3",
     "react-async": "^2.1.0",

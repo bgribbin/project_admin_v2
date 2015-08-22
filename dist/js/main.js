@@ -24933,7 +24933,7 @@ var App = React.createClass({displayName: "App",
         React.createElement(SideNav, {
           isLoggedIn: this.state.isLoggedIn, 
           email: this.state.email}), 
-          React.createElement("div", {id: "main"}, 
+          React.createElement("div", {id: "main-content"}, 
 
          React.createElement("div", {className: "content"}, 
    	 		React.createElement(RouteHandler, null)
@@ -25013,8 +25013,8 @@ var SideNav = React.createClass({displayName: "SideNav",
                 React.createElement("li", {className: "pure-menu-item"}, React.createElement(Link, {to: "about", className: "pure-menu-link"}, "About")), 
 
 
-                React.createElement("li", {className: "pure-menu-item", className: "menu-item-divided pure-menu-selected"}, 
-                    React.createElement("a", {href: "#", className: "pure-menu-link"}, "Services")
+                React.createElement("li", {className: "pure-menu-item pure-menu-selected"}, 
+                    React.createElement(Link, {to: "profile", className: "pure-menu-link"}, "Profile")
                 ), 
 
                 React.createElement("li", {className: "pure-menu-item"}, React.createElement("a", {href: "#", className: "pure-menu-link"}, "Contact"))
@@ -25134,10 +25134,11 @@ var Main = React.createClass({displayName: "Main",
 
     return (
 
-    React.createElement("div", {id: "main"}, 
+    React.createElement("div", {id: "main2"}, 
         React.createElement("div", {className: "header"}, 
             React.createElement("h1", null, "Athlete Admin Center"), 
-            React.createElement("h2", null, "Welcome to Future Elite Sports")
+            React.createElement("h2", null, "Welcome to Future Elite Sports"), 
+            React.createElement("button", null, "This is a refills button ")
         )
     )
    
@@ -25181,7 +25182,7 @@ var Profile = React.createClass({displayName: "Profile",
   },
    render: function() {
       return (
-         React.createElement("div", null, 
+         React.createElement("div", {className: "profile"}, 
          React.createElement("p", null, "Username + ",  this.state.user.username), 
          React.createElement("p", null, "email"), 
          React.createElement("p", null, "user id")
