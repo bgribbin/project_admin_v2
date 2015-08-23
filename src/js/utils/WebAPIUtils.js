@@ -51,6 +51,7 @@ module.exports = {
             ServerActionCreators.receiveLogin(null, errorMsgs);
           } else {
             json = JSON.parse(res.text);
+            console.log(json);
             ServerActionCreators.receiveLogin(json, null);
           }
         }

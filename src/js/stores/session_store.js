@@ -1,3 +1,6 @@
+var React = require('react');
+var SideNav = require('../components/sidenav.js');
+
 var SmallAppDispatcher = require('../dispatchers/AppDispatcher.js');
 var SmallConstants = require('../constants/constants.js');
 var EventEmitter = require('events').EventEmitter;
@@ -70,6 +73,8 @@ SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
         _errors = action.errors;
       }
       router.transitionTo('/profile');
+      var sideNav = React.render(SideNav);
+      sideNav.setActiveMenuItem("2");
       console.log("should be done now");
       SessionStore.emitChange();
       break;

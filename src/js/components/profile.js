@@ -30,8 +30,8 @@ var Profile = React.createClass({
       return (
          <div className="profile">
          <p>Username + { this.state.user.username }</p>
-         <p>email</p>
-         <p>user id</p>
+         <p>email + { this.state.user.email }</p>
+         <p>user id + { this.state.user.id }</p>
          </div>
       );
    }

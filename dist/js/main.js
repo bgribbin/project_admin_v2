@@ -24823,7 +24823,7 @@ module.exports = {
 
 };
 
-},{"../constants/constants.js":216,"../dispatchers/AppDispatcher.js":217}],206:[function(require,module,exports){
+},{"../constants/constants.js":218,"../dispatchers/AppDispatcher.js":219}],206:[function(require,module,exports){
 var AppDispatcher = require('../dispatchers/AppDispatcher.js');
 var Constants = require('../constants/constants.js');
 var WebAPIUtils = require('../utils/WebAPIUtils.js');
@@ -24860,7 +24860,7 @@ module.exports = {
 
 };
 
-},{"../constants/constants.js":216,"../dispatchers/AppDispatcher.js":217,"../utils/WebAPIUtils.js":221}],207:[function(require,module,exports){
+},{"../constants/constants.js":218,"../dispatchers/AppDispatcher.js":219,"../utils/WebAPIUtils.js":223}],207:[function(require,module,exports){
 var SmallAppDispatcher = require('../dispatchers/AppDispatcher.js');
 var SmallConstants = require('../constants/constants.js');
 var WebAPIUtils = require('../utils/WebAPIUtils.js');
@@ -24895,7 +24895,7 @@ module.exports = {
 
 };
 
-},{"../constants/constants.js":216,"../dispatchers/AppDispatcher.js":217,"../utils/WebAPIUtils.js":221}],208:[function(require,module,exports){
+},{"../constants/constants.js":218,"../dispatchers/AppDispatcher.js":219,"../utils/WebAPIUtils.js":223}],208:[function(require,module,exports){
 var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
 var SideNav = require('../components/SideNav.js');
@@ -24948,9 +24948,10 @@ var App = React.createClass({displayName: "App",
 
 module.exports = App;
 
-},{"../components/SideNav.js":209,"../stores/session_store.js":219,"react":201,"react-router":32}],209:[function(require,module,exports){
+},{"../components/SideNav.js":209,"../stores/session_store.js":221,"react":201,"react-router":32}],209:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
+var Menu_item = require('../components/menu_item.js');
 var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 var ReactPropTypes = React.PropTypes;
@@ -24960,16 +24961,26 @@ var SessionActionCreators = require('../actions/session_actions.js');
 
 var SideNav = React.createClass({displayName: "SideNav",
   
+  getInitialState: function() {
+    return {
+      activeMenuItem: '1'
+    };
+  },
   propTypes: {
   	isLoggedIn: ReactPropTypes.bool,
-  	email: ReactPropTypes.string
+  	email: ReactPropTypes.string,
+
   },
 
   logout: function(e) {
   	e.preventDefault();
   	SessionActionCreators.logout();
   },
-
+  setActiveMenuItem: function(key1) {
+    console.log("active changed to" + " " + key1);
+    this.setState({activeMenuItem: key1});
+    console.log(this.state.activeMenuItem);
+  },
   render: function () {
 
   	var rightNav = this.props.isLoggedIn ? (
@@ -24990,42 +25001,22 @@ var SideNav = React.createClass({displayName: "SideNav",
       )
     );
 
-    var leftNav = this.props.isLoggedIn ? (
-      React.createElement("div", null)
-    ) : (
-      React.createElement("div", null)
-    );
-
     return (
+
       React.createElement("div", {id: "layout"}, 
-
-    React.createElement("a", {href: "#menu", id: "menuLink", className: "menu-link"}, 
-      
-        React.createElement("span", null)
-    ), 
-
-    React.createElement("div", {id: "menu"}, 
-        React.createElement("div", {className: "pure-menu"}, 
-            React.createElement("a", {className: "pure-menu-heading", href: "#"}, "Future Elite Sports"), 
-            leftNav, 
-            rightNav, 
-            React.createElement("ul", {className: "pure-menu-list"}, 
-                React.createElement("li", {className: "pure-menu-item"}, React.createElement(Link, {to: "about", className: "pure-menu-link"}, "About")), 
-
-
-                React.createElement("li", {className: "pure-menu-item pure-menu-selected"}, 
-                    React.createElement(Link, {to: "profile", className: "pure-menu-link"}, "Profile")
-                ), 
-
-                React.createElement("li", {className: "pure-menu-item"}, React.createElement("a", {href: "#", className: "pure-menu-link"}, "Contact"))
+        React.createElement("div", {id: "menu"}, 
+            React.createElement("div", {className: "pure-menu"}, 
+                React.createElement("a", {className: "pure-menu-heading", href: "#"}, "Future Elite Sports"), 
+                rightNav, 
+                React.createElement("ul", {className: "pure-menu-list"}, 
+                    React.createElement(Menu_item, {active:  this.state.activeMenuItem === "1", name: "About", link_to:  "about", key1:  "1", onSelect: this.setActiveMenuItem}), 
+                    React.createElement(Menu_item, {active:  this.state.activeMenuItem === "2", name: "Profile", link_to:  "profile", key1:  "2", onSelect: this.setActiveMenuItem}), 
+                    React.createElement(Menu_item, {active:  this.state.activeMenuItem === "3", name: "Contact", link_to:  "profile", key1:  "3", onSelect: this.setActiveMenuItem})
+                )
+                
             )
-            
         )
-    )
-
-    )
-
-          
+      )   
 
     )
   }
@@ -25033,7 +25024,7 @@ var SideNav = React.createClass({displayName: "SideNav",
 
 module.exports = SideNav;
 
-},{"../actions/session_actions.js":206,"react":201,"react-router":32}],210:[function(require,module,exports){
+},{"../actions/session_actions.js":206,"../components/menu_item.js":213,"react":201,"react-router":32}],210:[function(require,module,exports){
 var React = require('react');
 
 var Home = React.createClass({displayName: "Home",
@@ -25108,7 +25099,7 @@ var LoginPage = React.createClass({displayName: "LoginPage",
 
 module.exports = LoginPage;
 
-},{"../actions/session_actions.js":206,"../stores/session_store.js":219,"react":201}],212:[function(require,module,exports){
+},{"../actions/session_actions.js":206,"../stores/session_store.js":221,"react":201}],212:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
@@ -25153,6 +25144,36 @@ module.exports = Main;
 
 },{"../actions/session_actions.js":206,"react":201,"react-router":32}],213:[function(require,module,exports){
 var React = require('react');
+var Router = require('react-router');
+var Link = Router.Link;
+
+var Menu_item = React.createClass({displayName: "Menu_item",
+
+  getInitialState: function() {
+  	return null;
+  },
+
+  handleClick: function(event) {
+  	// event.preventDefault();
+  	console.log(this.props.key1);
+  	this.props.onSelect(this.props.key1);
+  },
+  
+  render: function(){
+  	var className = this.props.active ? 'pure-menu-item pure-menu-selected' : 'pure-menu-item';
+  	console.log(this.props.link_to);
+    return (
+      React.createElement("li", {className: className}, 
+      	React.createElement(Link, {to: this.props.link_to, className: "pure-menu-link", onClick: this.handleClick}, this.props.name)
+      )
+    )
+  }
+});
+
+module.exports = Menu_item;
+
+},{"react":201,"react-router":32}],214:[function(require,module,exports){
+var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
 
@@ -25184,8 +25205,8 @@ var Profile = React.createClass({displayName: "Profile",
       return (
          React.createElement("div", {className: "profile"}, 
          React.createElement("p", null, "Username + ",  this.state.user.username), 
-         React.createElement("p", null, "email"), 
-         React.createElement("p", null, "user id")
+         React.createElement("p", null, "email + ",  this.state.user.email), 
+         React.createElement("p", null, "user id + ",  this.state.user.id)
          )
       );
    }
@@ -25194,7 +25215,83 @@ var Profile = React.createClass({displayName: "Profile",
 
 module.exports = Profile;
 
-},{"../actions/user_actions.js":207,"../stores/user_store.js":220,"react":201}],214:[function(require,module,exports){
+},{"../actions/user_actions.js":207,"../stores/user_store.js":222,"react":201}],215:[function(require,module,exports){
+var React = require('react');
+var Router = require('react-router');
+var Menu_item = require('../components/menu_item.js');
+var RouteHandler = Router.RouteHandler;
+var Link = Router.Link;
+var ReactPropTypes = React.PropTypes;
+var SessionActionCreators = require('../actions/session_actions.js');
+
+
+
+var SideNav = React.createClass({displayName: "SideNav",
+  
+  getInitialState: function() {
+    return {
+      activeMenuItem: '1'
+    };
+  },
+  propTypes: {
+  	isLoggedIn: ReactPropTypes.bool,
+  	email: ReactPropTypes.string,
+
+  },
+
+  logout: function(e) {
+  	e.preventDefault();
+  	SessionActionCreators.logout();
+  },
+  setActiveMenuItem: function(key1) {
+    console.log("active changed to" + " " + key1);
+    this.setState({activeMenuItem: key1});
+    console.log(this.state.activeMenuItem);
+  },
+  render: function () {
+
+  	var rightNav = this.props.isLoggedIn ? (
+      React.createElement("ul", {className: "pure-menu-list"}, 
+        React.createElement("li", {className: "pure-menu-item"}, 
+          React.createElement("a", {href: "#", className: "pure-menu-link"}, this.props.email)
+        ), 
+        React.createElement("li", {className: "pure-menu-item"}, 
+          React.createElement("a", {href: "#", className: "pure-menu-link", onClick: this.logout}, "Logout")
+        )
+        
+      )
+    ) : (
+      React.createElement("ul", {className: "pure-menu-list"}, 
+        React.createElement("li", {className: "pure-menu-item"}, 
+            React.createElement(Link, {to: "login", className: "pure-menu-link"}, "Login")
+        )
+      )
+    );
+
+    return (
+
+      React.createElement("div", {id: "layout"}, 
+        React.createElement("div", {id: "menu"}, 
+            React.createElement("div", {className: "pure-menu"}, 
+                React.createElement("a", {className: "pure-menu-heading", href: "#"}, "Future Elite Sports"), 
+                rightNav, 
+                React.createElement("ul", {className: "pure-menu-list"}, 
+                    React.createElement(Menu_item, {active:  this.state.activeMenuItem === "1", name: "About", link_to:  "about", key1:  "1", onSelect: this.setActiveMenuItem}), 
+                    React.createElement(Menu_item, {active:  this.state.activeMenuItem === "2", name: "Profile", link_to:  "profile", key1:  "2", onSelect: this.setActiveMenuItem}), 
+                    React.createElement(Menu_item, {active:  this.state.activeMenuItem === "3", name: "Contact", link_to:  "profile", key1:  "3", onSelect: this.setActiveMenuItem})
+                )
+                
+            )
+        )
+      )   
+
+    )
+  }
+});
+
+module.exports = SideNav;
+
+},{"../actions/session_actions.js":206,"../components/menu_item.js":213,"react":201,"react-router":32}],216:[function(require,module,exports){
 var React = require('react');
 
 var Video = React.createClass({displayName: "Video",
@@ -25209,7 +25306,7 @@ var Video = React.createClass({displayName: "Video",
 
 module.exports = Video;
 
-},{"react":201}],215:[function(require,module,exports){
+},{"react":201}],217:[function(require,module,exports){
 var React = require('react');
 var Main = require('../components/main');
 var HomePage = require('../components/home');
@@ -25232,7 +25329,7 @@ module.exports = (
   )
 );
 
-},{"../components/App":208,"../components/home":210,"../components/login":211,"../components/main":212,"../components/profile":213,"../components/video":214,"react":201,"react-router":32}],216:[function(require,module,exports){
+},{"../components/App":208,"../components/home":210,"../components/login":211,"../components/main":212,"../components/profile":214,"../components/video":216,"react":201,"react-router":32}],218:[function(require,module,exports){
 var keyMirror = require('keymirror');
 
 var APIRoot = "http://localhost:3000";
@@ -25269,7 +25366,7 @@ module.exports = {
 
 };
 
-},{"keymirror":6}],217:[function(require,module,exports){
+},{"keymirror":6}],219:[function(require,module,exports){
 var Constants = require('../constants/constants.js');
 var Dispatcher = require('flux').Dispatcher;
 var assign = require('react/lib/Object.assign');
@@ -25297,7 +25394,7 @@ var AppDispatcher = assign(new Dispatcher(), {
 
 module.exports = AppDispatcher;
 
-},{"../constants/constants.js":216,"flux":3,"react/lib/Object.assign":72}],218:[function(require,module,exports){
+},{"../constants/constants.js":218,"flux":3,"react/lib/Object.assign":72}],220:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var routes = require('./config/routes');
@@ -25306,7 +25403,10 @@ Router.run(routes, function(Root){
   React.render(React.createElement(Root, null), document.getElementById('main'));
 });
 
-},{"./config/routes":215,"react":201,"react-router":32}],219:[function(require,module,exports){
+},{"./config/routes":217,"react":201,"react-router":32}],221:[function(require,module,exports){
+var React = require('react');
+var SideNav = require('../components/sidenav.js');
+
 var SmallAppDispatcher = require('../dispatchers/AppDispatcher.js');
 var SmallConstants = require('../constants/constants.js');
 var EventEmitter = require('events').EventEmitter;
@@ -25379,6 +25479,8 @@ SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
         _errors = action.errors;
       }
       router.transitionTo('/profile');
+      var sideNav = React.render(SideNav);
+      sideNav.setActiveMenuItem("2");
       console.log("should be done now");
       SessionStore.emitChange();
       break;
@@ -25399,7 +25501,7 @@ SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
 
 module.exports = SessionStore;
 
-},{"../config/routes.js":215,"../constants/constants.js":216,"../dispatchers/AppDispatcher.js":217,"events":1,"object-assign":7,"react-router":32}],220:[function(require,module,exports){
+},{"../components/sidenav.js":215,"../config/routes.js":217,"../constants/constants.js":218,"../dispatchers/AppDispatcher.js":219,"events":1,"object-assign":7,"react":201,"react-router":32}],222:[function(require,module,exports){
 var SmallAppDispatcher = require('../dispatchers/AppDispatcher.js');
 var SmallConstants = require('../constants/constants.js');
 var EventEmitter = require('events').EventEmitter;
@@ -25485,7 +25587,7 @@ UserStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
 
 module.exports = UserStore;
 
-},{"../constants/constants.js":216,"../dispatchers/AppDispatcher.js":217,"../utils/WebAPIUtils.js":221,"events":1,"object-assign":7}],221:[function(require,module,exports){
+},{"../constants/constants.js":218,"../dispatchers/AppDispatcher.js":219,"../utils/WebAPIUtils.js":223,"events":1,"object-assign":7}],223:[function(require,module,exports){
 var ServerActionCreators = require('../actions/server_actions.js');
 var SmallConstants = require('../constants/constants.js');
 var request = require('superagent');
@@ -25539,6 +25641,7 @@ module.exports = {
             ServerActionCreators.receiveLogin(null, errorMsgs);
           } else {
             json = JSON.parse(res.text);
+            console.log(json);
             ServerActionCreators.receiveLogin(json, null);
           }
         }
@@ -25590,4 +25693,4 @@ module.exports = {
 
 };
 
-},{"../actions/server_actions.js":205,"../constants/constants.js":216,"superagent":202}]},{},[218]);
+},{"../actions/server_actions.js":205,"../constants/constants.js":218,"superagent":202}]},{},[220]);

@@ -1,5 +1,6 @@
 var React = require('react');
 var Router = require('react-router');
+var Menu_item = require('../components/menu_item.js');
 var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 var ReactPropTypes = React.PropTypes;
@@ -9,16 +10,26 @@ var SessionActionCreators = require('../actions/session_actions.js');
 
 var SideNav = React.createClass({
   
+  getInitialState: function() {
+    return {
+      activeMenuItem: '1'
+    };
+  },
   propTypes: {
   	isLoggedIn: ReactPropTypes.bool,
-  	email: ReactPropTypes.string
+  	email: ReactPropTypes.string,
+
   },
 
   logout: function(e) {
   	e.preventDefault();
   	SessionActionCreators.logout();
   },
-
+  setActiveMenuItem: function(key1) {
+    console.log("active changed to" + " " + key1);
+    this.setState({activeMenuItem: key1});
+    console.log(this.state.activeMenuItem);
+  },
   render: function () {
 
   	var rightNav = this.props.isLoggedIn ? (
@@ -39,42 +50,22 @@ var SideNav = React.createClass({
       </ul>
     );
 
-    var leftNav = this.props.isLoggedIn ? (
-      <div></div>
-    ) : (
-      <div></div>
-    );
-
     return (
+
       <div id="layout">
-
-    <a href="#menu" id="menuLink" className="menu-link">
-      
-        <span></span>
-    </a>
-
-    <div id="menu">
-        <div className="pure-menu">
-            <a className="pure-menu-heading" href="#">Future Elite Sports</a>
-            {leftNav}
-            {rightNav}
-            <ul className="pure-menu-list">
-                <li className="pure-menu-item"><Link to="about" className="pure-menu-link">About</Link></li>
-
-
-                <li className="pure-menu-item pure-menu-selected">
-                    <Link to="profile" className="pure-menu-link">Profile</Link>
-                </li>
-
-                <li className="pure-menu-item"><a href="#" className="pure-menu-link">Contact</a></li>
-            </ul>
-            
+        <div id="menu">
+            <div className="pure-menu">
+                <a className="pure-menu-heading" href="#">Future Elite Sports</a>
+                {rightNav}
+                <ul className="pure-menu-list">
+                    <Menu_item active={ this.state.activeMenuItem === "1" } name={"About"} link_to={ "about" }key1={ "1"} onSelect={this.setActiveMenuItem}/>
+                    <Menu_item active={ this.state.activeMenuItem === "2" } name={"Profile"} link_to={ "profile" } key1={ "2"} onSelect={this.setActiveMenuItem}/>
+                    <Menu_item active={ this.state.activeMenuItem === "3" } name={"Contact"} link_to={ "profile" } key1={ "3" } onSelect={this.setActiveMenuItem}/>
+                </ul>
+                
+            </div>
         </div>
-    </div>
-
-    </div>
-
-          
+      </div>   
 
     )
   }
