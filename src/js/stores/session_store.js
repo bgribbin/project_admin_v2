@@ -72,11 +72,8 @@ SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
       if (action.errors) {
         _errors = action.errors;
       }
-      router.transitionTo('/profile');
-      var sideNav = React.render(SideNav);
-      sideNav.setActiveMenuItem("2");
-      console.log("should be done now");
       SessionStore.emitChange();
+      router.transitionTo('/profile');
       break;
 
     case ActionTypes.LOGOUT:

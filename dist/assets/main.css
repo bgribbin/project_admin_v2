@@ -186,6 +186,9 @@ picture {
   margin: 0;
   max-width: 100%; }
 
+body {
+  background-color: white; }
+
 .main-content {
   position: absolute;
   left: 250px;
@@ -196,3 +199,6 @@ picture {
   left: 250px;
   right: 0px;
   padding-top: 40px; }
+
+.profile {
+  background-color: gray; }

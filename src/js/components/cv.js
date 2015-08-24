@@ -2,7 +2,7 @@ var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
 
-var Profile = React.createClass({
+var CV = React.createClass({
 
    getInitialState: function() {
     return { 
@@ -29,16 +29,13 @@ var Profile = React.createClass({
    render: function() {
       return (
          <div className="profile">
-           <p>Username + { this.state.user.username }</p>
-           <p>email + { this.state.user.email }</p>
-           <p>user id + { this.state.user.id }</p>
-           <br/>
-           <p>sat + {this.state.user.sat_completed.toString()}</p>
-           <p>video + {this.state.user.video_uploaded.toString()}</p>
+         <p>Username + { this.state.user.username }</p>
+         <p>email + { this.state.user.email }</p>
+         <p>user id + { this.state.user.id }</p>
          </div>
       );
    }
 
 });
 
-module.exports = Profile;
+module.exports = CV;

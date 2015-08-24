@@ -21,13 +21,12 @@ module.exports = {
     WebAPIUtils.loadStory(storyId);
   },
 
-  createStory: function(title, body) {
+  updateSAT: function(checkbox) {
     SmallAppDispatcher.handleViewAction({
-      type: ActionTypes.CREATE_STORY,
-      title: title,
-      body: body
+      type: ActionTypes.UPDATE_SAT,
+      confirmed: checkbox
     });
-    WebAPIUtils.createStory(title, body);
+    WebAPIUtils.updateSAT(checkbox);
   }
 
 };

@@ -10,11 +10,6 @@ var SessionActionCreators = require('../actions/session_actions.js');
 
 var SideNav = React.createClass({
   
-  getInitialState: function() {
-    return {
-      activeMenuItem: '1'
-    };
-  },
   propTypes: {
   	isLoggedIn: ReactPropTypes.bool,
   	email: ReactPropTypes.string,
@@ -25,11 +20,7 @@ var SideNav = React.createClass({
   	e.preventDefault();
   	SessionActionCreators.logout();
   },
-  setActiveMenuItem: function(key1) {
-    console.log("active changed to" + " " + key1);
-    this.setState({activeMenuItem: key1});
-    console.log(this.state.activeMenuItem);
-  },
+
   render: function () {
 
   	var rightNav = this.props.isLoggedIn ? (
@@ -40,7 +31,13 @@ var SideNav = React.createClass({
         <li className="pure-menu-item">
           <a href='#' className="pure-menu-link" onClick={this.logout}>Logout</a>
         </li>
-        
+         <Menu_item name={"CV"} link_to={ "cv" } />
+         <Menu_item name={"Sat"} link_to={ "sat" } />
+         <Menu_item name={"Eligability"} link_to={ "eligability" } />
+         <Menu_item name={"Insurance"} link_to={ "insurance" } />
+         <Menu_item name={"Visa"} link_to={ "visa" } />
+         <Menu_item name={"Profile"} link_to={ "profile" } />
+        <Menu_item name={"Video"} link_to={ "video" } />
       </ul>
     ) : (
       <ul className="pure-menu-list">
@@ -57,12 +54,6 @@ var SideNav = React.createClass({
             <div className="pure-menu">
                 <a className="pure-menu-heading" href="#">Future Elite Sports</a>
                 {rightNav}
-                <ul className="pure-menu-list">
-                    <Menu_item active={ this.state.activeMenuItem === "1" } name={"About"} link_to={ "about" }key1={ "1"} onSelect={this.setActiveMenuItem}/>
-                    <Menu_item active={ this.state.activeMenuItem === "2" } name={"Profile"} link_to={ "profile" } key1={ "2"} onSelect={this.setActiveMenuItem}/>
-                    <Menu_item active={ this.state.activeMenuItem === "3" } name={"Contact"} link_to={ "profile" } key1={ "3" } onSelect={this.setActiveMenuItem}/>
-                </ul>
-                
             </div>
         </div>
       </div>   

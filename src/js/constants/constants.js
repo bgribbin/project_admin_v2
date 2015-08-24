@@ -8,7 +8,8 @@ module.exports = {
     LOGIN:          APIRoot + "/v1/login",
     REGISTRATION:   APIRoot + "/v1/users",
     USER:           APIRoot + "/v1/profile?id=2",
-    VIDEO:          APIRoot + "/v1/video"
+    VIDEO:          APIRoot + "/v1/video",
+    SAT:          APIRoot + "/v1/sat"
   },
 
   PayloadSources: keyMirror({
@@ -25,6 +26,7 @@ module.exports = {
     REDIRECT: null,
 
     LOAD_USER: null,
+    UPDATE_SAT: null,
     RECEIVE_USER: null,
     LOAD_STORY: null,
     RECEIVE_STORY: null,

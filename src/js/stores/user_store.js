@@ -11,7 +11,13 @@ var _stories = [];
 var _errors = [];
 var _story = { title: "", body: "", user: { username: "" } };
 
-var _user =  {"username": "","id": 2,"email": "","video_uploaded": false} ;
+var _user =  {
+                "username": "",
+                "id": 2,
+                "email": "",
+                "video_uploaded": false,
+                "sat_completed": false
+             };
 
 var UserStore = assign({}, EventEmitter.prototype, {
 
@@ -50,8 +56,9 @@ UserStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
   switch(action.type) {
     
     case ActionTypes.RECEIVE_USER:
-      console.log("I'm here");
+      // console.log("I'm here");
       _user = action.json;
+      // console.log(action.json);
       UserStore.emitChange();
       break;
 

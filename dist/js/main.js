@@ -24823,7 +24823,7 @@ module.exports = {
 
 };
 
-},{"../constants/constants.js":218,"../dispatchers/AppDispatcher.js":219}],206:[function(require,module,exports){
+},{"../constants/constants.js":223,"../dispatchers/AppDispatcher.js":224}],206:[function(require,module,exports){
 var AppDispatcher = require('../dispatchers/AppDispatcher.js');
 var Constants = require('../constants/constants.js');
 var WebAPIUtils = require('../utils/WebAPIUtils.js');
@@ -24860,7 +24860,7 @@ module.exports = {
 
 };
 
-},{"../constants/constants.js":218,"../dispatchers/AppDispatcher.js":219,"../utils/WebAPIUtils.js":223}],207:[function(require,module,exports){
+},{"../constants/constants.js":223,"../dispatchers/AppDispatcher.js":224,"../utils/WebAPIUtils.js":228}],207:[function(require,module,exports){
 var SmallAppDispatcher = require('../dispatchers/AppDispatcher.js');
 var SmallConstants = require('../constants/constants.js');
 var WebAPIUtils = require('../utils/WebAPIUtils.js');
@@ -24884,18 +24884,17 @@ module.exports = {
     WebAPIUtils.loadStory(storyId);
   },
 
-  createStory: function(title, body) {
+  updateSAT: function(checkbox) {
     SmallAppDispatcher.handleViewAction({
-      type: ActionTypes.CREATE_STORY,
-      title: title,
-      body: body
+      type: ActionTypes.UPDATE_SAT,
+      confirmed: checkbox
     });
-    WebAPIUtils.createStory(title, body);
+    WebAPIUtils.updateSAT(checkbox);
   }
 
 };
 
-},{"../constants/constants.js":218,"../dispatchers/AppDispatcher.js":219,"../utils/WebAPIUtils.js":223}],208:[function(require,module,exports){
+},{"../constants/constants.js":223,"../dispatchers/AppDispatcher.js":224,"../utils/WebAPIUtils.js":228}],208:[function(require,module,exports){
 var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
 var SideNav = require('../components/SideNav.js');
@@ -24948,7 +24947,7 @@ var App = React.createClass({displayName: "App",
 
 module.exports = App;
 
-},{"../components/SideNav.js":209,"../stores/session_store.js":221,"react":201,"react-router":32}],209:[function(require,module,exports){
+},{"../components/SideNav.js":209,"../stores/session_store.js":226,"react":201,"react-router":32}],209:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var Menu_item = require('../components/menu_item.js');
@@ -24961,11 +24960,6 @@ var SessionActionCreators = require('../actions/session_actions.js');
 
 var SideNav = React.createClass({displayName: "SideNav",
   
-  getInitialState: function() {
-    return {
-      activeMenuItem: '1'
-    };
-  },
   propTypes: {
   	isLoggedIn: ReactPropTypes.bool,
   	email: ReactPropTypes.string,
@@ -24976,11 +24970,7 @@ var SideNav = React.createClass({displayName: "SideNav",
   	e.preventDefault();
   	SessionActionCreators.logout();
   },
-  setActiveMenuItem: function(key1) {
-    console.log("active changed to" + " " + key1);
-    this.setState({activeMenuItem: key1});
-    console.log(this.state.activeMenuItem);
-  },
+
   render: function () {
 
   	var rightNav = this.props.isLoggedIn ? (
@@ -24990,8 +24980,14 @@ var SideNav = React.createClass({displayName: "SideNav",
         ), 
         React.createElement("li", {className: "pure-menu-item"}, 
           React.createElement("a", {href: "#", className: "pure-menu-link", onClick: this.logout}, "Logout")
-        )
-        
+        ), 
+         React.createElement(Menu_item, {name: "CV", link_to:  "cv" }), 
+         React.createElement(Menu_item, {name: "Sat", link_to:  "sat" }), 
+         React.createElement(Menu_item, {name: "Eligability", link_to:  "eligability" }), 
+         React.createElement(Menu_item, {name: "Insurance", link_to:  "insurance" }), 
+         React.createElement(Menu_item, {name: "Visa", link_to:  "visa" }), 
+         React.createElement(Menu_item, {name: "Profile", link_to:  "profile" }), 
+        React.createElement(Menu_item, {name: "Video", link_to:  "video" })
       )
     ) : (
       React.createElement("ul", {className: "pure-menu-list"}, 
@@ -25007,13 +25003,7 @@ var SideNav = React.createClass({displayName: "SideNav",
         React.createElement("div", {id: "menu"}, 
             React.createElement("div", {className: "pure-menu"}, 
                 React.createElement("a", {className: "pure-menu-heading", href: "#"}, "Future Elite Sports"), 
-                rightNav, 
-                React.createElement("ul", {className: "pure-menu-list"}, 
-                    React.createElement(Menu_item, {active:  this.state.activeMenuItem === "1", name: "About", link_to:  "about", key1:  "1", onSelect: this.setActiveMenuItem}), 
-                    React.createElement(Menu_item, {active:  this.state.activeMenuItem === "2", name: "Profile", link_to:  "profile", key1:  "2", onSelect: this.setActiveMenuItem}), 
-                    React.createElement(Menu_item, {active:  this.state.activeMenuItem === "3", name: "Contact", link_to:  "profile", key1:  "3", onSelect: this.setActiveMenuItem})
-                )
-                
+                rightNav
             )
         )
       )   
@@ -25024,7 +25014,92 @@ var SideNav = React.createClass({displayName: "SideNav",
 
 module.exports = SideNav;
 
-},{"../actions/session_actions.js":206,"../components/menu_item.js":213,"react":201,"react-router":32}],210:[function(require,module,exports){
+},{"../actions/session_actions.js":206,"../components/menu_item.js":216,"react":201,"react-router":32}],210:[function(require,module,exports){
+var React = require('react');
+var UserActions = require('../actions/user_actions.js');
+var UserStore = require('../stores/user_store.js');
+
+var CV = React.createClass({displayName: "CV",
+
+   getInitialState: function() {
+    return { 
+      user: UserStore.getUser(), 
+      errors: []
+    };
+  },
+ 
+  componentDidMount: function() {
+    UserStore.addChangeListener(this._onChange);
+    UserActions.loadUser();
+  },
+
+  componentWillUnmount: function() {
+    UserStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function() {
+    this.setState({ 
+      user: UserStore.getUser(),
+      errors: UserStore.getErrors()
+    }); 
+  },
+   render: function() {
+      return (
+         React.createElement("div", {className: "profile"}, 
+         React.createElement("p", null, "Username + ",  this.state.user.username), 
+         React.createElement("p", null, "email + ",  this.state.user.email), 
+         React.createElement("p", null, "user id + ",  this.state.user.id)
+         )
+      );
+   }
+
+});
+
+module.exports = CV;
+
+},{"../actions/user_actions.js":207,"../stores/user_store.js":227,"react":201}],211:[function(require,module,exports){
+var React = require('react');
+var UserActions = require('../actions/user_actions.js');
+var UserStore = require('../stores/user_store.js');
+
+var Eligability = React.createClass({displayName: "Eligability",
+
+   getInitialState: function() {
+    return { 
+      user: UserStore.getUser(), 
+      errors: []
+    };
+  },
+ 
+  componentDidMount: function() {
+    UserStore.addChangeListener(this._onChange);
+    UserActions.loadUser();
+  },
+
+  componentWillUnmount: function() {
+    UserStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function() {
+    this.setState({ 
+      user: UserStore.getUser(),
+      errors: UserStore.getErrors()
+    }); 
+  },
+   render: function() {
+      return (
+         React.createElement("div", {className: "profile"}, 
+         React.createElement("p", null, "Eligability ")
+
+         )
+      );
+   }
+
+});
+
+module.exports = Eligability;
+
+},{"../actions/user_actions.js":207,"../stores/user_store.js":227,"react":201}],212:[function(require,module,exports){
 var React = require('react');
 
 var Home = React.createClass({displayName: "Home",
@@ -25039,7 +25114,68 @@ var Home = React.createClass({displayName: "Home",
 
 module.exports = Home;
 
-},{"react":201}],211:[function(require,module,exports){
+},{"react":201}],213:[function(require,module,exports){
+var React = require('react');
+var UserActions = require('../actions/user_actions.js');
+var UserStore = require('../stores/user_store.js');
+
+var Insurance = React.createClass({displayName: "Insurance",
+
+   getInitialState: function() {
+    return { 
+      user: UserStore.getUser(), 
+      errors: []
+    };
+  },
+ 
+  componentDidMount: function() {
+    UserStore.addChangeListener(this._onChange);
+    UserActions.loadUser();
+  },
+
+  componentWillUnmount: function() {
+    UserStore.removeChangeListener(this._onChange);
+
+  },
+
+  _onChange: function() {
+    this.setState({ 
+      user: UserStore.getUser(),
+      errors: UserStore.getErrors()
+    }); 
+  },
+  _onSubmit: function(e) {
+    e.preventDefault();
+    this.setState({ errors: [] });
+    var confirmed = this.refs.cb.getDOMNode().checked;
+    UserActions.updateSAT(confirmed);
+    UserActions.loadUser();
+  },
+   render: function() {
+
+      console.log(this.state.user);
+      return (
+         React.createElement("div", {className: "profile"}, 
+         React.createElement("p", null, "Insurance"), 
+         React.createElement("form", {onSubmit: this._onSubmit}, 
+          React.createElement("label", null, "Confirm as done?"), 
+          React.createElement("input", {type: "checkbox", className: "switch", ref: "cb"}), 
+          React.createElement("button", {type: "submit", className: "card--login__submit"}, "Confirm")
+         ), 
+
+         React.createElement("div", null, 
+         React.createElement("h2", null, this.state.user.username), 
+         React.createElement("p", null, this.state.user.sat_completed.toString())
+          )
+         )
+      );
+   }
+
+});
+
+module.exports = Insurance;
+
+},{"../actions/user_actions.js":207,"../stores/user_store.js":227,"react":201}],214:[function(require,module,exports){
 var React = require('react');
 var SessionActionCreators = require('../actions/session_actions.js');
 var SessionStore = require('../stores/session_store.js');
@@ -25099,7 +25235,7 @@ var LoginPage = React.createClass({displayName: "LoginPage",
 
 module.exports = LoginPage;
 
-},{"../actions/session_actions.js":206,"../stores/session_store.js":221,"react":201}],212:[function(require,module,exports){
+},{"../actions/session_actions.js":206,"../stores/session_store.js":226,"react":201}],215:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
@@ -25142,29 +25278,33 @@ var Main = React.createClass({displayName: "Main",
 
 module.exports = Main;
 
-},{"../actions/session_actions.js":206,"react":201,"react-router":32}],213:[function(require,module,exports){
+},{"../actions/session_actions.js":206,"react":201,"react-router":32}],216:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
+var State = Router.State;
 
 var Menu_item = React.createClass({displayName: "Menu_item",
-
+  mixins: [State],
   getInitialState: function() {
   	return null;
   },
 
-  handleClick: function(event) {
-  	// event.preventDefault();
-  	console.log(this.props.key1);
-  	this.props.onSelect(this.props.key1);
-  },
+  // handleClick: function(event) {
+  // 	// event.preventDefault();
+  // 	// console.log(this.props.key1);
+  // 	this.props.onSelect(this.props.key1);
+  // },
   
   render: function(){
-  	var className = this.props.active ? 'pure-menu-item pure-menu-selected' : 'pure-menu-item';
-  	console.log(this.props.link_to);
+    var isActive = this.isActive(this.props.link_to);
+  	var className = isActive ? 'pure-menu-item pure-menu-selected' : 'pure-menu-item';
+  	// console.log(this.props.link_to);
+    
+    // console.log(isActive);
     return (
       React.createElement("li", {className: className}, 
-      	React.createElement(Link, {to: this.props.link_to, className: "pure-menu-link", onClick: this.handleClick}, this.props.name)
+      	React.createElement(Link, {to: this.props.link_to, className: "pure-menu-link"}, this.props.name)
       )
     )
   }
@@ -25172,7 +25312,7 @@ var Menu_item = React.createClass({displayName: "Menu_item",
 
 module.exports = Menu_item;
 
-},{"react":201,"react-router":32}],214:[function(require,module,exports){
+},{"react":201,"react-router":32}],217:[function(require,module,exports){
 var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
@@ -25204,9 +25344,12 @@ var Profile = React.createClass({displayName: "Profile",
    render: function() {
       return (
          React.createElement("div", {className: "profile"}, 
-         React.createElement("p", null, "Username + ",  this.state.user.username), 
-         React.createElement("p", null, "email + ",  this.state.user.email), 
-         React.createElement("p", null, "user id + ",  this.state.user.id)
+           React.createElement("p", null, "Username + ",  this.state.user.username), 
+           React.createElement("p", null, "email + ",  this.state.user.email), 
+           React.createElement("p", null, "user id + ",  this.state.user.id), 
+           React.createElement("br", null), 
+           React.createElement("p", null, "sat + ", this.state.user.sat_completed.toString()), 
+           React.createElement("p", null, "video + ", this.state.user.video_uploaded.toString())
          )
       );
    }
@@ -25215,7 +25358,49 @@ var Profile = React.createClass({displayName: "Profile",
 
 module.exports = Profile;
 
-},{"../actions/user_actions.js":207,"../stores/user_store.js":222,"react":201}],215:[function(require,module,exports){
+},{"../actions/user_actions.js":207,"../stores/user_store.js":227,"react":201}],218:[function(require,module,exports){
+var React = require('react');
+var UserActions = require('../actions/user_actions.js');
+var UserStore = require('../stores/user_store.js');
+
+var Sat = React.createClass({displayName: "Sat",
+
+   getInitialState: function() {
+    return { 
+      user: UserStore.getUser(), 
+      errors: []
+    };
+  },
+ 
+  componentDidMount: function() {
+    UserStore.addChangeListener(this._onChange);
+    UserActions.loadUser();
+  },
+
+  componentWillUnmount: function() {
+    UserStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function() {
+    this.setState({ 
+      user: UserStore.getUser(),
+      errors: UserStore.getErrors()
+    }); 
+  },
+   render: function() {
+      return (
+         React.createElement("div", {className: "profile"}, 
+         React.createElement("p", null, "sat")
+
+         )
+      );
+   }
+
+});
+
+module.exports = Sat;
+
+},{"../actions/user_actions.js":207,"../stores/user_store.js":227,"react":201}],219:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var Menu_item = require('../components/menu_item.js');
@@ -25228,11 +25413,6 @@ var SessionActionCreators = require('../actions/session_actions.js');
 
 var SideNav = React.createClass({displayName: "SideNav",
   
-  getInitialState: function() {
-    return {
-      activeMenuItem: '1'
-    };
-  },
   propTypes: {
   	isLoggedIn: ReactPropTypes.bool,
   	email: ReactPropTypes.string,
@@ -25243,11 +25423,7 @@ var SideNav = React.createClass({displayName: "SideNav",
   	e.preventDefault();
   	SessionActionCreators.logout();
   },
-  setActiveMenuItem: function(key1) {
-    console.log("active changed to" + " " + key1);
-    this.setState({activeMenuItem: key1});
-    console.log(this.state.activeMenuItem);
-  },
+
   render: function () {
 
   	var rightNav = this.props.isLoggedIn ? (
@@ -25257,8 +25433,14 @@ var SideNav = React.createClass({displayName: "SideNav",
         ), 
         React.createElement("li", {className: "pure-menu-item"}, 
           React.createElement("a", {href: "#", className: "pure-menu-link", onClick: this.logout}, "Logout")
-        )
-        
+        ), 
+         React.createElement(Menu_item, {name: "CV", link_to:  "cv" }), 
+         React.createElement(Menu_item, {name: "Sat", link_to:  "sat" }), 
+         React.createElement(Menu_item, {name: "Eligability", link_to:  "eligability" }), 
+         React.createElement(Menu_item, {name: "Insurance", link_to:  "insurance" }), 
+         React.createElement(Menu_item, {name: "Visa", link_to:  "visa" }), 
+         React.createElement(Menu_item, {name: "Profile", link_to:  "profile" }), 
+        React.createElement(Menu_item, {name: "Video", link_to:  "video" })
       )
     ) : (
       React.createElement("ul", {className: "pure-menu-list"}, 
@@ -25274,13 +25456,7 @@ var SideNav = React.createClass({displayName: "SideNav",
         React.createElement("div", {id: "menu"}, 
             React.createElement("div", {className: "pure-menu"}, 
                 React.createElement("a", {className: "pure-menu-heading", href: "#"}, "Future Elite Sports"), 
-                rightNav, 
-                React.createElement("ul", {className: "pure-menu-list"}, 
-                    React.createElement(Menu_item, {active:  this.state.activeMenuItem === "1", name: "About", link_to:  "about", key1:  "1", onSelect: this.setActiveMenuItem}), 
-                    React.createElement(Menu_item, {active:  this.state.activeMenuItem === "2", name: "Profile", link_to:  "profile", key1:  "2", onSelect: this.setActiveMenuItem}), 
-                    React.createElement(Menu_item, {active:  this.state.activeMenuItem === "3", name: "Contact", link_to:  "profile", key1:  "3", onSelect: this.setActiveMenuItem})
-                )
-                
+                rightNav
             )
         )
       )   
@@ -25291,7 +25467,7 @@ var SideNav = React.createClass({displayName: "SideNav",
 
 module.exports = SideNav;
 
-},{"../actions/session_actions.js":206,"../components/menu_item.js":213,"react":201,"react-router":32}],216:[function(require,module,exports){
+},{"../actions/session_actions.js":206,"../components/menu_item.js":216,"react":201,"react-router":32}],220:[function(require,module,exports){
 var React = require('react');
 
 var Video = React.createClass({displayName: "Video",
@@ -25306,12 +25482,88 @@ var Video = React.createClass({displayName: "Video",
 
 module.exports = Video;
 
-},{"react":201}],217:[function(require,module,exports){
+},{"react":201}],221:[function(require,module,exports){
+var React = require('react');
+var UserActions = require('../actions/user_actions.js');
+var UserStore = require('../stores/user_store.js');
+
+var Visa = React.createClass({displayName: "Visa",
+
+   getInitialState: function() {
+    return { 
+      user: UserStore.getUser(), 
+      errors: []
+    };
+  },
+ 
+  componentDidMount: function() {
+    UserStore.addChangeListener(this._onChange);
+    UserActions.loadUser();
+  },
+
+  componentWillUnmount: function() {
+    UserStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function() {
+    this.setState({ 
+      user: UserStore.getUser(),
+      errors: UserStore.getErrors()
+    }); 
+  },
+   render: function() {
+      return (
+         React.createElement("div", {className: "profile"}, 
+
+         React.createElement("h2", null, "VISA Registration Steps"), 
+
+React.createElement("p", null, "1) Click on the link below. This will open up an online PDF that provides you with information when booking the exam.  VISA Process (please click)"), 
+
+React.createElement("p", null, "2) The first form you will need to fill in is the DS-160. Please ensure that the information on your I20 matches with the information that is entered on the form.  https://ceac.state.gov/genniv/"), 
+
+React.createElement("p", null, "After clicking on the link, please follow the process and guidance for each of the below steps: "), 
+
+React.createElement("p", null, "1. Select Location - 'England' 2. Click - 'Start An Application'"), 
+
+React.createElement("p", null, "Info on photo requirements - http://www.slideshare.net/USAinUK/ds160-visa-photo-requirements"), 
+
+React.createElement("p", null, "3) Once you have paid and completed this form you can (CREATE AN ACCOUNT, PAY VISA FEE, SCHEDULE APPOINTMENT, & ARRANGE FOR THE RETURN OF YOUR PASSPORT) Please choose the non-immigrant visa. https://ais.usvisa-info.com/en-gb/niv"), 
+
+React.createElement("p", null, "After creating your account, please follow the process and guidance for each of the below steps: "), 
+
+React.createElement("p", null, "1. Provide your DS-160 number;  2. Determine your visa type; (F1) 3. Select a courier return location**; 4. Pay your U.S. visa fee via debit card (Visa or Mastercard);  5. Schedule an appointment;  6. Select and pay the optional home delivery document option for each applicant (£18.00 per applicant) by credit or debit card."), 
+
+React.createElement("p", null, "4) Once you have booked your appointment you will need to complete the Sevis I-901 form.  https://www.fmjfee.com/i901fee/desktop/index.jsp?view=desktop 1. Click 'Submit I-901 and fee payment' 2. Click form I20 3. Fill in information  "), 
+
+React.createElement("p", null, "5) Please see the bottom section of the online PDF for a list of documents you will need to bring on the day and this embassy checklist. http://photos.state.gov/libraries/unitedkingdom/164203/cons-visa/appointment_letter_fm.pdf"), 
+
+React.createElement("p", null, "6) Please call your Future Elite Sports rep once you have confirmed your appointment. Your rep will then go through the interview process/list of common asked questions in preparation for the day."), 
+
+React.createElement("p", null, "7) Contact your Future Elite Sports rep if you have any problems completing the forms."), 
+
+React.createElement("p", null, "Useful Links - The link below explains in greater detail what you can expect on the day of your interview and how to be best prepared. VISA Process (Please click)"), 
+
+React.createElement("p", null, "- You will be asked a series of questions about why you want to study in the USA. The link below discussed the type of questions you will face in the day. Examples of Visa Questions (Please Click)")
+
+         )
+      );
+   }
+
+});
+
+module.exports = Visa;
+
+},{"../actions/user_actions.js":207,"../stores/user_store.js":227,"react":201}],222:[function(require,module,exports){
 var React = require('react');
 var Main = require('../components/main');
 var HomePage = require('../components/home');
 var VideoPage = require('../components/video');
 var ProfilePage = require('../components/profile');
+var SatPage = require('../components/sat');
+var CVPage = require('../components/cv');
+var InsurancePage = require('../components/insurance');
+var EligabilityPage = require('../components/eligability');
+var VisaPage = require('../components/visa');
 var App = require('../components/App');
 var LoginPage = require('../components/login');
 var Router = require('react-router');
@@ -25323,13 +25575,18 @@ module.exports = (
   React.createElement(Route, {name: "app", path: "/", handler: App}, 
     React.createElement(DefaultRoute, {handler: Main}), 
     React.createElement(Route, {name: "profile", path: "/profile", handler: ProfilePage}), 
+    React.createElement(Route, {name: "sat", path: "/sat", handler: SatPage}), 
+    React.createElement(Route, {name: "cv", path: "/cv", handler: CVPage}), 
+    React.createElement(Route, {name: "insurance", path: "/insurance", handler: InsurancePage}), 
+    React.createElement(Route, {name: "eligability", path: "/eligability", handler: EligabilityPage}), 
+    React.createElement(Route, {name: "visa", path: "/visa", handler: VisaPage}), 
     React.createElement(Route, {name: "about", path: "/about", handler: HomePage}), 
     React.createElement(Route, {name: "login", path: "/login", handler: LoginPage}), 
     React.createElement(Route, {name: "video", path: "/video", handler: VideoPage})
   )
 );
 
-},{"../components/App":208,"../components/home":210,"../components/login":211,"../components/main":212,"../components/profile":214,"../components/video":216,"react":201,"react-router":32}],218:[function(require,module,exports){
+},{"../components/App":208,"../components/cv":210,"../components/eligability":211,"../components/home":212,"../components/insurance":213,"../components/login":214,"../components/main":215,"../components/profile":217,"../components/sat":218,"../components/video":220,"../components/visa":221,"react":201,"react-router":32}],223:[function(require,module,exports){
 var keyMirror = require('keymirror');
 
 var APIRoot = "http://localhost:3000";
@@ -25340,7 +25597,8 @@ module.exports = {
     LOGIN:          APIRoot + "/v1/login",
     REGISTRATION:   APIRoot + "/v1/users",
     USER:           APIRoot + "/v1/profile?id=2",
-    VIDEO:          APIRoot + "/v1/video"
+    VIDEO:          APIRoot + "/v1/video",
+    SAT:          APIRoot + "/v1/sat"
   },
 
   PayloadSources: keyMirror({
@@ -25357,6 +25615,7 @@ module.exports = {
     REDIRECT: null,
 
     LOAD_USER: null,
+    UPDATE_SAT: null,
     RECEIVE_USER: null,
     LOAD_STORY: null,
     RECEIVE_STORY: null,
@@ -25366,7 +25625,7 @@ module.exports = {
 
 };
 
-},{"keymirror":6}],219:[function(require,module,exports){
+},{"keymirror":6}],224:[function(require,module,exports){
 var Constants = require('../constants/constants.js');
 var Dispatcher = require('flux').Dispatcher;
 var assign = require('react/lib/Object.assign');
@@ -25394,7 +25653,7 @@ var AppDispatcher = assign(new Dispatcher(), {
 
 module.exports = AppDispatcher;
 
-},{"../constants/constants.js":218,"flux":3,"react/lib/Object.assign":72}],220:[function(require,module,exports){
+},{"../constants/constants.js":223,"flux":3,"react/lib/Object.assign":72}],225:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var routes = require('./config/routes');
@@ -25403,7 +25662,7 @@ Router.run(routes, function(Root){
   React.render(React.createElement(Root, null), document.getElementById('main'));
 });
 
-},{"./config/routes":217,"react":201,"react-router":32}],221:[function(require,module,exports){
+},{"./config/routes":222,"react":201,"react-router":32}],226:[function(require,module,exports){
 var React = require('react');
 var SideNav = require('../components/sidenav.js');
 
@@ -25478,11 +25737,8 @@ SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
       if (action.errors) {
         _errors = action.errors;
       }
-      router.transitionTo('/profile');
-      var sideNav = React.render(SideNav);
-      sideNav.setActiveMenuItem("2");
-      console.log("should be done now");
       SessionStore.emitChange();
+      router.transitionTo('/profile');
       break;
 
     case ActionTypes.LOGOUT:
@@ -25501,7 +25757,7 @@ SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
 
 module.exports = SessionStore;
 
-},{"../components/sidenav.js":215,"../config/routes.js":217,"../constants/constants.js":218,"../dispatchers/AppDispatcher.js":219,"events":1,"object-assign":7,"react":201,"react-router":32}],222:[function(require,module,exports){
+},{"../components/sidenav.js":219,"../config/routes.js":222,"../constants/constants.js":223,"../dispatchers/AppDispatcher.js":224,"events":1,"object-assign":7,"react":201,"react-router":32}],227:[function(require,module,exports){
 var SmallAppDispatcher = require('../dispatchers/AppDispatcher.js');
 var SmallConstants = require('../constants/constants.js');
 var EventEmitter = require('events').EventEmitter;
@@ -25515,7 +25771,13 @@ var _stories = [];
 var _errors = [];
 var _story = { title: "", body: "", user: { username: "" } };
 
-var _user =  {"username": "","id": 2,"email": "","video_uploaded": false} ;
+var _user =  {
+                "username": "",
+                "id": 2,
+                "email": "",
+                "video_uploaded": false,
+                "sat_completed": false
+             };
 
 var UserStore = assign({}, EventEmitter.prototype, {
 
@@ -25554,8 +25816,9 @@ UserStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
   switch(action.type) {
     
     case ActionTypes.RECEIVE_USER:
-      console.log("I'm here");
+      // console.log("I'm here");
       _user = action.json;
+      // console.log(action.json);
       UserStore.emitChange();
       break;
 
@@ -25587,7 +25850,7 @@ UserStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
 
 module.exports = UserStore;
 
-},{"../constants/constants.js":218,"../dispatchers/AppDispatcher.js":219,"../utils/WebAPIUtils.js":223,"events":1,"object-assign":7}],223:[function(require,module,exports){
+},{"../constants/constants.js":223,"../dispatchers/AppDispatcher.js":224,"../utils/WebAPIUtils.js":228,"events":1,"object-assign":7}],228:[function(require,module,exports){
 var ServerActionCreators = require('../actions/server_actions.js');
 var SmallConstants = require('../constants/constants.js');
 var request = require('superagent');
@@ -25660,6 +25923,22 @@ module.exports = {
         }
       });
   },
+  updateSAT: function(confirmed) {
+    request.put(APIEndpoints.SAT)
+      .send({completed: confirmed })
+      .set('Accept', 'application/json')
+      .set('Authorization', sessionStorage.getItem('accessToken'))
+      .end(function(error, res){
+        if (res) {
+          if (res.error) {
+            console.log("ERRORRS");
+          }
+          json = JSON.parse(res.text);
+          console.log(json);
+          ServerActionCreators.receiveUser(json);
+        }
+      });
+  },
 
   loadStory: function(storyId) {
     request.get(APIEndpoints.STORIES + '/' + storyId)
@@ -25693,4 +25972,4 @@ module.exports = {
 
 };
 
-},{"../actions/server_actions.js":205,"../constants/constants.js":218,"superagent":202}]},{},[220]);
+},{"../actions/server_actions.js":205,"../constants/constants.js":223,"superagent":202}]},{},[225]);
