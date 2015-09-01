@@ -1,3 +1,5 @@
+/*@import url(https://fonts.googleapis.com/css?family=Muli:400,300);*/
+
 body {
   color: $base-font-color;
   font-family: $base-font-family;
@@ -6,20 +8,33 @@ body {
   line-height: $base-line-height;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1,h2,h3,h4,h5,h6 {
   font-family: $heading-font-family;
-  font-size: $base-font-size;
   line-height: $heading-line-height;
   margin: 0 0 $small-spacing;
+  font-weight: 400;
+  color: $main-blue;
+}
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.8rem;
+}
+h3 {
+  font-size: 1.6rem;
+}
+h4 {
+  font-size: 1.4rem;
+}
+h5 {
+  font-size: 1.2rem;
 }
 
 p {
+  font-size: 1rem;
   margin: 0 0 $small-spacing;
+  font-weight: 300;
 }
 
 a {

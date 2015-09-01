@@ -31,17 +31,11 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <div className="app">
+      <div className="main-content">
         <SideNav 
           isLoggedIn={this.state.isLoggedIn}
           email={this.state.email} />
-          <div id="main-content">
-
-         <div className="content">
-   	 		<RouteHandler />
-            
-         </div>
-     </div>
+   	 		<RouteHandler />   
       </div>
     );
   }

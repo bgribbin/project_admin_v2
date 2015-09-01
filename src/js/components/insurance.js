@@ -39,7 +39,7 @@ var Insurance = React.createClass({
       console.log(this.state.user);
       return (
          <div className="profile">
-         <p>Insurance</p>
+         <h2>Insurance</h2>
          <form onSubmit={this._onSubmit}>
           <label>Confirm as done?</label>
           <input type="checkbox" className="switch" ref="cb" />

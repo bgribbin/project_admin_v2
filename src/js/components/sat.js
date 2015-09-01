@@ -29,7 +29,7 @@ var Sat = React.createClass({
    render: function() {
       return (
          <div className="profile">
-         <p>sat</p>
+         <h2>sat</h2>
 
          </div>
       );

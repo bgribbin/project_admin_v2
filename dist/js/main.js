@@ -24928,17 +24928,11 @@ var App = React.createClass({displayName: "App",
 
   render: function() {
     return (
-      React.createElement("div", {className: "app"}, 
+      React.createElement("div", {className: "main-content"}, 
         React.createElement(SideNav, {
           isLoggedIn: this.state.isLoggedIn, 
           email: this.state.email}), 
-          React.createElement("div", {id: "main-content"}, 
-
-         React.createElement("div", {className: "content"}, 
    	 		React.createElement(RouteHandler, null)
-            
-         )
-     )
       )
     );
   }
@@ -24955,8 +24949,13 @@ var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 var ReactPropTypes = React.PropTypes;
 var SessionActionCreators = require('../actions/session_actions.js');
+var UserStore = require('../stores/user_store');
 
-
+function getStateFromStores() {
+  return {
+    user: UserStore.getUser()
+  };
+}
 
 var SideNav = React.createClass({displayName: "SideNav",
   
@@ -24964,6 +24963,22 @@ var SideNav = React.createClass({displayName: "SideNav",
   	isLoggedIn: ReactPropTypes.bool,
   	email: ReactPropTypes.string,
 
+  },
+
+  getInitialState: function() {
+    return getStateFromStores();
+  },
+
+  componentDidMount: function() {
+    UserStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    UserStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function() {
+    this.setState(getStateFromStores());
   },
 
   logout: function(e) {
@@ -24974,20 +24989,25 @@ var SideNav = React.createClass({displayName: "SideNav",
   render: function () {
 
   	var rightNav = this.props.isLoggedIn ? (
+      React.createElement("div", null, 
       React.createElement("ul", {className: "pure-menu-list"}, 
         React.createElement("li", {className: "pure-menu-item"}, 
           React.createElement("a", {href: "#", className: "pure-menu-link"}, this.props.email)
         ), 
         React.createElement("li", {className: "pure-menu-item"}, 
           React.createElement("a", {href: "#", className: "pure-menu-link", onClick: this.logout}, "Logout")
-        ), 
-         React.createElement(Menu_item, {name: "CV", link_to:  "cv" }), 
-         React.createElement(Menu_item, {name: "Sat", link_to:  "sat" }), 
-         React.createElement(Menu_item, {name: "Eligability", link_to:  "eligability" }), 
-         React.createElement(Menu_item, {name: "Insurance", link_to:  "insurance" }), 
-         React.createElement(Menu_item, {name: "Visa", link_to:  "visa" }), 
-         React.createElement(Menu_item, {name: "Profile", link_to:  "profile" }), 
-        React.createElement(Menu_item, {name: "Video", link_to:  "video" })
+        )
+      ), 
+      React.createElement("ul", {className: "pure-menu-list"}, 
+         React.createElement("li", {className: "pure-menu-heading"}, "Tasks"), 
+         React.createElement(Menu_item, {name: "CV", link_to: "cv", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "Sat", link_to: "sat", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "Eligability", link_to: "eligability", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "Insurance", link_to: "insurance", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "Visa", link_to: "visa", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "Profile", link_to: "profile", completed: this.state.user.sat_completed}), 
+        React.createElement(Menu_item, {name: "Video", link_to: "video", completed: this.state.user.sat_completed})
+      )
       )
     ) : (
       React.createElement("ul", {className: "pure-menu-list"}, 
@@ -24999,14 +25019,14 @@ var SideNav = React.createClass({displayName: "SideNav",
 
     return (
 
-      React.createElement("div", {id: "layout"}, 
-        React.createElement("div", {id: "menu"}, 
+
+        React.createElement("div", {id: "side-navbar"}, 
             React.createElement("div", {className: "pure-menu"}, 
                 React.createElement("a", {className: "pure-menu-heading", href: "#"}, "Future Elite Sports"), 
                 rightNav
             )
         )
-      )   
+  
 
     )
   }
@@ -25014,7 +25034,7 @@ var SideNav = React.createClass({displayName: "SideNav",
 
 module.exports = SideNav;
 
-},{"../actions/session_actions.js":206,"../components/menu_item.js":216,"react":201,"react-router":32}],210:[function(require,module,exports){
+},{"../actions/session_actions.js":206,"../components/menu_item.js":216,"../stores/user_store":227,"react":201,"react-router":32}],210:[function(require,module,exports){
 var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
@@ -25089,7 +25109,22 @@ var Eligability = React.createClass({displayName: "Eligability",
    render: function() {
       return (
          React.createElement("div", {className: "profile"}, 
-         React.createElement("p", null, "Eligability ")
+         React.createElement("h1", null, "NAIA Registration"), 
+        React.createElement("p", null, "The Eligibility Centre is something that all students that wish to study out in America have to complete in order to be deemed to be of ‘amateur’ status and therefore no professionals." + ' ' + 
+        "Further from our conversation, attached is a ‘how to guide’ for the NAIA Eligibility Centre."), 
+
+        React.createElement("h4", null, "Steps"), 
+        React.createElement("p", null, "1) Click on the link below. This will open up an online PDF that provides you with information/tips for registering with the NAIA" + ' ' +
+           "NAIA Registration Process (please click)"), 
+
+        React.createElement("p", null, "2) Create an account by clicking on 'Register to play'" + ' ' + 
+            "www.playnaia.org"), 
+
+        React.createElement("p", null, "3)  Please refer to the  PDF as a reference point when answering these questions. "), 
+
+        React.createElement("p", null, "4) The main question to be careful of is 'Have you played for anyone since leaving high school or from the age of 19'  The answer to this questions is 'NO' as high school in the USA is until 18."), 
+
+        React.createElement("p", null, "5) Contact your FES agent once you have completed the registration process. They will then discuss your list of tasks in greater detail.")
 
          )
       );
@@ -25156,7 +25191,7 @@ var Insurance = React.createClass({displayName: "Insurance",
       console.log(this.state.user);
       return (
          React.createElement("div", {className: "profile"}, 
-         React.createElement("p", null, "Insurance"), 
+         React.createElement("h2", null, "Insurance"), 
          React.createElement("form", {onSubmit: this._onSubmit}, 
           React.createElement("label", null, "Confirm as done?"), 
           React.createElement("input", {type: "checkbox", className: "switch", ref: "cb"}), 
@@ -25284,28 +25319,24 @@ var Router = require('react-router');
 var Link = Router.Link;
 var State = Router.State;
 
+
 var Menu_item = React.createClass({displayName: "Menu_item",
   mixins: [State],
-  getInitialState: function() {
-  	return null;
-  },
-
-  // handleClick: function(event) {
-  // 	// event.preventDefault();
-  // 	// console.log(this.props.key1);
-  // 	this.props.onSelect(this.props.key1);
-  // },
   
   render: function(){
+
     var isActive = this.isActive(this.props.link_to);
   	var className = isActive ? 'pure-menu-item pure-menu-selected' : 'pure-menu-item';
-  	// console.log(this.props.link_to);
-    
-    // console.log(isActive);
+    var isComplete = this.props.completed.toString();
     return (
       React.createElement("li", {className: className}, 
-      	React.createElement(Link, {to: this.props.link_to, className: "pure-menu-link"}, this.props.name)
+      	React.createElement(Link, {to: this.props.link_to, className: "pure-menu-link"}, 
+          this.props.name, 
+          React.createElement("span", {className: isComplete})
+        )
+        
       )
+
     )
   }
 });
@@ -25390,7 +25421,7 @@ var Sat = React.createClass({displayName: "Sat",
    render: function() {
       return (
          React.createElement("div", {className: "profile"}, 
-         React.createElement("p", null, "sat")
+         React.createElement("h2", null, "sat")
 
          )
       );
@@ -25408,8 +25439,13 @@ var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 var ReactPropTypes = React.PropTypes;
 var SessionActionCreators = require('../actions/session_actions.js');
+var UserStore = require('../stores/user_store');
 
-
+function getStateFromStores() {
+  return {
+    user: UserStore.getUser()
+  };
+}
 
 var SideNav = React.createClass({displayName: "SideNav",
   
@@ -25417,6 +25453,22 @@ var SideNav = React.createClass({displayName: "SideNav",
   	isLoggedIn: ReactPropTypes.bool,
   	email: ReactPropTypes.string,
 
+  },
+
+  getInitialState: function() {
+    return getStateFromStores();
+  },
+
+  componentDidMount: function() {
+    UserStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    UserStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function() {
+    this.setState(getStateFromStores());
   },
 
   logout: function(e) {
@@ -25427,20 +25479,25 @@ var SideNav = React.createClass({displayName: "SideNav",
   render: function () {
 
   	var rightNav = this.props.isLoggedIn ? (
+      React.createElement("div", null, 
       React.createElement("ul", {className: "pure-menu-list"}, 
         React.createElement("li", {className: "pure-menu-item"}, 
           React.createElement("a", {href: "#", className: "pure-menu-link"}, this.props.email)
         ), 
         React.createElement("li", {className: "pure-menu-item"}, 
           React.createElement("a", {href: "#", className: "pure-menu-link", onClick: this.logout}, "Logout")
-        ), 
-         React.createElement(Menu_item, {name: "CV", link_to:  "cv" }), 
-         React.createElement(Menu_item, {name: "Sat", link_to:  "sat" }), 
-         React.createElement(Menu_item, {name: "Eligability", link_to:  "eligability" }), 
-         React.createElement(Menu_item, {name: "Insurance", link_to:  "insurance" }), 
-         React.createElement(Menu_item, {name: "Visa", link_to:  "visa" }), 
-         React.createElement(Menu_item, {name: "Profile", link_to:  "profile" }), 
-        React.createElement(Menu_item, {name: "Video", link_to:  "video" })
+        )
+      ), 
+      React.createElement("ul", {className: "pure-menu-list"}, 
+         React.createElement("li", {className: "pure-menu-heading"}, "Tasks"), 
+         React.createElement(Menu_item, {name: "CV", link_to: "cv", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "Sat", link_to: "sat", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "Eligability", link_to: "eligability", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "Insurance", link_to: "insurance", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "Visa", link_to: "visa", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "Profile", link_to: "profile", completed: this.state.user.sat_completed}), 
+        React.createElement(Menu_item, {name: "Video", link_to: "video", completed: this.state.user.sat_completed})
+      )
       )
     ) : (
       React.createElement("ul", {className: "pure-menu-list"}, 
@@ -25452,14 +25509,14 @@ var SideNav = React.createClass({displayName: "SideNav",
 
     return (
 
-      React.createElement("div", {id: "layout"}, 
-        React.createElement("div", {id: "menu"}, 
+
+        React.createElement("div", {id: "side-navbar"}, 
             React.createElement("div", {className: "pure-menu"}, 
                 React.createElement("a", {className: "pure-menu-heading", href: "#"}, "Future Elite Sports"), 
                 rightNav
             )
         )
-      )   
+  
 
     )
   }
@@ -25467,7 +25524,7 @@ var SideNav = React.createClass({displayName: "SideNav",
 
 module.exports = SideNav;
 
-},{"../actions/session_actions.js":206,"../components/menu_item.js":216,"react":201,"react-router":32}],220:[function(require,module,exports){
+},{"../actions/session_actions.js":206,"../components/menu_item.js":216,"../stores/user_store":227,"react":201,"react-router":32}],220:[function(require,module,exports){
 var React = require('react');
 
 var Video = React.createClass({displayName: "Video",
@@ -25515,7 +25572,7 @@ var Visa = React.createClass({displayName: "Visa",
       return (
          React.createElement("div", {className: "profile"}, 
 
-         React.createElement("h2", null, "VISA Registration Steps"), 
+         React.createElement("h1", null, "VISA Registration Steps"), 
 
 React.createElement("p", null, "1) Click on the link below. This will open up an online PDF that provides you with information when booking the exam.  VISA Process (please click)"), 
 
@@ -25767,10 +25824,7 @@ var WebAPIUtils = require('../utils/WebAPIUtils.js');
 var ActionTypes = SmallConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
-var _stories = [];
 var _errors = [];
-var _story = { title: "", body: "", user: { username: "" } };
-
 var _user =  {
                 "username": "",
                 "id": 2,
@@ -25792,14 +25846,6 @@ var UserStore = assign({}, EventEmitter.prototype, {
   removeChangeListener: function(callback) {
     this.removeListener(CHANGE_EVENT, callback);
   },
-
-  getAllStories: function() {
-    return _stories;
-  },
-
-  getStory: function() {
-    return _story;
-  },
   getUser: function() {
     return _user;
   },
@@ -25816,9 +25862,7 @@ UserStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
   switch(action.type) {
     
     case ActionTypes.RECEIVE_USER:
-      // console.log("I'm here");
       _user = action.json;
-      // console.log(action.json);
       UserStore.emitChange();
       break;
 
@@ -25833,16 +25877,6 @@ UserStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
       UserStore.emitChange();
       break;
     
-    case ActionTypes.RECEIVE_STORY:
-      if (action.json) {
-        _story = action.json.story;
-        _errors = [];
-      }
-      if (action.errors) {
-        _errors = action.errors;
-      }
-      UserStore.emitChange();
-      break;
   }
 
   return true;

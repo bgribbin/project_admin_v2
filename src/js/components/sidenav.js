@@ -5,8 +5,13 @@ var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 var ReactPropTypes = React.PropTypes;
 var SessionActionCreators = require('../actions/session_actions.js');
+var UserStore = require('../stores/user_store');
 
-
+function getStateFromStores() {
+  return {
+    user: UserStore.getUser()
+  };
+}
 
 var SideNav = React.createClass({
   
@@ -14,6 +19,22 @@ var SideNav = React.createClass({
   	isLoggedIn: ReactPropTypes.bool,
   	email: ReactPropTypes.string,
 
+  },
+
+  getInitialState: function() {
+    return getStateFromStores();
+  },
+
+  componentDidMount: function() {
+    UserStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    UserStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function() {
+    this.setState(getStateFromStores());
   },
 
   logout: function(e) {
@@ -24,6 +45,7 @@ var SideNav = React.createClass({
   render: function () {
 
   	var rightNav = this.props.isLoggedIn ? (
+      <div>
       <ul className="pure-menu-list">
         <li className="pure-menu-item">
           <a href="#" className="pure-menu-link">{this.props.email}</a>
@@ -31,14 +53,18 @@ var SideNav = React.createClass({
         <li className="pure-menu-item">
           <a href='#' className="pure-menu-link" onClick={this.logout}>Logout</a>
         </li>
-         <Menu_item name={"CV"} link_to={ "cv" } />
-         <Menu_item name={"Sat"} link_to={ "sat" } />
-         <Menu_item name={"Eligability"} link_to={ "eligability" } />
-         <Menu_item name={"Insurance"} link_to={ "insurance" } />
-         <Menu_item name={"Visa"} link_to={ "visa" } />
-         <Menu_item name={"Profile"} link_to={ "profile" } />
-        <Menu_item name={"Video"} link_to={ "video" } />
       </ul>
+      <ul className="pure-menu-list">
+         <li className="pure-menu-heading">Tasks</li>
+         <Menu_item name={"CV"} link_to={"cv"} completed={this.state.user.sat_completed} />
+         <Menu_item name={"Sat"} link_to={"sat"} completed={this.state.user.sat_completed} />
+         <Menu_item name={"Eligability"} link_to={"eligability"} completed={this.state.user.sat_completed} />
+         <Menu_item name={"Insurance"} link_to={"insurance"} completed={this.state.user.sat_completed} />
+         <Menu_item name={"Visa"} link_to={"visa"} completed={this.state.user.sat_completed} />
+         <Menu_item name={"Profile"} link_to={"profile"} completed={this.state.user.sat_completed} />
+        <Menu_item name={"Video"} link_to={"video"} completed={this.state.user.sat_completed} />
+      </ul>
+      </div>
     ) : (
       <ul className="pure-menu-list">
         <li className="pure-menu-item">
@@ -49,14 +75,14 @@ var SideNav = React.createClass({
 
     return (
 
-      <div id="layout">
-        <div id="menu">
+
+        <div id="side-navbar">
             <div className="pure-menu">
                 <a className="pure-menu-heading" href="#">Future Elite Sports</a>
                 {rightNav}
             </div>
         </div>
-      </div>   
+  
 
     )
   }

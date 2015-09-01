@@ -1,5 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Muli:400,300);
+
 // Typography
-$base-font-family: $helvetica;
+
+$base-font-family: 'Muli', sans-serif;
 $heading-font-family: $base-font-family;
 
 // Font Sizes
@@ -20,6 +23,7 @@ $blue: #477dca;
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #ddd;
+$main-blue: #0F375A;
 
 // Font Colors
 $base-font-color: $dark-gray;

@@ -1,0 +1,25 @@
+span {
+   
+   &.false {
+   background: url('/assets/images/nope.png') no-repeat;
+   background-size: cover;
+   float: right;
+   color: white;
+   width: 24px;
+   height: 24px;
+   margin-right: 0.5rem;
+   }
+   &.true {
+   background: url('/assets/images/check.png') no-repeat;
+   background-size: cover;
+   float: right;
+   color: white;
+   width: 24px;
+   height: 24px;
+   margin-right: 0.5rem;
+   }
+}
+
+#side-navbar {
+   @include span-columns(4);
+}

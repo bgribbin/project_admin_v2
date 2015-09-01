@@ -8,7 +8,8 @@
     left: 250px;
     right: 0px;
     padding-top: 40px;
+    @include outer-container;
 }
 .profile {
-   background-color: gray;
+   @include span-columns(8);
 }

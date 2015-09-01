@@ -7,10 +7,7 @@ var WebAPIUtils = require('../utils/WebAPIUtils.js');
 var ActionTypes = SmallConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
-var _stories = [];
 var _errors = [];
-var _story = { title: "", body: "", user: { username: "" } };
-
 var _user =  {
                 "username": "",
                 "id": 2,
@@ -32,14 +29,6 @@ var UserStore = assign({}, EventEmitter.prototype, {
   removeChangeListener: function(callback) {
     this.removeListener(CHANGE_EVENT, callback);
   },
-
-  getAllStories: function() {
-    return _stories;
-  },
-
-  getStory: function() {
-    return _story;
-  },
   getUser: function() {
     return _user;
   },
@@ -56,9 +45,7 @@ UserStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
   switch(action.type) {
     
     case ActionTypes.RECEIVE_USER:
-      // console.log("I'm here");
       _user = action.json;
-      // console.log(action.json);
       UserStore.emitChange();
       break;
 
@@ -73,16 +60,6 @@ UserStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
       UserStore.emitChange();
       break;
     
-    case ActionTypes.RECEIVE_STORY:
-      if (action.json) {
-        _story = action.json.story;
-        _errors = [];
-      }
-      if (action.errors) {
-        _errors = action.errors;
-      }
-      UserStore.emitChange();
-      break;
   }
 
   return true;
