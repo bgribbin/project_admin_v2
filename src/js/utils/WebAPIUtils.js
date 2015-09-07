@@ -86,6 +86,22 @@ module.exports = {
         }
       });
   },
+    updateUSER: function(task, confirmed) {
+    request.put(APIEndpoints.USER)
+      .send({task: task, completed: confirmed })
+      .set('Accept', 'application/json')
+      .set('Authorization', sessionStorage.getItem('accessToken'))
+      .end(function(error, res){
+        if (res) {
+          if (res.error) {
+            console.log("ERRORRS");
+          }
+          json = JSON.parse(res.text);
+          console.log(json);
+          ServerActionCreators.receiveUser(json);
+        }
+      });
+  },
 
   loadStory: function(storyId) {
     request.get(APIEndpoints.STORIES + '/' + storyId)

@@ -24823,7 +24823,7 @@ module.exports = {
 
 };
 
-},{"../constants/constants.js":223,"../dispatchers/AppDispatcher.js":224}],206:[function(require,module,exports){
+},{"../constants/constants.js":224,"../dispatchers/AppDispatcher.js":225}],206:[function(require,module,exports){
 var AppDispatcher = require('../dispatchers/AppDispatcher.js');
 var Constants = require('../constants/constants.js');
 var WebAPIUtils = require('../utils/WebAPIUtils.js');
@@ -24860,7 +24860,7 @@ module.exports = {
 
 };
 
-},{"../constants/constants.js":223,"../dispatchers/AppDispatcher.js":224,"../utils/WebAPIUtils.js":228}],207:[function(require,module,exports){
+},{"../constants/constants.js":224,"../dispatchers/AppDispatcher.js":225,"../utils/WebAPIUtils.js":229}],207:[function(require,module,exports){
 var SmallAppDispatcher = require('../dispatchers/AppDispatcher.js');
 var SmallConstants = require('../constants/constants.js');
 var WebAPIUtils = require('../utils/WebAPIUtils.js');
@@ -24890,11 +24890,19 @@ module.exports = {
       confirmed: checkbox
     });
     WebAPIUtils.updateSAT(checkbox);
+  },
+
+  updateUSER: function(task, checkbox) {
+    SmallAppDispatcher.handleViewAction({
+      type: ActionTypes.UPDATE_USER,
+      confirmed: checkbox
+    });
+    WebAPIUtils.updateUSER(task, checkbox);
   }
 
 };
 
-},{"../constants/constants.js":223,"../dispatchers/AppDispatcher.js":224,"../utils/WebAPIUtils.js":228}],208:[function(require,module,exports){
+},{"../constants/constants.js":224,"../dispatchers/AppDispatcher.js":225,"../utils/WebAPIUtils.js":229}],208:[function(require,module,exports){
 var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
 var SideNav = require('../components/SideNav.js');
@@ -24928,7 +24936,7 @@ var App = React.createClass({displayName: "App",
 
   render: function() {
     return (
-      React.createElement("div", {className: "main-content"}, 
+      React.createElement("div", {className: "content-wrapper"}, 
         React.createElement(SideNav, {
           isLoggedIn: this.state.isLoggedIn, 
           email: this.state.email}), 
@@ -24941,7 +24949,7 @@ var App = React.createClass({displayName: "App",
 
 module.exports = App;
 
-},{"../components/SideNav.js":209,"../stores/session_store.js":226,"react":201,"react-router":32}],209:[function(require,module,exports){
+},{"../components/SideNav.js":209,"../stores/session_store.js":227,"react":201,"react-router":32}],209:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var Menu_item = require('../components/menu_item.js');
@@ -24998,15 +25006,15 @@ var SideNav = React.createClass({displayName: "SideNav",
           React.createElement("a", {href: "#", className: "pure-menu-link", onClick: this.logout}, "Logout")
         )
       ), 
-      React.createElement("ul", {className: "pure-menu-list"}, 
+      React.createElement("ul", {className: "pure-menu-list nav-tasks"}, 
          React.createElement("li", {className: "pure-menu-heading"}, "Tasks"), 
-         React.createElement(Menu_item, {name: "CV", link_to: "cv", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "CV", link_to: "cv", completed: this.state.user.cv_completed}), 
          React.createElement(Menu_item, {name: "Sat", link_to: "sat", completed: this.state.user.sat_completed}), 
-         React.createElement(Menu_item, {name: "Eligability", link_to: "eligability", completed: this.state.user.sat_completed}), 
-         React.createElement(Menu_item, {name: "Insurance", link_to: "insurance", completed: this.state.user.sat_completed}), 
-         React.createElement(Menu_item, {name: "Visa", link_to: "visa", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "Eligability", link_to: "eligability", completed: this.state.user.eligability_completed}), 
+         React.createElement(Menu_item, {name: "Insurance", link_to: "insurance", completed: this.state.user.insurance_completed}), 
+         React.createElement(Menu_item, {name: "Visa", link_to: "visa", completed: this.state.user.visa_completed}), 
          React.createElement(Menu_item, {name: "Profile", link_to: "profile", completed: this.state.user.sat_completed}), 
-        React.createElement(Menu_item, {name: "Video", link_to: "video", completed: this.state.user.sat_completed})
+        React.createElement(Menu_item, {name: "Video", link_to: "video", completed: this.state.user.video_completed})
       )
       )
     ) : (
@@ -25022,7 +25030,10 @@ var SideNav = React.createClass({displayName: "SideNav",
 
         React.createElement("div", {id: "side-navbar"}, 
             React.createElement("div", {className: "pure-menu"}, 
-                React.createElement("a", {className: "pure-menu-heading", href: "#"}, "Future Elite Sports"), 
+
+                React.createElement("div", {className: "nav_header"}, 
+                React.createElement("a", {className: "pure-menu-heading", href: "#"}, "Future Elite Sports")
+                ), 
                 rightNav
             )
         )
@@ -25034,10 +25045,66 @@ var SideNav = React.createClass({displayName: "SideNav",
 
 module.exports = SideNav;
 
-},{"../actions/session_actions.js":206,"../components/menu_item.js":216,"../stores/user_store":227,"react":201,"react-router":32}],210:[function(require,module,exports){
+},{"../actions/session_actions.js":206,"../components/menu_item.js":217,"../stores/user_store":228,"react":201,"react-router":32}],210:[function(require,module,exports){
 var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
+
+var Completed = React.createClass({displayName: "Completed",
+
+   getInitialState: function() {
+    return { 
+      user: UserStore.getUser(), 
+      errors: []
+    };
+  },
+ 
+  componentDidMount: function() {
+    UserStore.addChangeListener(this._onChange);
+    UserActions.loadUser();
+  },
+
+  componentWillUnmount: function() {
+    UserStore.removeChangeListener(this._onChange);
+
+  },
+
+  _onChange: function() {
+    this.setState({ 
+      user: UserStore.getUser(),
+      errors: UserStore.getErrors()
+    }); 
+  },
+  _onSubmit: function(e) {
+    e.preventDefault();
+    this.setState({ errors: [] });
+    var confirmed = this.refs.cb.getDOMNode().checked;
+    var task = this.props.task;
+    console.log(task);
+    UserActions.updateUSER(task, confirmed);
+    UserActions.loadUser();
+  },
+   render: function() {
+
+
+      return (
+         React.createElement("form", {onSubmit: this._onSubmit}, 
+          React.createElement("label", null, "Confirm as done?"), 
+          React.createElement("input", {type: "checkbox", className: "switch", ref: "cb", defaultChecked: this.props.checked}), 
+          React.createElement("button", {type: "submit", className: "card--login__submit"}, "Confirm")
+         )
+      );
+   }
+
+});
+
+module.exports = Completed;
+
+},{"../actions/user_actions.js":207,"../stores/user_store.js":228,"react":201}],211:[function(require,module,exports){
+var React = require('react');
+var UserActions = require('../actions/user_actions.js');
+var UserStore = require('../stores/user_store.js');
+var Completed_form = require('../components/completed_form.js');
 
 var CV = React.createClass({displayName: "CV",
 
@@ -25066,9 +25133,7 @@ var CV = React.createClass({displayName: "CV",
    render: function() {
       return (
          React.createElement("div", {className: "profile"}, 
-         React.createElement("p", null, "Username + ",  this.state.user.username), 
-         React.createElement("p", null, "email + ",  this.state.user.email), 
-         React.createElement("p", null, "user id + ",  this.state.user.id)
+         React.createElement(Completed_form, {task: "cv"})
          )
       );
    }
@@ -25077,10 +25142,11 @@ var CV = React.createClass({displayName: "CV",
 
 module.exports = CV;
 
-},{"../actions/user_actions.js":207,"../stores/user_store.js":227,"react":201}],211:[function(require,module,exports){
+},{"../actions/user_actions.js":207,"../components/completed_form.js":210,"../stores/user_store.js":228,"react":201}],212:[function(require,module,exports){
 var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
+var Completed_form = require('../components/completed_form.js');
 
 var Eligability = React.createClass({displayName: "Eligability",
 
@@ -25108,8 +25174,10 @@ var Eligability = React.createClass({displayName: "Eligability",
   },
    render: function() {
       return (
-         React.createElement("div", {className: "profile"}, 
-         React.createElement("h1", null, "NAIA Registration"), 
+         React.createElement("div", {className: "task-content"}, 
+          React.createElement("div", {className: "title"}, 
+            React.createElement("h1", null, "NAIA Registration")
+          ), 
         React.createElement("p", null, "The Eligibility Centre is something that all students that wish to study out in America have to complete in order to be deemed to be of ‘amateur’ status and therefore no professionals." + ' ' + 
         "Further from our conversation, attached is a ‘how to guide’ for the NAIA Eligibility Centre."), 
 
@@ -25124,8 +25192,10 @@ var Eligability = React.createClass({displayName: "Eligability",
 
         React.createElement("p", null, "4) The main question to be careful of is 'Have you played for anyone since leaving high school or from the age of 19'  The answer to this questions is 'NO' as high school in the USA is until 18."), 
 
-        React.createElement("p", null, "5) Contact your FES agent once you have completed the registration process. They will then discuss your list of tasks in greater detail.")
+        React.createElement("p", null, "5) Contact your FES agent once you have completed the registration process. They will then discuss your list of tasks in greater detail."), 
+        
 
+        React.createElement(Completed_form, {task: "eligability"})
          )
       );
    }
@@ -25134,7 +25204,7 @@ var Eligability = React.createClass({displayName: "Eligability",
 
 module.exports = Eligability;
 
-},{"../actions/user_actions.js":207,"../stores/user_store.js":227,"react":201}],212:[function(require,module,exports){
+},{"../actions/user_actions.js":207,"../components/completed_form.js":210,"../stores/user_store.js":228,"react":201}],213:[function(require,module,exports){
 var React = require('react');
 
 var Home = React.createClass({displayName: "Home",
@@ -25149,10 +25219,11 @@ var Home = React.createClass({displayName: "Home",
 
 module.exports = Home;
 
-},{"react":201}],213:[function(require,module,exports){
+},{"react":201}],214:[function(require,module,exports){
 var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
+var Completed_form = require('../components/completed_form.js');
 
 var Insurance = React.createClass({displayName: "Insurance",
 
@@ -25192,11 +25263,7 @@ var Insurance = React.createClass({displayName: "Insurance",
       return (
          React.createElement("div", {className: "profile"}, 
          React.createElement("h2", null, "Insurance"), 
-         React.createElement("form", {onSubmit: this._onSubmit}, 
-          React.createElement("label", null, "Confirm as done?"), 
-          React.createElement("input", {type: "checkbox", className: "switch", ref: "cb"}), 
-          React.createElement("button", {type: "submit", className: "card--login__submit"}, "Confirm")
-         ), 
+         React.createElement(Completed_form, {task: "insurance"}), 
 
          React.createElement("div", null, 
          React.createElement("h2", null, this.state.user.username), 
@@ -25210,7 +25277,7 @@ var Insurance = React.createClass({displayName: "Insurance",
 
 module.exports = Insurance;
 
-},{"../actions/user_actions.js":207,"../stores/user_store.js":227,"react":201}],214:[function(require,module,exports){
+},{"../actions/user_actions.js":207,"../components/completed_form.js":210,"../stores/user_store.js":228,"react":201}],215:[function(require,module,exports){
 var React = require('react');
 var SessionActionCreators = require('../actions/session_actions.js');
 var SessionStore = require('../stores/session_store.js');
@@ -25246,10 +25313,10 @@ var LoginPage = React.createClass({displayName: "LoginPage",
 
   //  var errors = (this.state.errors.length > 0) ? <ErrorNotice errors={this.state.errors}/> : <div></div>;
     return (
-      React.createElement("div", {className: "container"}, 
+      React.createElement("div", {className: "main-container"}, 
         errors, 
-        React.createElement("div", {className: "row"}, 
-          React.createElement("div", {className: "card card--login small-10 medium-6 large-4 columns small-centered"}, 
+        React.createElement("div", {className: "profile"}, 
+          React.createElement("div", {className: ""}, 
             React.createElement("form", {onSubmit: this._onSubmit}, 
               React.createElement("div", {className: "card--login__field"}, 
                 React.createElement("label", {name: "email"}, "Email"), 
@@ -25270,7 +25337,7 @@ var LoginPage = React.createClass({displayName: "LoginPage",
 
 module.exports = LoginPage;
 
-},{"../actions/session_actions.js":206,"../stores/session_store.js":226,"react":201}],215:[function(require,module,exports){
+},{"../actions/session_actions.js":206,"../stores/session_store.js":227,"react":201}],216:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
@@ -25313,7 +25380,7 @@ var Main = React.createClass({displayName: "Main",
 
 module.exports = Main;
 
-},{"../actions/session_actions.js":206,"react":201,"react-router":32}],216:[function(require,module,exports){
+},{"../actions/session_actions.js":206,"react":201,"react-router":32}],217:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
@@ -25343,7 +25410,7 @@ var Menu_item = React.createClass({displayName: "Menu_item",
 
 module.exports = Menu_item;
 
-},{"react":201,"react-router":32}],217:[function(require,module,exports){
+},{"react":201,"react-router":32}],218:[function(require,module,exports){
 var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
@@ -25375,12 +25442,13 @@ var Profile = React.createClass({displayName: "Profile",
    render: function() {
       return (
          React.createElement("div", {className: "profile"}, 
+         React.createElement("div", {className: "main_header"}, React.createElement("p", null, "Profile")), 
            React.createElement("p", null, "Username + ",  this.state.user.username), 
            React.createElement("p", null, "email + ",  this.state.user.email), 
            React.createElement("p", null, "user id + ",  this.state.user.id), 
            React.createElement("br", null), 
-           React.createElement("p", null, "sat + ", this.state.user.sat_completed.toString()), 
-           React.createElement("p", null, "video + ", this.state.user.video_uploaded.toString())
+           React.createElement("p", null, "sat + ", this.state.user.sat_completed.toString())
+
          )
       );
    }
@@ -25389,10 +25457,11 @@ var Profile = React.createClass({displayName: "Profile",
 
 module.exports = Profile;
 
-},{"../actions/user_actions.js":207,"../stores/user_store.js":227,"react":201}],218:[function(require,module,exports){
+},{"../actions/user_actions.js":207,"../stores/user_store.js":228,"react":201}],219:[function(require,module,exports){
 var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
+var Completed_form = require('../components/completed_form.js');
 
 var Sat = React.createClass({displayName: "Sat",
 
@@ -25418,11 +25487,22 @@ var Sat = React.createClass({displayName: "Sat",
       errors: UserStore.getErrors()
     }); 
   },
-   render: function() {
-      return (
-         React.createElement("div", {className: "profile"}, 
-         React.createElement("h2", null, "sat")
 
+  
+   render: function() {
+
+      var isChecked = this.state.user.sat_completed;
+      var checked = isChecked? 'checked' : '';
+      return (
+         React.createElement("div", {className: "task-content"}, 
+           React.createElement("div", {className: "title"}, 
+            React.createElement("h1", null, "Test Scores")
+           ), 
+
+           React.createElement("div", {className: "content"}, 
+           React.createElement("p", null, " This is where the content will go")
+           ), 
+         React.createElement(Completed_form, {task: "sat", checked: checked})
          )
       );
    }
@@ -25431,7 +25511,7 @@ var Sat = React.createClass({displayName: "Sat",
 
 module.exports = Sat;
 
-},{"../actions/user_actions.js":207,"../stores/user_store.js":227,"react":201}],219:[function(require,module,exports){
+},{"../actions/user_actions.js":207,"../components/completed_form.js":210,"../stores/user_store.js":228,"react":201}],220:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var Menu_item = require('../components/menu_item.js');
@@ -25488,15 +25568,15 @@ var SideNav = React.createClass({displayName: "SideNav",
           React.createElement("a", {href: "#", className: "pure-menu-link", onClick: this.logout}, "Logout")
         )
       ), 
-      React.createElement("ul", {className: "pure-menu-list"}, 
+      React.createElement("ul", {className: "pure-menu-list nav-tasks"}, 
          React.createElement("li", {className: "pure-menu-heading"}, "Tasks"), 
-         React.createElement(Menu_item, {name: "CV", link_to: "cv", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "CV", link_to: "cv", completed: this.state.user.cv_completed}), 
          React.createElement(Menu_item, {name: "Sat", link_to: "sat", completed: this.state.user.sat_completed}), 
-         React.createElement(Menu_item, {name: "Eligability", link_to: "eligability", completed: this.state.user.sat_completed}), 
-         React.createElement(Menu_item, {name: "Insurance", link_to: "insurance", completed: this.state.user.sat_completed}), 
-         React.createElement(Menu_item, {name: "Visa", link_to: "visa", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "Eligability", link_to: "eligability", completed: this.state.user.eligability_completed}), 
+         React.createElement(Menu_item, {name: "Insurance", link_to: "insurance", completed: this.state.user.insurance_completed}), 
+         React.createElement(Menu_item, {name: "Visa", link_to: "visa", completed: this.state.user.visa_completed}), 
          React.createElement(Menu_item, {name: "Profile", link_to: "profile", completed: this.state.user.sat_completed}), 
-        React.createElement(Menu_item, {name: "Video", link_to: "video", completed: this.state.user.sat_completed})
+        React.createElement(Menu_item, {name: "Video", link_to: "video", completed: this.state.user.video_completed})
       )
       )
     ) : (
@@ -25512,7 +25592,10 @@ var SideNav = React.createClass({displayName: "SideNav",
 
         React.createElement("div", {id: "side-navbar"}, 
             React.createElement("div", {className: "pure-menu"}, 
-                React.createElement("a", {className: "pure-menu-heading", href: "#"}, "Future Elite Sports"), 
+
+                React.createElement("div", {className: "nav_header"}, 
+                React.createElement("a", {className: "pure-menu-heading", href: "#"}, "Future Elite Sports")
+                ), 
                 rightNav
             )
         )
@@ -25524,14 +25607,16 @@ var SideNav = React.createClass({displayName: "SideNav",
 
 module.exports = SideNav;
 
-},{"../actions/session_actions.js":206,"../components/menu_item.js":216,"../stores/user_store":227,"react":201,"react-router":32}],220:[function(require,module,exports){
+},{"../actions/session_actions.js":206,"../components/menu_item.js":217,"../stores/user_store":228,"react":201,"react-router":32}],221:[function(require,module,exports){
 var React = require('react');
+var Completed_form = require('../components/completed_form.js');
 
 var Video = React.createClass({displayName: "Video",
   render: function(){
     return (
       React.createElement("h2", {className: ""}, 
-        "This is the video page"
+        "This is the video page", 
+        React.createElement(Completed_form, {task: "video"})
       )
     )
   }
@@ -25539,10 +25624,11 @@ var Video = React.createClass({displayName: "Video",
 
 module.exports = Video;
 
-},{"react":201}],221:[function(require,module,exports){
+},{"../components/completed_form.js":210,"react":201}],222:[function(require,module,exports){
 var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
+var Completed_form = require('../components/completed_form.js');
 
 var Visa = React.createClass({displayName: "Visa",
 
@@ -25570,9 +25656,13 @@ var Visa = React.createClass({displayName: "Visa",
   },
    render: function() {
       return (
-         React.createElement("div", {className: "profile"}, 
+         React.createElement("div", {className: "task-content"}, 
 
-         React.createElement("h1", null, "VISA Registration Steps"), 
+         React.createElement("div", {className: "title"}, 
+         React.createElement("h1", null, "VISA Registration Steps")
+         ), 
+
+         React.createElement("div", {className: "content"}, 
 
 React.createElement("p", null, "1) Click on the link below. This will open up an online PDF that provides you with information when booking the exam.  VISA Process (please click)"), 
 
@@ -25601,7 +25691,8 @@ React.createElement("p", null, "7) Contact your Future Elite Sports rep if you h
 React.createElement("p", null, "Useful Links - The link below explains in greater detail what you can expect on the day of your interview and how to be best prepared. VISA Process (Please click)"), 
 
 React.createElement("p", null, "- You will be asked a series of questions about why you want to study in the USA. The link below discussed the type of questions you will face in the day. Examples of Visa Questions (Please Click)")
-
+  ), 
+          React.createElement(Completed_form, {task: "visa"})
          )
       );
    }
@@ -25610,7 +25701,7 @@ React.createElement("p", null, "- You will be asked a series of questions about 
 
 module.exports = Visa;
 
-},{"../actions/user_actions.js":207,"../stores/user_store.js":227,"react":201}],222:[function(require,module,exports){
+},{"../actions/user_actions.js":207,"../components/completed_form.js":210,"../stores/user_store.js":228,"react":201}],223:[function(require,module,exports){
 var React = require('react');
 var Main = require('../components/main');
 var HomePage = require('../components/home');
@@ -25643,7 +25734,7 @@ module.exports = (
   )
 );
 
-},{"../components/App":208,"../components/cv":210,"../components/eligability":211,"../components/home":212,"../components/insurance":213,"../components/login":214,"../components/main":215,"../components/profile":217,"../components/sat":218,"../components/video":220,"../components/visa":221,"react":201,"react-router":32}],223:[function(require,module,exports){
+},{"../components/App":208,"../components/cv":211,"../components/eligability":212,"../components/home":213,"../components/insurance":214,"../components/login":215,"../components/main":216,"../components/profile":218,"../components/sat":219,"../components/video":221,"../components/visa":222,"react":201,"react-router":32}],224:[function(require,module,exports){
 var keyMirror = require('keymirror');
 
 var APIRoot = "http://localhost:3000";
@@ -25653,7 +25744,7 @@ module.exports = {
   APIEndpoints: {
     LOGIN:          APIRoot + "/v1/login",
     REGISTRATION:   APIRoot + "/v1/users",
-    USER:           APIRoot + "/v1/profile?id=2",
+    USER:           APIRoot + "/v1/profile",
     VIDEO:          APIRoot + "/v1/video",
     SAT:          APIRoot + "/v1/sat"
   },
@@ -25671,6 +25762,8 @@ module.exports = {
     // Routes
     REDIRECT: null,
 
+
+    UPDATE_USER: null,
     LOAD_USER: null,
     UPDATE_SAT: null,
     RECEIVE_USER: null,
@@ -25682,7 +25775,7 @@ module.exports = {
 
 };
 
-},{"keymirror":6}],224:[function(require,module,exports){
+},{"keymirror":6}],225:[function(require,module,exports){
 var Constants = require('../constants/constants.js');
 var Dispatcher = require('flux').Dispatcher;
 var assign = require('react/lib/Object.assign');
@@ -25710,7 +25803,7 @@ var AppDispatcher = assign(new Dispatcher(), {
 
 module.exports = AppDispatcher;
 
-},{"../constants/constants.js":223,"flux":3,"react/lib/Object.assign":72}],225:[function(require,module,exports){
+},{"../constants/constants.js":224,"flux":3,"react/lib/Object.assign":72}],226:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var routes = require('./config/routes');
@@ -25719,7 +25812,7 @@ Router.run(routes, function(Root){
   React.render(React.createElement(Root, null), document.getElementById('main'));
 });
 
-},{"./config/routes":222,"react":201,"react-router":32}],226:[function(require,module,exports){
+},{"./config/routes":223,"react":201,"react-router":32}],227:[function(require,module,exports){
 var React = require('react');
 var SideNav = require('../components/sidenav.js');
 
@@ -25804,6 +25897,7 @@ SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
       sessionStorage.removeItem('accessToken');
       sessionStorage.removeItem('email');
       SessionStore.emitChange();
+      router.transitionTo('/');
       break;
 
     default:
@@ -25814,7 +25908,7 @@ SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
 
 module.exports = SessionStore;
 
-},{"../components/sidenav.js":219,"../config/routes.js":222,"../constants/constants.js":223,"../dispatchers/AppDispatcher.js":224,"events":1,"object-assign":7,"react":201,"react-router":32}],227:[function(require,module,exports){
+},{"../components/sidenav.js":220,"../config/routes.js":223,"../constants/constants.js":224,"../dispatchers/AppDispatcher.js":225,"events":1,"object-assign":7,"react":201,"react-router":32}],228:[function(require,module,exports){
 var SmallAppDispatcher = require('../dispatchers/AppDispatcher.js');
 var SmallConstants = require('../constants/constants.js');
 var EventEmitter = require('events').EventEmitter;
@@ -25829,8 +25923,12 @@ var _user =  {
                 "username": "",
                 "id": 2,
                 "email": "",
-                "video_uploaded": false,
-                "sat_completed": false
+                "video_completed": false,
+                "sat_completed": false,
+                "insurance_completed": false,
+                "cv_completed": false,
+                "eligability_completed": false,
+                "visa_completed": false
              };
 
 var UserStore = assign({}, EventEmitter.prototype, {
@@ -25884,7 +25982,7 @@ UserStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
 
 module.exports = UserStore;
 
-},{"../constants/constants.js":223,"../dispatchers/AppDispatcher.js":224,"../utils/WebAPIUtils.js":228,"events":1,"object-assign":7}],228:[function(require,module,exports){
+},{"../constants/constants.js":224,"../dispatchers/AppDispatcher.js":225,"../utils/WebAPIUtils.js":229,"events":1,"object-assign":7}],229:[function(require,module,exports){
 var ServerActionCreators = require('../actions/server_actions.js');
 var SmallConstants = require('../constants/constants.js');
 var request = require('superagent');
@@ -25973,6 +26071,22 @@ module.exports = {
         }
       });
   },
+    updateUSER: function(task, confirmed) {
+    request.put(APIEndpoints.USER)
+      .send({task: task, completed: confirmed })
+      .set('Accept', 'application/json')
+      .set('Authorization', sessionStorage.getItem('accessToken'))
+      .end(function(error, res){
+        if (res) {
+          if (res.error) {
+            console.log("ERRORRS");
+          }
+          json = JSON.parse(res.text);
+          console.log(json);
+          ServerActionCreators.receiveUser(json);
+        }
+      });
+  },
 
   loadStory: function(storyId) {
     request.get(APIEndpoints.STORIES + '/' + storyId)
@@ -26006,4 +26120,4 @@ module.exports = {
 
 };
 
-},{"../actions/server_actions.js":205,"../constants/constants.js":223,"superagent":202}]},{},[225]);
+},{"../actions/server_actions.js":205,"../constants/constants.js":224,"superagent":202}]},{},[226]);

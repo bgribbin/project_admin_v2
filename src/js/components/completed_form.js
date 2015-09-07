@@ -1,9 +1,8 @@
 var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
-var Completed_form = require('../components/completed_form.js');
 
-var Sat = React.createClass({
+var Completed = React.createClass({
 
    getInitialState: function() {
     return { 
@@ -19,6 +18,7 @@ var Sat = React.createClass({
 
   componentWillUnmount: function() {
     UserStore.removeChangeListener(this._onChange);
+
   },
 
   _onChange: function() {
@@ -27,26 +27,27 @@ var Sat = React.createClass({
       errors: UserStore.getErrors()
     }); 
   },
-
-  
+  _onSubmit: function(e) {
+    e.preventDefault();
+    this.setState({ errors: [] });
+    var confirmed = this.refs.cb.getDOMNode().checked;
+    var task = this.props.task;
+    console.log(task);
+    UserActions.updateUSER(task, confirmed);
+    UserActions.loadUser();
+  },
    render: function() {
 
-      var isChecked = this.state.user.sat_completed;
-      var checked = isChecked? 'checked' : '';
-      return (
-         <div className="task-content">
-           <div className="title">
-            <h1>Test Scores</h1>
-           </div>
 
-           <div className="content">
-           <p> This is where the content will go</p>
-           </div>
-         <Completed_form task={"sat"} checked={checked} />
-         </div>
+      return (
+         <form onSubmit={this._onSubmit}>
+          <label>Confirm as done?</label>
+          <input type="checkbox" className="switch" ref="cb" defaultChecked={this.props.checked} />
+          <button type="submit" className="card--login__submit">Confirm</button>
+         </form>
       );
    }
 
 });
 
-module.exports = Sat;
+module.exports = Completed;

@@ -12,8 +12,12 @@ var _user =  {
                 "username": "",
                 "id": 2,
                 "email": "",
-                "video_uploaded": false,
-                "sat_completed": false
+                "video_completed": false,
+                "sat_completed": false,
+                "insurance_completed": false,
+                "cv_completed": false,
+                "eligability_completed": false,
+                "visa_completed": false
              };
 
 var UserStore = assign({}, EventEmitter.prototype, {

@@ -29,12 +29,13 @@ var Profile = React.createClass({
    render: function() {
       return (
          <div className="profile">
+         <div className="main_header"><p>Profile</p></div>
            <p>Username + { this.state.user.username }</p>
            <p>email + { this.state.user.email }</p>
            <p>user id + { this.state.user.id }</p>
            <br/>
            <p>sat + {this.state.user.sat_completed.toString()}</p>
-           <p>video + {this.state.user.video_uploaded.toString()}</p>
+
          </div>
       );
    }

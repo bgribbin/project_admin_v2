@@ -27,6 +27,14 @@ module.exports = {
       confirmed: checkbox
     });
     WebAPIUtils.updateSAT(checkbox);
+  },
+
+  updateUSER: function(task, checkbox) {
+    SmallAppDispatcher.handleViewAction({
+      type: ActionTypes.UPDATE_USER,
+      confirmed: checkbox
+    });
+    WebAPIUtils.updateUSER(task, checkbox);
   }
 
 };

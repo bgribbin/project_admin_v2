@@ -1,6 +1,7 @@
 var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
+var Completed_form = require('../components/completed_form.js');
 
 var Eligability = React.createClass({
 
@@ -28,8 +29,10 @@ var Eligability = React.createClass({
   },
    render: function() {
       return (
-         <div className="profile">
-         <h1>NAIA Registration</h1>
+         <div className="task-content">
+          <div className="title">
+            <h1>NAIA Registration</h1>
+          </div>
         <p>The Eligibility Centre is something that all students that wish to study out in America have to complete in order to be deemed to be of ‘amateur’ status and therefore no professionals. 
         Further from our conversation, attached is a ‘how to guide’ for the NAIA Eligibility Centre.</p>
 
@@ -45,7 +48,9 @@ var Eligability = React.createClass({
         <p>4) The main question to be careful of is 'Have you played for anyone since leaving high school or from the age of 19'  The answer to this questions is 'NO' as high school in the USA is until 18.</p>
 
         <p>5) Contact your FES agent once you have completed the registration process. They will then discuss your list of tasks in greater detail.</p>
+        
 
+        <Completed_form task={"eligability"} />
          </div>
       );
    }

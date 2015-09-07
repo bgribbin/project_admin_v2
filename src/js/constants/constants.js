@@ -7,7 +7,7 @@ module.exports = {
   APIEndpoints: {
     LOGIN:          APIRoot + "/v1/login",
     REGISTRATION:   APIRoot + "/v1/users",
-    USER:           APIRoot + "/v1/profile?id=2",
+    USER:           APIRoot + "/v1/profile",
     VIDEO:          APIRoot + "/v1/video",
     SAT:          APIRoot + "/v1/sat"
   },
@@ -25,6 +25,8 @@ module.exports = {
     // Routes
     REDIRECT: null,
 
+
+    UPDATE_USER: null,
     LOAD_USER: null,
     UPDATE_SAT: null,
     RECEIVE_USER: null,

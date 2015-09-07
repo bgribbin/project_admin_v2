@@ -54,15 +54,15 @@ var SideNav = React.createClass({
           <a href='#' className="pure-menu-link" onClick={this.logout}>Logout</a>
         </li>
       </ul>
-      <ul className="pure-menu-list">
+      <ul className="pure-menu-list nav-tasks">
          <li className="pure-menu-heading">Tasks</li>
-         <Menu_item name={"CV"} link_to={"cv"} completed={this.state.user.sat_completed} />
+         <Menu_item name={"CV"} link_to={"cv"} completed={this.state.user.cv_completed} />
          <Menu_item name={"Sat"} link_to={"sat"} completed={this.state.user.sat_completed} />
-         <Menu_item name={"Eligability"} link_to={"eligability"} completed={this.state.user.sat_completed} />
-         <Menu_item name={"Insurance"} link_to={"insurance"} completed={this.state.user.sat_completed} />
-         <Menu_item name={"Visa"} link_to={"visa"} completed={this.state.user.sat_completed} />
+         <Menu_item name={"Eligability"} link_to={"eligability"} completed={this.state.user.eligability_completed} />
+         <Menu_item name={"Insurance"} link_to={"insurance"} completed={this.state.user.insurance_completed} />
+         <Menu_item name={"Visa"} link_to={"visa"} completed={this.state.user.visa_completed} />
          <Menu_item name={"Profile"} link_to={"profile"} completed={this.state.user.sat_completed} />
-        <Menu_item name={"Video"} link_to={"video"} completed={this.state.user.sat_completed} />
+        <Menu_item name={"Video"} link_to={"video"} completed={this.state.user.video_completed} />
       </ul>
       </div>
     ) : (
@@ -78,7 +78,10 @@ var SideNav = React.createClass({
 
         <div id="side-navbar">
             <div className="pure-menu">
+
+                <div className="nav_header">
                 <a className="pure-menu-heading" href="#">Future Elite Sports</a>
+                </div>
                 {rightNav}
             </div>
         </div>

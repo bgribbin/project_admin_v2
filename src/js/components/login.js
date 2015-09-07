@@ -33,10 +33,10 @@ var LoginPage = React.createClass({
 
   //  var errors = (this.state.errors.length > 0) ? <ErrorNotice errors={this.state.errors}/> : <div></div>;
     return (
-      <div className="container">
+      <div className="main-container">
         {errors}
-        <div className="row">
-          <div className="card card--login small-10 medium-6 large-4 columns small-centered">
+        <div className="profile">
+          <div className="">
             <form onSubmit={this._onSubmit}>
               <div className="card--login__field">
                 <label name="email">Email</label>

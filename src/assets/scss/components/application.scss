@@ -1,0 +1,34 @@
+html {
+   height: 100%;
+}
+body {
+   height: 100%;
+   padding: 0;
+   margin: 0;
+   .container {
+      background: linear-gradient(
+      rgba(30, 92, 131, 0.90), 
+      rgba(57, 167, 211, 0.90)), url('/assets/images/screen.png');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+      height: 100%;
+      &:before {
+       content: ' ';
+       position: absolute;
+       width: 100%;
+       height: 100px;  
+      }
+
+      .content-wrapper {
+         position: relative;
+         top: 38px;
+         @include outer-container;
+         height: calc(100% - 58px);
+         width: calc(100% - 58px);
+         border-radius: 4px;
+         background-color: white;
+         box-shadow: 0 1px 1px 0 rgba(0,0,0,.06),0 2px 5px 0 rgba(0,0,0,.2);
+      }
+   }
+}

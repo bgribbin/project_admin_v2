@@ -31,7 +31,7 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <div className="main-content">
+      <div className="content-wrapper">
         <SideNav 
           isLoggedIn={this.state.isLoggedIn}
           email={this.state.email} />

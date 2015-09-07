@@ -1,6 +1,7 @@
 var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
+var Completed_form = require('../components/completed_form.js');
 
 var Insurance = React.createClass({
 
@@ -40,11 +41,7 @@ var Insurance = React.createClass({
       return (
          <div className="profile">
          <h2>Insurance</h2>
-         <form onSubmit={this._onSubmit}>
-          <label>Confirm as done?</label>
-          <input type="checkbox" className="switch" ref="cb" />
-          <button type="submit" className="card--login__submit">Confirm</button>
-         </form>
+         <Completed_form task={"insurance"} />
 
          <div>
          <h2>{this.state.user.username}</h2>

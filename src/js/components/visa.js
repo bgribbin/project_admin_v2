@@ -1,6 +1,7 @@
 var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
+var Completed_form = require('../components/completed_form.js');
 
 var Visa = React.createClass({
 
@@ -28,9 +29,13 @@ var Visa = React.createClass({
   },
    render: function() {
       return (
-         <div className="profile">
+         <div className="task-content">
 
+         <div className="title">
          <h1>VISA Registration Steps</h1>
+         </div>
+
+         <div className="content">
 
 <p>1) Click on the link below. This will open up an online PDF that provides you with information when booking the exam.  VISA Process (please click)</p>
 
@@ -59,7 +64,8 @@ var Visa = React.createClass({
 <p>Useful Links - The link below explains in greater detail what you can expect on the day of your interview and how to be best prepared. VISA Process (Please click)</p>
 
 <p>- You will be asked a series of questions about why you want to study in the USA. The link below discussed the type of questions you will face in the day. Examples of Visa Questions (Please Click)</p>
-
+  </div>
+          <Completed_form task={"visa"} />
          </div>
       );
    }

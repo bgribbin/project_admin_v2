@@ -82,6 +82,7 @@ SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
       sessionStorage.removeItem('accessToken');
       sessionStorage.removeItem('email');
       SessionStore.emitChange();
+      router.transitionTo('/');
       break;
 
     default:

@@ -1,6 +1,7 @@
 var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
+var Completed_form = require('../components/completed_form.js');
 
 var CV = React.createClass({
 
@@ -29,9 +30,7 @@ var CV = React.createClass({
    render: function() {
       return (
          <div className="profile">
-         <p>Username + { this.state.user.username }</p>
-         <p>email + { this.state.user.email }</p>
-         <p>user id + { this.state.user.id }</p>
+         <Completed_form task={"cv"} />
          </div>
       );
    }

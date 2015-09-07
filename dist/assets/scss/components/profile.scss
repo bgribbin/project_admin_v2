@@ -1,15 +1,16 @@
-.main-content {
-    position: absolute;
-    left: 250px;
-    right: 0px;
-}
-#main-content {
-    position: absolute;
-    left: 250px;
-    right: 0px;
-    padding-top: 40px;
-    @include outer-container;
-}
-.profile {
+.task-content {
    @include span-columns(8);
+   height: 100%;
+   overflow: scroll;
+   .title {
+      text-align: center; 
+      width: 100%;
+      margin-left: -5%;
+      padding-left: 5%;
+      margin-bottom: 2rem;
+      h1 {
+         padding: 1rem;
+      }
+   }
+
 }

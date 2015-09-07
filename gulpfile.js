@@ -35,7 +35,14 @@ gulp.task('scss_that_shit', function () {
 
 });
 
+gulp.task('watchFiles', function() {
+  gulp.watch('./src/assets/scss/*.scss', ['scss_that_shit']);
+})
 
-gulp.task('default',['browserify', 'scss_that_shit', 'copy'], function() {
-    return gulp.watch('src/**/*.*', ['browserify', 'copy'])
+gulp.task("build", ['browserify', 'copy','scss_that_shit']);
+
+
+gulp.task("default", ['browserify', 'copy','scss_that_shit'], function() {
+  return gulp.watch('src/**/*.*', ['browserify', 'copy','scss_that_shit'])
 });
+
