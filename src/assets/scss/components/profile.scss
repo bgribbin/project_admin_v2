@@ -1,5 +1,5 @@
-.task-content {
-   @include span-columns(8);
+.task-content, .main-container {
+   @include span-columns(9);
    height: 100%;
    overflow: scroll;
    .title {

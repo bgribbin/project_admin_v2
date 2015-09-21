@@ -40,10 +40,10 @@ var Completed = React.createClass({
 
 
       return (
-         <form onSubmit={this._onSubmit}>
-          <label>Confirm as done?</label>
+         <form className="confirm-form" onSubmit={this._onSubmit}>
+          <label>Mark as completed once done</label>
           <input type="checkbox" className="switch" ref="cb" defaultChecked={this.props.checked} />
-          <button type="submit" className="card--login__submit">Confirm</button>
+          <button type="submit" className="card--login__submit">Completed</button>
          </form>
       );
    }

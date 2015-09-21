@@ -28,8 +28,13 @@ var Profile = React.createClass({
   },
    render: function() {
       return (
-         <div className="profile">
-         <div className="main_header"><p>Profile</p></div>
+         <div className="task-content">
+
+           <div className="title">
+              <h1 className="">Profile</h1>
+           </div>
+
+           <p>Profile</p>
            <p>Username + { this.state.user.username }</p>
            <p>email + { this.state.user.email }</p>
            <p>user id + { this.state.user.id }</p>

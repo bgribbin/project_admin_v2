@@ -35,7 +35,7 @@ var LoginPage = React.createClass({
     return (
       <div className="main-container">
         {errors}
-        <div className="profile">
+        <div className="login">
           <div className="">
             <form onSubmit={this._onSubmit}>
               <div className="card--login__field">

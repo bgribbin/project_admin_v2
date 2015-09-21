@@ -39,8 +39,10 @@ var Insurance = React.createClass({
 
       console.log(this.state.user);
       return (
-         <div className="profile">
+         <div className="task-content">
+         <div className="title">
          <h2>Insurance</h2>
+         </div>
          <Completed_form task={"insurance"} />
 
          <div>

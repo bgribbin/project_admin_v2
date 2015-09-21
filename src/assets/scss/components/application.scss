@@ -8,10 +8,12 @@ body {
    .container {
       background: linear-gradient(
       rgba(30, 92, 131, 0.90), 
-      rgba(57, 167, 211, 0.90)), url('/assets/images/screen.png');
+      rgba(30, 92, 131, 0.90)), url('/assets/images/screen.png');
+      
       background-size: cover;
       background-position: center center;
       background-attachment: fixed;
+      background-color: #e7e7e7;
       height: 100%;
       &:before {
        content: ' ';
