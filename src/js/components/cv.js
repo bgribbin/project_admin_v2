@@ -32,6 +32,8 @@ var CV = React.createClass({
          <div className="task-content">
          <div className="title">
             <h1 className="">Sports CV</h1>
+         </div>
+         <div className="task-text">
             <p>Please use the template attached and include as much information as possible.
             Your Future Elite Rep will then go over any changes that need to be made.</p>
          </div>

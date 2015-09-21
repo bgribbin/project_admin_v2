@@ -4,6 +4,7 @@ var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 var ReactPropTypes = React.PropTypes;
 var SessionActionCreators = require('../actions/session_actions.js');
+var Login = require('../components/login.js')
 
 
 
@@ -27,7 +28,7 @@ var Main = React.createClass({
         <div className="header">
             <h1>Athlete Admin Center</h1>
             <h2>Welcome to Future Elite Sports</h2>
-            <button>This is a refills button </button>
+            <Login />
         </div>
     </div>
    

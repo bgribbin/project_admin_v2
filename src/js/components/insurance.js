@@ -45,10 +45,6 @@ var Insurance = React.createClass({
          </div>
          <Completed_form task={"insurance"} />
 
-         <div>
-         <h2>{this.state.user.username}</h2>
-         <p>{this.state.user.sat_completed.toString()}</p>
-          </div>
          </div>
       );
    }

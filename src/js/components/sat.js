@@ -39,7 +39,10 @@ var Sat = React.createClass({
             <h1>Test Scores</h1>
            </div>
 
-           <div className="content">
+           <div className="type-system-rounded">
+           <h1>This is the title</h1> 
+           <p> This is where the content will go</p>
+           <p> This is where the content will go</p>
            <p> This is where the content will go</p>
            </div>
          <Completed_form task={"sat"} checked={checked} />

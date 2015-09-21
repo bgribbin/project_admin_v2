@@ -25134,7 +25134,9 @@ var CV = React.createClass({displayName: "CV",
       return (
          React.createElement("div", {className: "task-content"}, 
          React.createElement("div", {className: "title"}, 
-            React.createElement("h1", {className: ""}, "Sports CV"), 
+            React.createElement("h1", {className: ""}, "Sports CV")
+         ), 
+         React.createElement("div", {className: "task-text"}, 
             React.createElement("p", null, "Please use the template attached and include as much information as possible." + ' ' +
             "Your Future Elite Rep will then go over any changes that need to be made.")
          ), 
@@ -25181,24 +25183,26 @@ var Eligability = React.createClass({displayName: "Eligability",
       return (
          React.createElement("div", {className: "task-content"}, 
           React.createElement("div", {className: "title"}, 
-            React.createElement("h1", null, "NAIA Registration")
+            React.createElement("h1", null, "NAIA Registration"), 
+            React.createElement("hr", null)
           ), 
+        React.createElement("div", {className: "task-text"}, 
         React.createElement("p", null, "The Eligibility Centre is something that all students that wish to study out in America have to complete in order to be deemed to be of ‘amateur’ status and therefore no professionals." + ' ' + 
         "Further from our conversation, attached is a ‘how to guide’ for the NAIA Eligibility Centre."), 
 
-        React.createElement("h4", null, "Steps"), 
-        React.createElement("p", null, "1) Click on the link below. This will open up an online PDF that provides you with information/tips for registering with the NAIA" + ' ' +
+        React.createElement("h4", null, "STEPS"), 
+        React.createElement("p", null, React.createElement("span", {className: "step-number"}, "1 "), " Click on the link below. This will open up an online PDF that provides you with information/tips for registering with the NAIA" + ' ' +
            "NAIA Registration Process (please click)"), 
 
-        React.createElement("p", null, "2) Create an account by clicking on 'Register to play'" + ' ' + 
+        React.createElement("p", null, React.createElement("span", {className: "step-number"}, "2 "), " Create an account by clicking on 'Register to play'" + ' ' + 
             "www.playnaia.org"), 
 
-        React.createElement("p", null, "3)  Please refer to the  PDF as a reference point when answering these questions. "), 
+        React.createElement("p", null, React.createElement("span", {className: "step-number"}, "3 "), "  Please refer to the  PDF as a reference point when answering these questions. "), 
 
-        React.createElement("p", null, "4) The main question to be careful of is 'Have you played for anyone since leaving high school or from the age of 19'  The answer to this questions is 'NO' as high school in the USA is until 18."), 
+        React.createElement("p", null, React.createElement("span", {className: "step-number"}, "4 "), " The main question to be careful of is 'Have you played for anyone since leaving high school or from the age of 19'  The answer to this questions is 'NO' as high school in the USA is until 18."), 
 
-        React.createElement("p", null, "5) Contact your FES agent once you have completed the registration process. They will then discuss your list of tasks in greater detail."), 
-        
+        React.createElement("p", null, React.createElement("span", {className: "step-number"}, "5 "), " Contact your FES agent once you have completed the registration process. They will then discuss your list of tasks in greater detail.")
+        ), 
 
         React.createElement(Completed_form, {task: "eligability"})
          )
@@ -25270,12 +25274,8 @@ var Insurance = React.createClass({displayName: "Insurance",
          React.createElement("div", {className: "title"}, 
          React.createElement("h2", null, "Insurance")
          ), 
-         React.createElement(Completed_form, {task: "insurance"}), 
+         React.createElement(Completed_form, {task: "insurance"})
 
-         React.createElement("div", null, 
-         React.createElement("h2", null, this.state.user.username), 
-         React.createElement("p", null, this.state.user.sat_completed.toString())
-          )
          )
       );
    }
@@ -25351,6 +25351,7 @@ var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 var ReactPropTypes = React.PropTypes;
 var SessionActionCreators = require('../actions/session_actions.js');
+var Login = require('../components/login.js')
 
 
 
@@ -25374,7 +25375,7 @@ var Main = React.createClass({displayName: "Main",
         React.createElement("div", {className: "header"}, 
             React.createElement("h1", null, "Athlete Admin Center"), 
             React.createElement("h2", null, "Welcome to Future Elite Sports"), 
-            React.createElement("button", null, "This is a refills button ")
+            React.createElement(Login, null)
         )
     )
    
@@ -25387,7 +25388,7 @@ var Main = React.createClass({displayName: "Main",
 
 module.exports = Main;
 
-},{"../actions/session_actions.js":206,"react":201,"react-router":32}],217:[function(require,module,exports){
+},{"../actions/session_actions.js":206,"../components/login.js":215,"react":201,"react-router":32}],217:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
@@ -25511,7 +25512,10 @@ var Sat = React.createClass({displayName: "Sat",
             React.createElement("h1", null, "Test Scores")
            ), 
 
-           React.createElement("div", {className: "content"}, 
+           React.createElement("div", {className: "type-system-rounded"}, 
+           React.createElement("h1", null, "This is the title"), 
+           React.createElement("p", null, " This is where the content will go"), 
+           React.createElement("p", null, " This is where the content will go"), 
            React.createElement("p", null, " This is where the content will go")
            ), 
          React.createElement(Completed_form, {task: "sat", checked: checked})
@@ -25629,14 +25633,15 @@ var Video = React.createClass({displayName: "Video",
 
       React.createElement("div", {className: "task-content"}, 
          React.createElement("div", {className: "title"}, 
-            React.createElement("h2", {className: ""}, "Video footage")
+            React.createElement("h1", null, "Video footage")
          ), 
+         React.createElement("div", {className: "task-text"}, 
         React.createElement("p", null, "Video footage makes up a large section of your profile." + ' ' + 
         "The sooner you can gather footage or register for a video day," + ' ' +
          "the sooner we can get you speaking with coaches." + ' ' + 
          "It's important to spend time collecting quality footage as it" + ' ' +
-         "can be the difference between a 50% and a 75% scholarship offer."), 
-
+         "can be the difference between a 50% and a 75% scholarship offer.")
+         ), 
         React.createElement(Completed_form, {task: "video"})
       )
     )
@@ -25683,7 +25688,7 @@ var Visa = React.createClass({displayName: "Visa",
          React.createElement("h1", null, "VISA Registration Steps")
          ), 
 
-         React.createElement("div", {className: "content"}, 
+         React.createElement("div", {className: "task-text"}, 
 
 React.createElement("p", null, "1) Click on the link below. This will open up an online PDF that provides you with information when booking the exam.  VISA Process (please click)"), 
 

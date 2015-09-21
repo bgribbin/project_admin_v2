@@ -35,7 +35,7 @@ var Visa = React.createClass({
          <h1>VISA Registration Steps</h1>
          </div>
 
-         <div className="content">
+         <div className="task-text">
 
 <p>1) Click on the link below. This will open up an online PDF that provides you with information when booking the exam.  VISA Process (please click)</p>
 
