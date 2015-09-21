@@ -25088,10 +25088,10 @@ var Completed = React.createClass({displayName: "Completed",
 
 
       return (
-         React.createElement("form", {onSubmit: this._onSubmit}, 
-          React.createElement("label", null, "Confirm as done?"), 
+         React.createElement("form", {className: "confirm-form", onSubmit: this._onSubmit}, 
+          React.createElement("label", null, "Mark as completed once done"), 
           React.createElement("input", {type: "checkbox", className: "switch", ref: "cb", defaultChecked: this.props.checked}), 
-          React.createElement("button", {type: "submit", className: "card--login__submit"}, "Confirm")
+          React.createElement("button", {type: "submit", className: "card--login__submit"}, "Completed")
          )
       );
    }
@@ -25132,7 +25132,12 @@ var CV = React.createClass({displayName: "CV",
   },
    render: function() {
       return (
-         React.createElement("div", {className: "profile"}, 
+         React.createElement("div", {className: "task-content"}, 
+         React.createElement("div", {className: "title"}, 
+            React.createElement("h1", {className: ""}, "Sports CV"), 
+            React.createElement("p", null, "Please use the template attached and include as much information as possible." + ' ' +
+            "Your Future Elite Rep will then go over any changes that need to be made.")
+         ), 
          React.createElement(Completed_form, {task: "cv"})
          )
       );
@@ -25261,8 +25266,10 @@ var Insurance = React.createClass({displayName: "Insurance",
 
       console.log(this.state.user);
       return (
-         React.createElement("div", {className: "profile"}, 
-         React.createElement("h2", null, "Insurance"), 
+         React.createElement("div", {className: "task-content"}, 
+         React.createElement("div", {className: "title"}, 
+         React.createElement("h2", null, "Insurance")
+         ), 
          React.createElement(Completed_form, {task: "insurance"}), 
 
          React.createElement("div", null, 
@@ -25315,7 +25322,7 @@ var LoginPage = React.createClass({displayName: "LoginPage",
     return (
       React.createElement("div", {className: "main-container"}, 
         errors, 
-        React.createElement("div", {className: "profile"}, 
+        React.createElement("div", {className: "login"}, 
           React.createElement("div", {className: ""}, 
             React.createElement("form", {onSubmit: this._onSubmit}, 
               React.createElement("div", {className: "card--login__field"}, 
@@ -25441,8 +25448,13 @@ var Profile = React.createClass({displayName: "Profile",
   },
    render: function() {
       return (
-         React.createElement("div", {className: "profile"}, 
-         React.createElement("div", {className: "main_header"}, React.createElement("p", null, "Profile")), 
+         React.createElement("div", {className: "task-content"}, 
+
+           React.createElement("div", {className: "title"}, 
+              React.createElement("h1", {className: ""}, "Profile")
+           ), 
+
+           React.createElement("p", null, "Profile"), 
            React.createElement("p", null, "Username + ",  this.state.user.username), 
            React.createElement("p", null, "email + ",  this.state.user.email), 
            React.createElement("p", null, "user id + ",  this.state.user.id), 
@@ -25614,8 +25626,17 @@ var Completed_form = require('../components/completed_form.js');
 var Video = React.createClass({displayName: "Video",
   render: function(){
     return (
-      React.createElement("h2", {className: ""}, 
-        "This is the video page", 
+
+      React.createElement("div", {className: "task-content"}, 
+         React.createElement("div", {className: "title"}, 
+            React.createElement("h2", {className: ""}, "Video footage")
+         ), 
+        React.createElement("p", null, "Video footage makes up a large section of your profile." + ' ' + 
+        "The sooner you can gather footage or register for a video day," + ' ' +
+         "the sooner we can get you speaking with coaches." + ' ' + 
+         "It's important to spend time collecting quality footage as it" + ' ' +
+         "can be the difference between a 50% and a 75% scholarship offer."), 
+
         React.createElement(Completed_form, {task: "video"})
       )
     )
