@@ -1,6 +1,6 @@
 var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
-var SideNav = require('../components/SideNav.js');
+var SideNav = require('../components/sidenav.js');
 var SessionStore = require('../stores/session_store.js');
 // var RouteStore = require('../stores/RouteStore.react.jsx');
 
