@@ -164,7 +164,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   margin: 0 0 0.75em;
   font-weight: 300;
-  color: #999; }
+  /*color: $medium-gray;*/ }
 
 h1 {
   font-size: 2rem; }
@@ -215,13 +215,11 @@ body {
   padding: 0;
   margin: 0; }
   body .container {
-    /*      background: linear-gradient(
-      rgba(30, 92, 131, 0.90), 
-      rgba(30, 92, 131, 0.90)), url('/assets/images/screen.png');*/
+    background: linear-gradient(rgba(220, 220, 220, 0.8), rgba(220, 220, 220, 0.8)), url("/assets/images/screen.png");
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
-    background-color: #e7e7e7;
+    /*background-color: #e7e7e7;*/
     height: 100%; }
     body .container:before {
       content: ' ';
@@ -248,13 +246,34 @@ body {
   height: 50px;
   background-color: #D6DFE7; }
 
+.download-comp, .upload-comp {
+  width: 100%;
+  text-align: center;
+  padding: 3rem; }
+
+.download-btn {
+  border-radius: 24px;
+  background-color: #0F375A; }
+  .download-btn a {
+    color: white; }
+
+.upload-btn {
+  border-radius: 24px;
+  background-color: #477dca; }
+  .upload-btn a {
+    color: white; }
+
+.btn-a {
+  color: white; }
+
 .task-content, .main-container {
   float: left;
   display: block;
   margin-right: 2.35765%;
   width: 74.41059%;
   height: 100%;
-  overflow: scroll; }
+  overflow: scroll;
+  position: relative; }
   .task-content:last-child, .main-container:last-child {
     margin-right: 0; }
   .task-content .title, .main-container .title {
@@ -267,59 +286,81 @@ body {
     .task-content .title h1, .main-container .title h1 {
       padding: 1rem; }
 
-.task-text {
+.task-text, .task-welcome {
   width: 70%;
   margin-left: 10%;
-  font-family: "Monserrat", sans-serif;
+  font-family: "Varela", sans-serif;
   text-align: left; }
-  .task-text::after {
+  .task-text::after, .task-welcome::after {
     clear: both;
     content: "";
     display: table; }
-  .task-text h1, .task-text h2, .task-text h3, .task-text p {
+  .task-text h1, .task-welcome h1, .task-text h2, .task-welcome h2, .task-text h3, .task-welcome h3, .task-text p, .task-welcome p {
     margin: 0; }
-  .task-text .step-number {
-    font-size: 1.5em;
-    font-weight: 300; }
-  .task-text hr {
+  .task-text .step-number, .task-welcome .step-number {
+    font-size: 2em;
+    font-weight: 300;
+    float: left;
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 6.17215%; }
+    .task-text .step-number:last-child, .task-welcome .step-number:last-child {
+      margin-right: 0; }
+  .task-text .step-para, .task-welcome .step-para {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 91.4702%; }
+    .task-text .step-para:last-child, .task-welcome .step-para:last-child {
+      margin-right: 0; }
+  .task-text .step-cont, .task-welcome .step-cont {
+    max-width: 68em;
+    margin-left: auto;
+    margin-right: auto; }
+    .task-text .step-cont::after, .task-welcome .step-cont::after {
+      clear: both;
+      content: "";
+      display: table; }
+  .task-text hr, .task-welcome hr {
     border-bottom: 1px solid #ddd;
     border-left: none;
     border-right: none;
     border-top: none;
     margin: 1.5em 0; }
-  .task-text p {
+  .task-text p, .task-welcome p {
     color: #333;
     line-height: 1.75em; }
-  .task-text a {
-    color: #477dca;
-    text-decoration: none; }
-  .task-text .type {
+  .task-text a, .task-welcome a {
+    /*    color: $action-color;
+    text-decoration: none;*/ }
+  .task-text .type, .task-welcome .type {
     border-bottom: 1px solid;
     display: inline-block;
-    font-family: "Monserrat", sans-serif;
+    font-family: "Varela", sans-serif;
     font-size: 0.7em;
     font-weight: 800;
     margin-bottom: 2em;
     padding: 0.3em 0;
     text-align: left;
     text-transform: uppercase; }
-  .task-text h1 {
+  .task-text h1, .task-welcome h1 {
     font-family: "Varela", sans-serif;
     font-size: 1.8em;
     margin-bottom: 0.5em; }
     @media screen and (min-width: 40em) {
-      .task-text h1 {
+      .task-text h1, .task-welcome h1 {
         font-size: 2.4em; } }
-  .task-text h2 {
+  .task-text h2, .task-welcome h2 {
     font-family: "Varela", sans-serif;
     font-size: 1.2em;
     font-weight: 300;
     line-height: 1.4em;
     margin-bottom: 0.9em; }
     @media screen and (min-width: 40em) {
-      .task-text h2 {
+      .task-text h2, .task-welcome h2 {
         font-size: 1.4em; } }
-  .task-text code {
+  .task-text code, .task-welcome code {
     background: #F7F7F7;
     border-radius: 4.5px;
     border: 1px solid #E0E0E0;
@@ -328,28 +369,28 @@ body {
     font-style: normal;
     padding: 0.1em 0.4em;
     white-space: nowrap; }
-  .task-text h3 {
+  .task-text h3, .task-welcome h3 {
     font-family: "Varela", sans-serif;
     font-size: 1.2em;
     font-weight: 400;
     line-height: 1.3em;
     margin-bottom: 0.4em; }
-  .task-text p.date {
+  .task-text p.date, .task-welcome p.date {
     color: rgba(51, 51, 51, 0.4);
-    font-family: "Monserrat", sans-serif;
+    font-family: "Varela", sans-serif;
     font-size: 0.9em;
     margin-bottom: 0.3em; }
-  .task-text p {
-    font-family: "Monserrat", sans-serif;
+  .task-text p, .task-welcome p {
+    font-family: "Varela", sans-serif;
     font-size: 1.05em;
     font-weight: 300;
     line-height: 1.75em;
     margin-bottom: 1.5em; }
-    .task-text p span {
+    .task-text p span, .task-welcome p span {
       font-family: "Varela", sans-serif;
       font-size: 0.8em;
       text-transform: uppercase; }
-  .task-text a.read-more {
+  .task-text a.read-more, .task-welcome a.read-more {
     display: inline-block;
     font-family: "Varela", sans-serif;
     font-size: 0.8em;
@@ -357,15 +398,18 @@ body {
     margin-left: 0.2em;
     position: relative;
     text-transform: uppercase; }
-    .task-text a.read-more span {
+    .task-text a.read-more span, .task-welcome a.read-more span {
       font-size: 1.5em;
       position: absolute;
       right: -12px;
       top: -1px; }
-  .task-text hr {
+  .task-text hr, .task-welcome hr {
     width: 3em; }
-  .task-text p.author {
-    font-family: "Monserrat", sans-serif; }
+  .task-text p.author, .task-welcome p.author {
+    font-family: "Varela", sans-serif; }
+
+.task-welcome {
+  width: 80%; }
 
 span.false {
   background: url("/assets/images/nope.png") no-repeat;
@@ -400,6 +444,10 @@ span.true {
   /*border-right: 1px solid #edeeee;*/ }
   #side-navbar:last-child {
     margin-right: 0; }
+
+.logo {
+  height: 70px;
+  width: auto; }
 
 .nav-header {
   background-color: #f2f2f2;
@@ -483,7 +531,7 @@ span.true {
 
 .pure-menu-heading {
   text-transform: uppercase;
-  color: #125688;
+  color: rgba(255, 255, 255, 0.5);
   padding-bottom: 1.5em; }
 
 .pure-menu-link {
@@ -501,7 +549,8 @@ span.true {
   padding: 0.5em 1em; }
 
 .pure-menu-link {
-  padding-left: 1.5em; }
+  padding-left: 1.5em;
+  font-size: 14px; }
 
 .pure-menu-disabled {
   opacity: .5; }
@@ -512,7 +561,7 @@ span.true {
 .pure-menu-active > .pure-menu-link,
 .pure-menu-link:hover,
 .pure-menu-link:focus {
-  background-color: #fafafa;
+  background-color: rgba(255, 255, 255, 0.5);
   color: #125688; }
 
 .pure-menu-selected .pure-menu-link,

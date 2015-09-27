@@ -32,6 +32,11 @@ span {
    /*border-right: 1px solid #edeeee;*/
 }
 
+.logo {
+  height: 70px;
+  width: auto;
+}
+
 .nav-header {
    background-color: $main-gray;
    height: 50px;
@@ -133,7 +138,7 @@ span {
 
 .pure-menu-heading {
     text-transform: uppercase;
-    color: #125688;
+    color: $color-white-trans;
     padding-bottom: 1.5em;
 }
 
@@ -155,6 +160,7 @@ span {
 }
 .pure-menu-link {
     padding-left: 1.5em;
+    font-size: 14px;
 }
 
 
@@ -169,7 +175,7 @@ span {
 .pure-menu-active > .pure-menu-link,
 .pure-menu-link:hover,
 .pure-menu-link:focus {
-    background-color: #fafafa;
+    background-color: $color-white-trans;
     color: #125688;
 }
 

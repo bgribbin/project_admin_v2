@@ -2,3 +2,27 @@
    height: 50px;
    background-color: #D6DFE7;
 }
+
+.download-comp, .upload-comp {
+   width: 100%;
+   text-align: center;
+   padding: 3rem;
+
+}
+.download-btn {
+   border-radius: 24px;
+   background-color: $main-blue;
+   a {
+      color: white;
+   }
+}
+.upload-btn {
+   border-radius: 24px;
+   background-color: $blue;
+   a {
+      color: white;
+   }
+}
+.btn-a {
+   color: white;
+}

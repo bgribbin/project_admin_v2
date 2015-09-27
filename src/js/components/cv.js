@@ -33,10 +33,24 @@ var CV = React.createClass({
          <div className="title">
             <h1 className="">Sports CV</h1>
          </div>
+
+
          <div className="task-text">
+         <div className="download-comp">
+         <button className="download-btn"><a className="btn-a" href="assets/images/check.png" download="/assets/images/check.png">Download CV Template</a></button>
+         </div>
+
             <p>Please use the template attached and include as much information as possible.
             Your Future Elite Rep will then go over any changes that need to be made.</p>
+
+            <br />
+            <div className="upload-comp">
+           <button className="upload-btn"><a className="btn-a" href="https://www.dropbox.com/request/nXUQO5DMSoknWSooJ6jF">Upload your CV</a></button>
+           </div>
          </div>
+
+         
+
          <Completed_form task={"cv"} />
          </div>
       );

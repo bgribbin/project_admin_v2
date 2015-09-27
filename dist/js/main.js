@@ -25000,7 +25000,10 @@ var SideNav = React.createClass({displayName: "SideNav",
       React.createElement("div", null, 
       React.createElement("ul", {className: "pure-menu-list"}, 
         React.createElement("li", {className: "pure-menu-item"}, 
-          React.createElement("a", {href: "#", className: "pure-menu-link"}, this.props.email)
+        React.createElement(Link, {to: "app", className: "pure-menu-link"}, "Welcome")
+        ), 
+        React.createElement("li", {className: "pure-menu-item"}, 
+        React.createElement(Link, {to: "profile", className: "pure-menu-link"}, "Profile")
         ), 
         React.createElement("li", {className: "pure-menu-item"}, 
           React.createElement("a", {href: "#", className: "pure-menu-link", onClick: this.logout}, "Logout")
@@ -25008,13 +25011,12 @@ var SideNav = React.createClass({displayName: "SideNav",
       ), 
       React.createElement("ul", {className: "pure-menu-list nav-tasks"}, 
          React.createElement("li", {className: "pure-menu-heading"}, "Tasks"), 
-         React.createElement(Menu_item, {name: "CV", link_to: "cv", completed: this.state.user.cv_completed}), 
-         React.createElement(Menu_item, {name: "Sat", link_to: "sat", completed: this.state.user.sat_completed}), 
-         React.createElement(Menu_item, {name: "Eligability", link_to: "eligability", completed: this.state.user.eligability_completed}), 
+         React.createElement(Menu_item, {name: "Athletic CV", link_to: "cv", completed: this.state.user.cv_completed}), 
+         React.createElement(Menu_item, {name: "SAT Scores", link_to: "sat", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "NCAA/NAIA Eligability", link_to: "eligability", completed: this.state.user.eligability_completed}), 
          React.createElement(Menu_item, {name: "Insurance", link_to: "insurance", completed: this.state.user.insurance_completed}), 
          React.createElement(Menu_item, {name: "Visa", link_to: "visa", completed: this.state.user.visa_completed}), 
-         React.createElement(Menu_item, {name: "Profile", link_to: "profile", completed: this.state.user.sat_completed}), 
-        React.createElement(Menu_item, {name: "Video", link_to: "video", completed: this.state.user.video_completed})
+         React.createElement(Menu_item, {name: "Video Upload", link_to: "video", completed: this.state.user.video_completed})
       )
       )
     ) : (
@@ -25032,7 +25034,8 @@ var SideNav = React.createClass({displayName: "SideNav",
             React.createElement("div", {className: "pure-menu"}, 
 
                 React.createElement("div", {className: "nav_header"}, 
-                React.createElement("a", {className: "pure-menu-heading", href: "#"}, "Future Elite Sports")
+                React.createElement("a", {className: "pure-menu-heading", href: "#"}, 
+                React.createElement("img", {src: "/assets/images/logo.png", className: "logo"}))
                 ), 
                 rightNav
             )
@@ -25136,10 +25139,24 @@ var CV = React.createClass({displayName: "CV",
          React.createElement("div", {className: "title"}, 
             React.createElement("h1", {className: ""}, "Sports CV")
          ), 
+
+
          React.createElement("div", {className: "task-text"}, 
-            React.createElement("p", null, "Please use the template attached and include as much information as possible." + ' ' +
-            "Your Future Elite Rep will then go over any changes that need to be made.")
+         React.createElement("div", {className: "download-comp"}, 
+         React.createElement("button", {className: "download-btn"}, React.createElement("a", {className: "btn-a", href: "assets/images/check.png", download: "/assets/images/check.png"}, "Download CV Template"))
          ), 
+
+            React.createElement("p", null, "Please use the template attached and include as much information as possible." + ' ' +
+            "Your Future Elite Rep will then go over any changes that need to be made."), 
+
+            React.createElement("br", null), 
+            React.createElement("div", {className: "upload-comp"}, 
+           React.createElement("button", {className: "upload-btn"}, React.createElement("a", {className: "btn-a", href: "https://www.dropbox.com/request/nXUQO5DMSoknWSooJ6jF"}, "Upload your CV"))
+           )
+         ), 
+
+         
+
          React.createElement(Completed_form, {task: "cv"})
          )
       );
@@ -25186,26 +25203,42 @@ var Eligability = React.createClass({displayName: "Eligability",
             React.createElement("h1", null, "NAIA Registration"), 
             React.createElement("hr", null)
           ), 
-        React.createElement("div", {className: "task-text"}, 
-        React.createElement("p", null, "The Eligibility Centre is something that all students that wish to study out in America have to complete in order to be deemed to be of ‘amateur’ status and therefore no professionals." + ' ' + 
-        "Further from our conversation, attached is a ‘how to guide’ for the NAIA Eligibility Centre."), 
+            React.createElement("div", {className: "task-text"}, 
+              React.createElement("p", null, "The Eligibility Centre is something that all students that wish to study out in America have to complete in order to be deemed to be of ‘amateur’ status and therefore no professionals." + ' ' + 
+              "Further from our conversation, attached is a ‘how to guide’ for the NAIA Eligibility Centre."), 
 
-        React.createElement("h4", null, "STEPS"), 
-        React.createElement("p", null, React.createElement("span", {className: "step-number"}, "1 "), " Click on the link below. This will open up an online PDF that provides you with information/tips for registering with the NAIA" + ' ' +
-           "NAIA Registration Process (please click)"), 
+              React.createElement("h4", null, "STEPS"), 
+              React.createElement("div", {className: "step-cont"}, 
+                React.createElement("p", {className: "step-number"}, "1 "), 
+                React.createElement("p", {className: "step-para"}, " Click on the link below. This will open up an online PDF that provides you with information/tips for registering with the NAIA" + ' ' +
+                   "NAIA Registration Process (please click)")
+              ), 
 
-        React.createElement("p", null, React.createElement("span", {className: "step-number"}, "2 "), " Create an account by clicking on 'Register to play'" + ' ' + 
-            "www.playnaia.org"), 
+              React.createElement("div", {className: "step-cont"}, 
+                React.createElement("p", {className: "step-number"}, "2 "), 
+                React.createElement("p", {className: "step-para"}, " Create an account by clicking on 'Register to play' www.playnaia.org")
+              ), 
 
-        React.createElement("p", null, React.createElement("span", {className: "step-number"}, "3 "), "  Please refer to the  PDF as a reference point when answering these questions. "), 
+                 React.createElement("div", {className: "step-cont"}, 
+                  React.createElement("p", {className: "step-number"}, "3 "), 
+                  React.createElement("p", {className: "step-para"}, " Please refer to the  PDF as a reference point when answering these questions. ")
+                ), 
 
-        React.createElement("p", null, React.createElement("span", {className: "step-number"}, "4 "), " The main question to be careful of is 'Have you played for anyone since leaving high school or from the age of 19'  The answer to this questions is 'NO' as high school in the USA is until 18."), 
+                   React.createElement("div", {className: "step-cont"}, 
+                  React.createElement("p", {className: "step-number"}, "4 "), 
+                  React.createElement("p", {className: "step-para"}, " The main question to be careful of is 'Have you played for anyone since leaving high school or from the age of 19'" + ' ' +
+                    "The answer to this questions is 'NO' as high school in the USA is until 18.")
+                ), 
 
-        React.createElement("p", null, React.createElement("span", {className: "step-number"}, "5 "), " Contact your FES agent once you have completed the registration process. They will then discuss your list of tasks in greater detail.")
-        ), 
+                React.createElement("div", {className: "step-cont"}, 
+                  React.createElement("p", {className: "step-number"}, "5 "), 
+                  React.createElement("p", {className: "step-para"}, " Contact your FES agent once you have completed the registration process. They will then discuss your list of tasks in greater detail.")
+                )
 
-        React.createElement(Completed_form, {task: "eligability"})
-         )
+            ), 
+
+          React.createElement(Completed_form, {task: "eligability"})
+        )
       );
    }
 
@@ -25351,44 +25384,83 @@ var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 var ReactPropTypes = React.PropTypes;
 var SessionActionCreators = require('../actions/session_actions.js');
-var Login = require('../components/login.js')
+var Login = require('../components/login.js');
+var SessionStore = require('../stores/session_store');
 
-
+function getStateFromStores() {
+  return {
+    isLoggedIn: SessionStore.isLoggedIn()
+  };
+}
 
 var Main = React.createClass({displayName: "Main",
   
-  propTypes: {
-  	isLoggedIn: ReactPropTypes.bool,
-  	email: ReactPropTypes.string
+  getInitialState: function() {
+    return getStateFromStores();
   },
 
-  logout: function(e) {
-  	e.preventDefault();
-  	SessionActionCreators.logout();
+  componentDidMount: function() {
+    SessionStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    SessionStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function() {
+    this.setState(getStateFromStores());
   },
 
   render: function () {
 
-    return (
+    var loggedok = (React.createElement("div", null, 
+         React.createElement("div", {className: "header"}, 
+             React.createElement("h1", null, "Athlete Admin Center"), 
+             React.createElement("h2", null, "Welcome to Future Elite Sports"), 
+             React.createElement("div", null, 
+               React.createElement("div", {className: "task-welcome"}, 
+               React.createElement("p", null, "Firstly I’d like to say welcome on board the Future Elite Scholarship Programme." + ' ' + 
+               "We are extremely excited to be involved in the next stage of your career."), 
+               React.createElement("p", null, 
+               "Everyone at Future Elite Sports has been through the US Scholarship process before and therefore understands how big a decision it is to leave friends and family in pursuit of your sporting and academic dreams. We will be with you before, during and after - supporting you throughout your time in the USA."), 
+               React.createElement("p", null, 
+               "We think it’s very important that each Future Elite Sports agent gets to know their clients’ needs in order to make the process as personalized as possible. Each client will be provided with their agent’s mobile number in order to contact them when they are out of the office - whether it’s advice on insurance, making that all important final decision or just to update them on a recent sporting result. They will be with you every step of the way."), 
+               React.createElement("p", null, 
+               "The process is fun and exciting and will become more real the further down the recruitment process you get."), 
+               React.createElement("p", null, 
+               "Finally we wish you all the best in this exciting period of your life. Take advantage of every opportunity you get offered in the USA, it’s a once in a lifetime opportunity that not everyone can boast to have done. You’ve already invested time, hard work and discipline to get where you’re now but it’s also important to stress the hard work starts today."), 
+               React.createElement("p", null, 
+               "I have attached a brief outline on the scholarship process, along with a CV template and a receipt for your payment.")
+               )
+              )
+         )
+      ));
 
-    React.createElement("div", {id: "main2"}, 
+    var loggedno = (React.createElement("div", null, 
         React.createElement("div", {className: "header"}, 
             React.createElement("h1", null, "Athlete Admin Center"), 
             React.createElement("h2", null, "Welcome to Future Elite Sports"), 
             React.createElement(Login, null)
         )
-    )
-   
+      ));
 
-          
+    var homeScreen = this.state.isLoggedIn ? (
+      {loggedok}
+    ) : (
+      {loggedno}
+    );
 
-    )
+    return (
+
+    React.createElement("div", {className: "task-content"}, homeScreen)
+    );
   }
+
 });
 
 module.exports = Main;
 
-},{"../actions/session_actions.js":206,"../components/login.js":215,"react":201,"react-router":32}],217:[function(require,module,exports){
+},{"../actions/session_actions.js":206,"../components/login.js":215,"../stores/session_store":227,"react":201,"react-router":32}],217:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
@@ -25578,7 +25650,10 @@ var SideNav = React.createClass({displayName: "SideNav",
       React.createElement("div", null, 
       React.createElement("ul", {className: "pure-menu-list"}, 
         React.createElement("li", {className: "pure-menu-item"}, 
-          React.createElement("a", {href: "#", className: "pure-menu-link"}, this.props.email)
+        React.createElement(Link, {to: "app", className: "pure-menu-link"}, "Welcome")
+        ), 
+        React.createElement("li", {className: "pure-menu-item"}, 
+        React.createElement(Link, {to: "profile", className: "pure-menu-link"}, "Profile")
         ), 
         React.createElement("li", {className: "pure-menu-item"}, 
           React.createElement("a", {href: "#", className: "pure-menu-link", onClick: this.logout}, "Logout")
@@ -25586,13 +25661,12 @@ var SideNav = React.createClass({displayName: "SideNav",
       ), 
       React.createElement("ul", {className: "pure-menu-list nav-tasks"}, 
          React.createElement("li", {className: "pure-menu-heading"}, "Tasks"), 
-         React.createElement(Menu_item, {name: "CV", link_to: "cv", completed: this.state.user.cv_completed}), 
-         React.createElement(Menu_item, {name: "Sat", link_to: "sat", completed: this.state.user.sat_completed}), 
-         React.createElement(Menu_item, {name: "Eligability", link_to: "eligability", completed: this.state.user.eligability_completed}), 
+         React.createElement(Menu_item, {name: "Athletic CV", link_to: "cv", completed: this.state.user.cv_completed}), 
+         React.createElement(Menu_item, {name: "SAT Scores", link_to: "sat", completed: this.state.user.sat_completed}), 
+         React.createElement(Menu_item, {name: "NCAA/NAIA Eligability", link_to: "eligability", completed: this.state.user.eligability_completed}), 
          React.createElement(Menu_item, {name: "Insurance", link_to: "insurance", completed: this.state.user.insurance_completed}), 
          React.createElement(Menu_item, {name: "Visa", link_to: "visa", completed: this.state.user.visa_completed}), 
-         React.createElement(Menu_item, {name: "Profile", link_to: "profile", completed: this.state.user.sat_completed}), 
-        React.createElement(Menu_item, {name: "Video", link_to: "video", completed: this.state.user.video_completed})
+         React.createElement(Menu_item, {name: "Video Upload", link_to: "video", completed: this.state.user.video_completed})
       )
       )
     ) : (
@@ -25610,7 +25684,8 @@ var SideNav = React.createClass({displayName: "SideNav",
             React.createElement("div", {className: "pure-menu"}, 
 
                 React.createElement("div", {className: "nav_header"}, 
-                React.createElement("a", {className: "pure-menu-heading", href: "#"}, "Future Elite Sports")
+                React.createElement("a", {className: "pure-menu-heading", href: "#"}, 
+                React.createElement("img", {src: "/assets/images/logo.png", className: "logo"}))
                 ), 
                 rightNav
             )
@@ -25690,33 +25765,60 @@ var Visa = React.createClass({displayName: "Visa",
 
          React.createElement("div", {className: "task-text"}, 
 
-React.createElement("p", null, "1) Click on the link below. This will open up an online PDF that provides you with information when booking the exam.  VISA Process (please click)"), 
+         React.createElement("h4", null, "STEPS"), 
 
-React.createElement("p", null, "2) The first form you will need to fill in is the DS-160. Please ensure that the information on your I20 matches with the information that is entered on the form.  https://ceac.state.gov/genniv/"), 
+         React.createElement("div", null, 
+         React.createElement("span", {className: "step-number"}, "1 "), 
+         React.createElement("p", {className: "step-para"}, " Click on the link below." + ' ' + 
+         "This will open up an online PDF that provides you with information when booking the exam." + ' ' +
+            "VISA Process (please click)"
+          )
+        ), 
+        React.createElement("div", null, 
+         React.createElement("p", {className: "step-number"}, "2 "), 
+         React.createElement("p", {className: "step-para"}, " The first form you will need to fill in is the DS-160." + ' ' +
+           "Please ensure that the information on your I20 matches with the information that is entered on the form.  https://ceac.state.gov/genniv/", 
+           React.createElement("br", null), 
+          "After clicking on the link, please follow the process and guidance for each of the below steps:",  
+          React.createElement("br", null), 
+          "1. Select Location - 'England' 2. Click - 'Start An Application'", 
+          React.createElement("br", null), 
+          "Info on photo requirements - http://www.slideshare.net/USAinUK/ds160-visa-photo-requirements"
+          )
+        ), 
+          React.createElement("p", {className: "step-number"}, "3 "), 
+          React.createElement("p", {className: "step-para"}, " Once you have paid and completed this form you can (CREATE AN ACCOUNT, PAY VISA FEE, SCHEDULE APPOINTMENT," + ' ' +
+           "& ARRANGE FOR THE RETURN OF YOUR PASSPORT) Please choose the non-immigrant visa. https://ais.usvisa-info.com/en-gb/niv", 
+          React.createElement("br", null), 
+          "After creating your account, please follow the process and guidance for each of the below steps:",  
+          React.createElement("br", null), 
+          "1. Provide your DS-160 number;" + ' ' +  
+          "2. Determine your visa type; (F1)" + ' ' + 
+          "3. Select a courier return location**;" + ' ' + 
+          "4. Pay your U.S. visa fee via debit card (Visa or Mastercard);" + ' ' +
+          "5. Schedule an appointment;" + ' ' +  
+          "6. Select and pay the optional home delivery document option for each applicant (£18.00 per applicant) by credit or debit card."), 
 
-React.createElement("p", null, "After clicking on the link, please follow the process and guidance for each of the below steps: "), 
+          React.createElement("p", {className: "step-number"}, "4"), 
+          React.createElement("p", null, " Once you have booked your appointment you will need to complete the Sevis I-901 form." + ' ' +
+            "https://www.fmjfee.com/i901fee/desktop/index.jsp?view=desktop" + ' ' + 
+            "1. Click 'Submit I-901 and fee payment'" + ' ' + 
+            "2. Click form I20 3. Fill in information  "), 
 
-React.createElement("p", null, "1. Select Location - 'England' 2. Click - 'Start An Application'"), 
+            React.createElement("p", {className: "step-number"}, "5"), 
+            React.createElement("p", null, " Please see the bottom section of the online PDF for a list of documents you will need to bring on the day and this embassy checklist." + ' ' + 
+            "http://photos.state.gov/libraries/unitedkingdom/164203/cons-visa/appointment_letter_fm.pdf"), 
 
-React.createElement("p", null, "Info on photo requirements - http://www.slideshare.net/USAinUK/ds160-visa-photo-requirements"), 
+            React.createElement("p", {className: "step-number"}, "6"), 
+            React.createElement("p", null, " Please call your Future Elite Sports rep once you have confirmed your appointment." + ' ' +
+           "Your rep will then go through the interview process/list of common asked questions in preparation for the day."), 
 
-React.createElement("p", null, "3) Once you have paid and completed this form you can (CREATE AN ACCOUNT, PAY VISA FEE, SCHEDULE APPOINTMENT, & ARRANGE FOR THE RETURN OF YOUR PASSPORT) Please choose the non-immigrant visa. https://ais.usvisa-info.com/en-gb/niv"), 
+           React.createElement("p", {className: "step-number"}, "7"), 
+           React.createElement("p", null, " Contact your Future Elite Sports rep if you have any problems completing the forms."), 
 
-React.createElement("p", null, "After creating your account, please follow the process and guidance for each of the below steps: "), 
+          React.createElement("p", null, "Useful Links - The link below explains in greater detail what you can expect on the day of your interview and how to be best prepared. VISA Process (Please click)"), 
 
-React.createElement("p", null, "1. Provide your DS-160 number;  2. Determine your visa type; (F1) 3. Select a courier return location**; 4. Pay your U.S. visa fee via debit card (Visa or Mastercard);  5. Schedule an appointment;  6. Select and pay the optional home delivery document option for each applicant (£18.00 per applicant) by credit or debit card."), 
-
-React.createElement("p", null, "4) Once you have booked your appointment you will need to complete the Sevis I-901 form.  https://www.fmjfee.com/i901fee/desktop/index.jsp?view=desktop 1. Click 'Submit I-901 and fee payment' 2. Click form I20 3. Fill in information  "), 
-
-React.createElement("p", null, "5) Please see the bottom section of the online PDF for a list of documents you will need to bring on the day and this embassy checklist. http://photos.state.gov/libraries/unitedkingdom/164203/cons-visa/appointment_letter_fm.pdf"), 
-
-React.createElement("p", null, "6) Please call your Future Elite Sports rep once you have confirmed your appointment. Your rep will then go through the interview process/list of common asked questions in preparation for the day."), 
-
-React.createElement("p", null, "7) Contact your Future Elite Sports rep if you have any problems completing the forms."), 
-
-React.createElement("p", null, "Useful Links - The link below explains in greater detail what you can expect on the day of your interview and how to be best prepared. VISA Process (Please click)"), 
-
-React.createElement("p", null, "- You will be asked a series of questions about why you want to study in the USA. The link below discussed the type of questions you will face in the day. Examples of Visa Questions (Please Click)")
+          React.createElement("p", null, "- You will be asked a series of questions about why you want to study in the USA. The link below discussed the type of questions you will face in the day. Examples of Visa Questions (Please Click)")
   ), 
           React.createElement(Completed_form, {task: "visa"})
          )
