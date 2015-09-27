@@ -2,7 +2,6 @@
   "name": "project_admin_frontent",
   "version": "1.0.0",
   "description": "",
-  "main": "gulpfile.js",
   "dependencies": {
     "browserify": "^11.0.0",
     "flux": "^2.0.3",
