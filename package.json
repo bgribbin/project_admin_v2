@@ -30,8 +30,8 @@
   "devDependencies": {},
   "scripts": {
     "preinstall": "gulp clean",
-    "build": "gulp",
-    "postinstall": "gulp"
+    "build": "gulp build",
+    "postinstall": "gulp build"
   },
   "engines": {
     "node": "0.12.0"
