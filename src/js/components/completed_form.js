@@ -33,7 +33,7 @@ var Completed = React.createClass({
     var confirmed = this.refs.cb.getDOMNode().checked;
     var task = this.props.task;
     console.log(task);
-    UserActions.updateUSER(task, confirmed);
+    UserActions.updateUserTasks(task, confirmed);
     UserActions.loadUser();
   },
    render: function() {
@@ -43,7 +43,7 @@ var Completed = React.createClass({
          <form className="confirm-form" onSubmit={this._onSubmit}>
           <label>Mark as completed once done</label>
           <input type="checkbox" className="switch" ref="cb" defaultChecked={this.props.checked} />
-          <button type="submit" className="card--login__submit">Completed</button>
+          <button type="submit" className="completed-btn">Completed</button>
          </form>
       );
    }

@@ -1,23 +1,19 @@
-@import url(https://fonts.googleapis.com/css?family=Varela);
-@import url(https://fonts.googleapis.com/css?family=Nunito:400,300,100,500);
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500italic,500,300);
 html {
   box-sizing: border-box; }
 
-*,
-*::after,
-*::before {
+*, *::after, *::before {
   box-sizing: inherit; }
 
 button, input[type="button"], input[type="reset"], input[type="submit"] {
   appearance: none;
-  background-color: #477dca;
+  background-color: #11aae3;
   border: 0;
   border-radius: 3px;
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: "Varela", "Montserrat", "Nunito", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1em;
   -webkit-font-smoothing: antialiased;
   font-weight: 600;
@@ -28,18 +24,17 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
   user-select: none;
   vertical-align: middle;
   white-space: nowrap; }
-  button:hover,
-  button:focus, input[type="button"]:hover,
-  input[type="button"]:focus, input[type="reset"]:hover,
-  input[type="reset"]:focus, input[type="submit"]:hover,
-  input[type="submit"]:focus {
-    background-color: #3964a2;
+  button:hover, button:focus, input[type="button"]:hover, input[type="button"]:focus, input[type="reset"]:hover, input[type="reset"]:focus, input[type="submit"]:hover, input[type="submit"]:focus {
+    background-color: #0e88b6;
     color: #fff; }
   button:disabled, input[type="button"]:disabled, input[type="reset"]:disabled, input[type="submit"]:disabled {
     cursor: not-allowed;
     opacity: 0.5; }
     button:disabled:hover, input[type="button"]:disabled:hover, input[type="reset"]:disabled:hover, input[type="submit"]:disabled:hover {
-      background-color: #477dca; }
+      background-color: #11aae3; }
+
+.completed-btn {
+  border-radius: 26px; }
 
 fieldset {
   background-color: #f7f7f7;
@@ -51,7 +46,7 @@ input,
 label,
 select {
   display: block;
-  font-family: "Varela", "Montserrat", "Nunito", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1em; }
 
 label {
@@ -69,7 +64,7 @@ select[multiple=multiple] {
   border-radius: 3px;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
-  font-family: "Varela", "Montserrat", "Nunito", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1em;
   margin-bottom: 0.75em;
   padding: 0.5em;
@@ -80,8 +75,8 @@ select[multiple=multiple] {
     border-color: #b1b1b1; }
   input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="email"]:focus, input[type="month"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="time"]:focus, input[type="url"]:focus, input[type="week"]:focus, textarea:focus,
   select[multiple=multiple]:focus {
-    border-color: #477dca;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 5px rgba(55, 112, 192, 0.7);
+    border-color: #11aae3;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 5px rgba(15, 152, 203, 0.7);
     outline: none; }
   input[type="color"]:disabled, input[type="date"]:disabled, input[type="datetime"]:disabled, input[type="datetime-local"]:disabled, input[type="email"]:disabled, input[type="month"]:disabled, input[type="number"]:disabled, input[type="password"]:disabled, input[type="search"]:disabled, input[type="tel"]:disabled, input[type="text"]:disabled, input[type="time"]:disabled, input[type="url"]:disabled, input[type="week"]:disabled, textarea:disabled,
   select[multiple=multiple]:disabled {
@@ -154,16 +149,16 @@ th {
 /*@import url(https://fonts.googleapis.com/css?family=Muli:400,300);*/
 body {
   color: #333;
-  font-family: "Varela", "Montserrat", "Nunito", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-feature-settings: "kern", "liga", "pnum";
   font-size: 1em;
   line-height: 1.5; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Varela", "Montserrat", "Nunito", sans-serif;
+  font-family: "Roboto", sans-serif;
   line-height: 1.2;
   margin: 0 0 0.75em;
-  font-weight: 300;
+  font-weight: 500;
   /*color: $medium-gray;*/ }
 
 h1 {
@@ -187,13 +182,11 @@ p {
   font-weight: 300; }
 
 a {
-  color: #477dca;
+  color: #11aae3;
   text-decoration: none;
   transition: color 150ms ease; }
-  a:active,
-  a:focus,
-  a:hover {
-    color: #355e98; }
+  a:active, a:focus, a:hover {
+    color: #0d80aa; }
 
 hr {
   border-bottom: 1px solid #ddd;
@@ -259,7 +252,7 @@ body {
 
 .upload-btn {
   border-radius: 24px;
-  background-color: #477dca; }
+  background-color: #0F375A; }
   .upload-btn a {
     color: white; }
 
@@ -286,10 +279,44 @@ body {
     .task-content .title h1, .main-container .title h1 {
       padding: 1rem; }
 
+.profile-header {
+  @span-columns (12);
+  text-align: center; }
+
+.profile-view-wrapper {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto; }
+  .profile-view-wrapper::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+.profile-left {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%; }
+  .profile-left:last-child {
+    margin-right: 0; }
+
+.profile-right {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%; }
+  .profile-right:last-child {
+    margin-right: 0; }
+
+.profile-img {
+  position: relative;
+  top: 50%;
+  height: 250px; }
+
 .task-text, .task-welcome {
   width: 70%;
   margin-left: 10%;
-  font-family: "Varela", sans-serif;
+  font-family: "Roboto", sans-serif;
   text-align: left; }
   .task-text::after, .task-welcome::after {
     clear: both;
@@ -337,7 +364,7 @@ body {
   .task-text .type, .task-welcome .type {
     border-bottom: 1px solid;
     display: inline-block;
-    font-family: "Varela", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 0.7em;
     font-weight: 800;
     margin-bottom: 2em;
@@ -345,14 +372,14 @@ body {
     text-align: left;
     text-transform: uppercase; }
   .task-text h1, .task-welcome h1 {
-    font-family: "Varela", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 1.8em;
     margin-bottom: 0.5em; }
     @media screen and (min-width: 40em) {
       .task-text h1, .task-welcome h1 {
         font-size: 2.4em; } }
   .task-text h2, .task-welcome h2 {
-    font-family: "Varela", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 1.2em;
     font-weight: 300;
     line-height: 1.4em;
@@ -370,29 +397,29 @@ body {
     padding: 0.1em 0.4em;
     white-space: nowrap; }
   .task-text h3, .task-welcome h3 {
-    font-family: "Varela", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 1.2em;
     font-weight: 400;
     line-height: 1.3em;
     margin-bottom: 0.4em; }
   .task-text p.date, .task-welcome p.date {
     color: rgba(51, 51, 51, 0.4);
-    font-family: "Varela", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 0.9em;
     margin-bottom: 0.3em; }
   .task-text p, .task-welcome p {
-    font-family: "Varela", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 1.05em;
     font-weight: 300;
     line-height: 1.75em;
     margin-bottom: 1.5em; }
     .task-text p span, .task-welcome p span {
-      font-family: "Varela", sans-serif;
+      font-family: "Roboto", sans-serif;
       font-size: 0.8em;
       text-transform: uppercase; }
   .task-text a.read-more, .task-welcome a.read-more {
     display: inline-block;
-    font-family: "Varela", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 0.8em;
     font-weight: 700;
     margin-left: 0.2em;
@@ -406,7 +433,7 @@ body {
   .task-text hr, .task-welcome hr {
     width: 3em; }
   .task-text p.author, .task-welcome p.author {
-    font-family: "Varela", sans-serif; }
+    font-family: "Roboto", sans-serif; }
 
 .task-welcome {
   width: 80%; }
@@ -435,7 +462,7 @@ span.true {
   margin-right: 2.35765%;
   width: 23.23176%;
   height: 100%;
-  background-color: #3989CE;
+  background-color: #0F375A;
   /*background-color: #fafafa;*/
   padding: 1rem 0rem;
   border-top-left-radius: 2px;
@@ -527,7 +554,7 @@ span.true {
 .pure-menu-horizontal .pure-menu-separator {
   width: 1px;
   height: 1.3em;
-  margin: 0 0.3em; }
+  margin: 0 .3em; }
 
 .pure-menu-heading {
   text-transform: uppercase;
@@ -546,7 +573,7 @@ span.true {
 .pure-menu-link,
 .pure-menu-disabled,
 .pure-menu-heading {
-  padding: 0.5em 1em; }
+  padding: .5em 1em; }
 
 .pure-menu-link {
   padding-left: 1.5em;

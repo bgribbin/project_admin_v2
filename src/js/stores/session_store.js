@@ -65,15 +65,17 @@ SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
       if (action.json && action.json.access_token) {
         _accessToken = action.json.access_token;
         _email = action.json.email;
-        // Token will always live in the session, so that the API can grab it with no hassle
+
         sessionStorage.setItem('accessToken', _accessToken);
         sessionStorage.setItem('email', _email);
+        SessionStore.emitChange();
+        router.transitionTo('/profile');
       }
       if (action.errors) {
         _errors = action.errors;
+        sessionStorage.setItem('errors', _errors);
+        SessionStore.emitChange();
       }
-      SessionStore.emitChange();
-      router.transitionTo('/profile');
       break;
 
     case ActionTypes.LOGOUT:

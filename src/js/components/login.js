@@ -29,9 +29,9 @@ var LoginPage = React.createClass({
   },
 
   render: function() {
-    var errors = <div></div>;
+   // var errors = <div></div>;
 
-  //  var errors = (this.state.errors.length > 0) ? <ErrorNotice errors={this.state.errors}/> : <div></div>;
+   var errors = (this.state.errors.length > 0) ? <div>{this.state.errors}</div> : <div></div>;
     return (
       <div className="main-container">
         {errors}

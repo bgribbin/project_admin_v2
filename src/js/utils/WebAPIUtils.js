@@ -47,7 +47,9 @@ module.exports = {
       .end(function(error, res){
         if (res) {
           if (res.error) {
+
             var errorMsgs = _getErrors(res);
+            console.log(errorMsgs);
             ServerActionCreators.receiveLogin(null, errorMsgs);
           } else {
             json = JSON.parse(res.text);
@@ -86,7 +88,7 @@ module.exports = {
         }
       });
   },
-    updateUSER: function(task, confirmed) {
+    updateUserTasks: function(task, confirmed) {
     request.put(APIEndpoints.USER)
       .send({task: task, completed: confirmed })
       .set('Accept', 'application/json')
@@ -103,32 +105,19 @@ module.exports = {
       });
   },
 
-  loadStory: function(storyId) {
-    request.get(APIEndpoints.STORIES + '/' + storyId)
+  updateUserProfile: function(profile) {
+    request.put(APIEndpoints.USER)
+      .send({user: profile })
       .set('Accept', 'application/json')
       .set('Authorization', sessionStorage.getItem('accessToken'))
-      .end(function(error, res){
-        if (res) {
-          json = JSON.parse(res.text);
-          ServerActionCreators.receiveStory(json);
-        }
-      });
-  },
-
-  createStory: function(title, body) {
-    request.post(APIEndpoints.STORIES)
-      .set('Accept', 'application/json')
-      .set('Authorization', sessionStorage.getItem('accessToken'))
-      .send({ story: { title: title, body: body } })
       .end(function(error, res){
         if (res) {
           if (res.error) {
-            var errorMsgs = _getErrors(res);
-            ServerActionCreators.receiveCreatedStory(null, errorMsgs);
-          } else {
-            json = JSON.parse(res.text);
-            ServerActionCreators.receiveCreatedStory(json, null);
+            console.log("ERRORRS");
           }
+          json = JSON.parse(res.text);
+          console.log(json);
+          ServerActionCreators.receiveUser(json);
         }
       });
   }

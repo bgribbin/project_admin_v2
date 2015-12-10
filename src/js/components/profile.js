@@ -7,7 +7,11 @@ var Profile = React.createClass({
    getInitialState: function() {
     return { 
       user: UserStore.getUser(), 
-      errors: []
+      errors: [],
+      first_name: UserStore.getUser().first_name,
+      last_name: UserStore.getUser().last_name,
+      dob: UserStore.getUser().dob,
+      sport: UserStore.getUser().first_name
     };
   },
  
@@ -21,25 +25,81 @@ var Profile = React.createClass({
   },
 
   _onChange: function() {
+
     this.setState({ 
       user: UserStore.getUser(),
       errors: UserStore.getErrors()
     }); 
   },
+  _handleChange: function(e) {
+
+    var state = {}
+    state[e.target.name] =  e.target.value;
+    this.setState({user: e.target.value});
+  },
+  _onSubmit: function(e) {
+    e.preventDefault();
+    this.setState({ errors: [] });
+    var attributes = {
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
+      dob: this.state.dob,
+      sport: this.state.sport
+    };
+    UserActions.updateUserProfile(attributes);
+    UserActions.loadUser();
+  },
    render: function() {
       return (
          <div className="task-content">
 
-           <div className="title">
-              <h1 className="">Profile</h1>
-           </div>
 
-           <p>Profile</p>
-           <p>Username + { this.state.user.username }</p>
-           <p>email + { this.state.user.email }</p>
-           <p>user id + { this.state.user.id }</p>
-           <br/>
-           <p>sat + {this.state.user.sat_completed.toString()}</p>
+          <div className="profile-view-wrapper">
+
+          <div className="profile-header">
+            <h2>Profile</h2>
+          </div>
+               <div className="profile-left">
+                <img src='/assets/images/check.png' className="profile-img" />
+               </div>
+               <div className="profile-right">
+                 <div className="title">
+                    <p>{this.state.user.first_name}</p>
+                    <p>{this.state.user.last_name}</p>
+                    <p>{this.state.user.dob}</p>
+                    <p>{this.state.user.sport}</p>
+                 </div>
+              </div>
+          </div>
+
+          <form className="profile-form" onSubmit={this._onSubmit}>
+            <label>First Name</label>
+
+            <input type="text" 
+                   value={this.state.user.first_name} 
+                   name="first_name" 
+                   onChange={this._handleChange} />
+
+            <label>Last Name</label>
+            <input type="text" 
+                   value={this.state.last_name} 
+                   name="last_name"
+                   onChange={this._handleChange} />
+
+            <label>Date of birth</label>
+            <input type="date" 
+                   value={this.state.dob} 
+                   name="dob"
+                   onChange={this._handleChange} />
+
+            <label>Sport</label>
+            <input type="text" 
+                   value={this.state.sport} 
+                   name="sport"
+                   onChange={this._handleChange} />
+
+            <button type="submit" className="completed-btn">Update</button>
+         </form>
 
          </div>
       );

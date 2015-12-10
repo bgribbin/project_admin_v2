@@ -29,12 +29,21 @@ module.exports = {
     WebAPIUtils.updateSAT(checkbox);
   },
 
-  updateUSER: function(task, checkbox) {
+  updateUserTasks: function(task, checkbox) {
     SmallAppDispatcher.handleViewAction({
       type: ActionTypes.UPDATE_USER,
       confirmed: checkbox
     });
-    WebAPIUtils.updateUSER(task, checkbox);
+    WebAPIUtils.updateUserTasks(task, checkbox);
+  },
+
+  updateUserProfile: function(profile) {
+    SmallAppDispatcher.handleViewAction({
+      type: ActionTypes.UPDATE_USER
+    });
+    console.log("here");
+    console.log(profile);
+    WebAPIUtils.updateUserProfile(profile);
   }
 
 };

@@ -23,7 +23,7 @@ span {
 #side-navbar {
    @include span-columns(3);
    height: 100%;
-   background-color: #3989CE;
+   background-color: $main-blue;
    /*background-color: #fafafa;*/
    padding: 1rem 0rem;
    border-top-left-radius: 2px;

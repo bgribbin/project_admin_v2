@@ -20,7 +20,24 @@
    }
 
 }
-
+.profile-header {
+  @span-columns(12);
+  text-align: center;
+}
+.profile-view-wrapper {
+  @include outer-container;
+}
+.profile-left {
+  @include span-columns(6);
+}
+.profile-right {
+  @include span-columns(6);
+}
+.profile-img {
+  position: relative;
+  top: 50%;
+  height: 250px;
+}
 .task-text {
   $base-border-radius: 3px !default;
   $base-line-height: 1.75em;
@@ -30,8 +47,8 @@
   $light-gray: #DDD !default;
   $medium-screen: em(640) !default;
   $base-font-color: $dark-gray !default;
-  $sans-serif: 'Varela', sans-serif;
-  $sans-serif-2: 'Varela', sans-serif;
+  $sans-serif: $base-font-family;
+  $sans-serif-2: $base-font-family;
   width: 70%;
   margin-left: 10%;
   @include clearfix;
