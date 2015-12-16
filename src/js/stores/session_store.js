@@ -5,6 +5,7 @@ var SmallAppDispatcher = require('../dispatchers/AppDispatcher.js');
 var SmallConstants = require('../constants/constants.js');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var UserStore = require('../stores/user_store.js');
 
 var Router = require('react-router');
 var routes = require('../config/routes.js');
@@ -57,6 +58,10 @@ var SessionStore = assign({}, EventEmitter.prototype, {
 
 SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
   var action = payload.action;
+
+  SmallAppDispatcher.waitFor([
+    UserStore.dispatchToken
+  ]);
 
   switch(action.type) {
 

@@ -2,22 +2,30 @@ var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
 
+var APIRoot = "http://localhost:3000";
+
 var Profile = React.createClass({
 
    getInitialState: function() {
+      var user = UserStore.getUser();
+      console.log('user:');
+      console.log(user);
+      UserStore.addChangeListener(this._onChange);
     return { 
-      user: UserStore.getUser(), 
+      user: user, 
       errors: [],
-      first_name: UserStore.getUser().first_name,
-      last_name: UserStore.getUser().last_name,
-      dob: UserStore.getUser().dob,
-      sport: UserStore.getUser().first_name
+      first_name: user.first_name,
+      last_name: user.last_name,
+      dob: user.dob,
+      sport: user.first_name,
+      avatar_url: user.avatar_url,
+      data_uri: null
     };
   },
  
   componentDidMount: function() {
-    UserStore.addChangeListener(this._onChange);
     UserActions.loadUser();
+    UserStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
@@ -25,17 +33,40 @@ var Profile = React.createClass({
   },
 
   _onChange: function() {
-
+    var user = UserStore.getUser();
     this.setState({ 
-      user: UserStore.getUser(),
-      errors: UserStore.getErrors()
+      user: user, 
+      errors: [],
+      first_name: user.first_name,
+      last_name: user.last_name,
+      dob: user.dob,
+      sport: user.sport,
+      avatar_url: user.avatar_url
     }); 
   },
   _handleChange: function(e) {
 
     var state = {}
+    console.log(e.target.name);
+
     state[e.target.name] =  e.target.value;
-    this.setState({user: e.target.value});
+
+    console.log(state);
+    this.setState(state);
+    console.log(this.state);
+  },
+  _handleFile: function(e) {
+    var self = this;
+    var reader = new FileReader();
+    var file = e.target.files[0];
+
+    reader.onload = function(upload) {
+      self.setState({
+        data_uri: upload.target.result,
+      });
+    }
+
+    reader.readAsDataURL(file);
   },
   _onSubmit: function(e) {
     e.preventDefault();
@@ -44,64 +75,76 @@ var Profile = React.createClass({
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       dob: this.state.dob,
-      sport: this.state.sport
+      sport: this.state.sport,
+      avatar: this.state.data_uri
     };
+    console.log('attributes:');
+    console.log(attributes);
     UserActions.updateUserProfile(attributes);
     UserActions.loadUser();
   },
    render: function() {
       return (
-         <div className="task-content">
 
 
-          <div className="profile-view-wrapper">
+          <div className="profile-view-wrapper row col-f-6">
 
-          <div className="profile-header">
+          <div className="profile-header col-12">
             <h2>Profile</h2>
           </div>
-               <div className="profile-left">
-                <img src='/assets/images/check.png' className="profile-img" />
+               
+               <div className="profile-left col-12">
+
+                <img src={ APIRoot + this.state.avatar_url} className="profile-img" />
                </div>
-               <div className="profile-right">
-                 <div className="title">
-                    <p>{this.state.user.first_name}</p>
-                    <p>{this.state.user.last_name}</p>
-                    <p>{this.state.user.dob}</p>
-                    <p>{this.state.user.sport}</p>
-                 </div>
-              </div>
-          </div>
 
-          <form className="profile-form" onSubmit={this._onSubmit}>
-            <label>First Name</label>
+          <form className="profile-form col-12" onSubmit={this._onSubmit}>
+            
 
-            <input type="text" 
-                   value={this.state.user.first_name} 
-                   name="first_name" 
-                   onChange={this._handleChange} />
+            <div className="form-dob col-12">
+            <label>Profile Image</label>
+              <input type="file"
+                     name="avatar"
+                     onChange={this._handleFile} />
+            </div>
+            <div className="form-name col-6">
+              <label>First Name</label>
 
+              <input type="text" 
+                     value={this.state.first_name} 
+                     name="first_name" 
+                     onChange={this._handleChange} />
+            </div>
+
+            <div className="form-name col-6">
             <label>Last Name</label>
             <input type="text" 
                    value={this.state.last_name} 
                    name="last_name"
                    onChange={this._handleChange} />
-
+         
+         
+            </div>
+            <div className="form-dob col-12">
             <label>Date of birth</label>
             <input type="date" 
                    value={this.state.dob} 
                    name="dob"
                    onChange={this._handleChange} />
+            </div>
 
+            <div className="form-sport col-12">
             <label>Sport</label>
             <input type="text" 
                    value={this.state.sport} 
                    name="sport"
                    onChange={this._handleChange} />
+            </div>
 
-            <button type="submit" className="completed-btn">Update</button>
+            <button className="std-btn">Update</button>
          </form>
+          </div>
 
-         </div>
       );
    }
 

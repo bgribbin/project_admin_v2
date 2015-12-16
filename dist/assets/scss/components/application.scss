@@ -9,11 +9,9 @@ body {
       background: linear-gradient(
       rgba(220, 220, 220, 0.80), 
       rgba(220,220,220, 0.80)), url('/assets/images/screen.png');
-      
       background-size: cover;
       background-position: center center;
       background-attachment: fixed;
-      /*background-color: #e7e7e7;*/
       height: 100%;
       &:before {
        content: ' ';
@@ -24,13 +22,6 @@ body {
 
       .content-wrapper {
          position: relative;
-         top: 38px;
-         @include outer-container;
-         height: calc(100% - 58px);
-         width: calc(100% - 58px);
-         border-radius: 4px;
-         background-color: white;
-         box-shadow: 0 1px 1px 0 rgba(0,0,0,.06),0 2px 5px 0 rgba(0,0,0,.2);
       }
    }
 }

@@ -31,11 +31,16 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <div className="content-wrapper">
+      <div className="comp-app-wrp row">
+
         <SideNav 
           isLoggedIn={this.state.isLoggedIn}
           email={this.state.email} />
-   	 		<RouteHandler />   
+
+        <div className="comp-main-cont col-9">
+ 	 		     <RouteHandler />  
+        </div> 
+
       </div>
     );
   }

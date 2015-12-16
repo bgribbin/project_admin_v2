@@ -14,6 +14,7 @@ var _user =  {
                 "email": "",
                 "first_name": "",
                 "last_name": "",
+                "avatar_url": "",
                 "video_completed": false,
                 "sat_completed": false,
                 "insurance_completed": false,
@@ -52,8 +53,11 @@ UserStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
     
     case ActionTypes.RECEIVE_USER:
       _user = action.json;
+      console.log('RECEIVE_USER');
       UserStore.emitChange();
       break;
+
+
     
   }
 

@@ -67,6 +67,7 @@ module.exports = {
       .end(function(error, res){
         if (res) {
           json = JSON.parse(res.text);
+          console.log('loaded user');
           console.log(json);
           ServerActionCreators.receiveUser(json);
         }

@@ -78,7 +78,7 @@ var SideNav = React.createClass({
     return (
 
 
-        <div id="side-navbar">
+        <div id="side-navbar" className="comp-side-nav col-3">
             <div className="pure-menu">
 
                 <div className="nav_header">

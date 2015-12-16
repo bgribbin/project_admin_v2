@@ -1,5 +1,4 @@
 .task-content, .main-container {
-   @include span-columns(9);
    height: 100%;
    overflow: scroll;
    position: relative;
@@ -15,44 +14,30 @@
       }
    }
    .task-text {
-      
-
    }
 
 }
 .profile-header {
-  @span-columns(12);
   text-align: center;
 }
 .profile-view-wrapper {
-  @include outer-container;
 }
 .profile-left {
-  @include span-columns(6);
+  text-align: center;
+  margin-top: 25px;
 }
 .profile-right {
-  @include span-columns(6);
 }
 .profile-img {
-  position: relative;
-  top: 50%;
-  height: 250px;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
 }
 .task-text {
-  $base-border-radius: 3px !default;
-  $base-line-height: 1.75em;
-  $base-spacing: 1.5em !default;
-  $action-color: #477DCA !default;
-  $dark-gray: #333 !default;
-  $light-gray: #DDD !default;
-  $medium-screen: em(640) !default;
-  $base-font-color: $dark-gray !default;
-  $sans-serif: $base-font-family;
-  $sans-serif-2: $base-font-family;
+
   width: 70%;
   margin-left: 10%;
-  @include clearfix;
-  font-family: $sans-serif;
   text-align: left;
   
   h1, h2, h3, p {
@@ -62,135 +47,17 @@
    font-size: 2em;
    font-weight: 300;
    float: left;
-   @include span-columns(1);
+
   }
   .step-para {
-   @include span-columns(11);
+
   }
   .step-cont {
-    @include outer-container;
-  }
-  hr {
-    border-bottom: 1px solid $light-gray;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    margin: $base-spacing 0;
+
   }
 
-  p {
-    color: $base-font-color;
-    line-height: $base-line-height;
-  }
-
-  a {
-/*    color: $action-color;
-    text-decoration: none;*/
-  }
-
-  .type {
-    border-bottom: 1px solid;
-    display: inline-block;
-    font-family: $sans-serif;
-    font-size: 0.7em;
-    font-weight: 800;
-    margin-bottom: 2em;
-    padding: 0.3em 0;
-    text-align: left;
-    text-transform: uppercase;
-  }
-
-  h1 {
-    font-family: $sans-serif-2;
-    font-size: 1.8em;
-    margin-bottom: 0.5em;
-
-    @include media($medium-screen) {
-      font-size: 2.4em;
-    }
-  }
-
-
-  h2 {
-    font-family: $sans-serif-2;
-    font-size: 1.2em;
-    font-weight: 300;
-    line-height: 1.4em;
-    margin-bottom: 0.9em;
-
-    @include media($medium-screen) {
-      font-size: 1.4em;
-    }
-  }
-
-  code {
-    background: #F7F7F7;
-    border-radius: $base-border-radius * 1.5;
-    border: 1px solid #E0E0E0;
-    font-family: monaco;
-    font-size: 0.7em;
-    font-style: normal;
-    padding: 0.1em 0.4em;
-    white-space: nowrap;
-  }
-
-
-  h3 {
-    font-family: $sans-serif-2;
-    font-size: 1.2em;
-    font-weight: 400;
-    line-height: 1.3em;
-    margin-bottom: 0.4em;
-  }
-
-  p.date {
-    color: transparentize($base-font-color, 0.6);
-    font-family: $sans-serif;
-    font-size: 0.9em;
-    margin-bottom: 0.3em;
-  }
-
-  p {
-    font-family: $sans-serif;
-    font-size: 1.05em;
-    font-weight: 300;
-    line-height: 1.75em;
-    margin-bottom: 1.5em;
-
-    span {
-      font-family: $sans-serif-2;
-      font-size: 0.8em;
-      text-transform: uppercase;
-    }
-  }
-
-  a.read-more {
-    display: inline-block;
-    font-family: $sans-serif-2;
-    font-size: 0.8em;
-    font-weight: 700;
-    margin-left: 0.2em;
-    position: relative;
-    text-transform: uppercase;
-
-    span {
-      font-size: 1.5em;
-      position: absolute;
-      right: -12px;
-      top: -1px;
-    }
-  }
-  
-  hr {
-    width: 3em;
-  }
-
-  p.author {
-    font-family: $sans-serif;
-  }
 }
    .task-welcome {
-    @extend .task-text;
     width: 80%;
 
 }

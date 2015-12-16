@@ -21,15 +21,14 @@ span {
 }
 
 #side-navbar {
-   @include span-columns(3);
+
+}
+.comp-side-nav {
+
    height: 100%;
    background-color: $main-blue;
-   /*background-color: #fafafa;*/
-   padding: 1rem 0rem;
-   border-top-left-radius: 2px;
-   border-bottom-left-radius: 2px;
    overflow: scroll;
-   /*border-right: 1px solid #edeeee;*/
+
 }
 
 .logo {

@@ -25076,11 +25076,16 @@ var App = React.createClass({displayName: "App",
 
   render: function() {
     return (
-      React.createElement("div", {className: "content-wrapper"}, 
+      React.createElement("div", {className: "comp-app-wrp row"}, 
+
         React.createElement(SideNav, {
           isLoggedIn: this.state.isLoggedIn, 
           email: this.state.email}), 
-   	 		React.createElement(RouteHandler, null)
+
+        React.createElement("div", {className: "comp-main-cont col-9"}, 
+ 	 		     React.createElement(RouteHandler, null)
+        )
+
       )
     );
   }
@@ -25135,7 +25140,7 @@ var Completed = React.createClass({displayName: "Completed",
          React.createElement("form", {className: "confirm-form", onSubmit: this._onSubmit}, 
           React.createElement("label", null, "Mark as completed once done"), 
           React.createElement("input", {type: "checkbox", className: "switch", ref: "cb", defaultChecked: this.props.checked}), 
-          React.createElement("button", {type: "submit", className: "completed-btn"}, "Completed")
+          React.createElement("button", {type: "submit", className: "std-btn"}, "Completed")
          )
       );
    }
@@ -25184,7 +25189,7 @@ var CV = React.createClass({displayName: "CV",
 
          React.createElement("div", {className: "task-text"}, 
          React.createElement("div", {className: "download-comp"}, 
-         React.createElement("button", {className: "download-btn"}, React.createElement("a", {className: "btn-a", href: "assets/images/check.png", download: "/assets/images/check.png"}, "Download CV Template"))
+         React.createElement("button", {className: "std-btn download-btn"}, React.createElement("a", {className: "btn-a", href: "assets/images/check.png", download: "/assets/images/check.png"}, "Download CV Template"))
          ), 
 
             React.createElement("p", null, "Please use the template attached and include as much information as possible." + ' ' +
@@ -25192,7 +25197,7 @@ var CV = React.createClass({displayName: "CV",
 
             React.createElement("br", null), 
             React.createElement("div", {className: "upload-comp"}, 
-           React.createElement("button", {className: "upload-btn"}, React.createElement("a", {className: "btn-a", href: "https://www.dropbox.com/request/nXUQO5DMSoknWSooJ6jF"}, "Upload your CV"))
+           React.createElement("button", {className: "std-btn upload-btn"}, React.createElement("a", {className: "btn-a", href: "https://www.dropbox.com/request/nXUQO5DMSoknWSooJ6jF"}, "Upload your CV"))
            )
          ), 
 
@@ -25394,14 +25399,14 @@ var LoginPage = React.createClass({displayName: "LoginPage",
 
    var errors = (this.state.errors.length > 0) ? React.createElement("div", null, this.state.errors) : React.createElement("div", null);
     return (
-      React.createElement("div", {className: "main-container"}, 
+      React.createElement("div", {className: "main-container col-9"}, 
         errors, 
         React.createElement("div", {className: "login"}, 
           React.createElement("div", {className: ""}, 
             React.createElement("form", {onSubmit: this._onSubmit}, 
               React.createElement("div", {className: "card--login__field"}, 
                 React.createElement("label", {name: "email"}, "Email"), 
-                React.createElement("input", {type: "text", name: "email", ref: "email"})
+                React.createElement("input", {type: "email", name: "email", ref: "email"})
               ), 
               React.createElement("div", {className: "card--login__field"}, 
                 React.createElement("label", {name: "password"}, "Password"), 
@@ -25536,22 +25541,30 @@ var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
 
+var APIRoot = "http://localhost:3000";
+
 var Profile = React.createClass({displayName: "Profile",
 
    getInitialState: function() {
+      var user = UserStore.getUser();
+      console.log('user:');
+      console.log(user);
+      UserStore.addChangeListener(this._onChange);
     return { 
-      user: UserStore.getUser(), 
+      user: user, 
       errors: [],
-      first_name: UserStore.getUser().first_name,
-      last_name: UserStore.getUser().last_name,
-      dob: UserStore.getUser().dob,
-      sport: UserStore.getUser().first_name
+      first_name: user.first_name,
+      last_name: user.last_name,
+      dob: user.dob,
+      sport: user.first_name,
+      avatar_url: user.avatar_url,
+      data_uri: null
     };
   },
  
   componentDidMount: function() {
-    UserStore.addChangeListener(this._onChange);
     UserActions.loadUser();
+    UserStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
@@ -25559,17 +25572,40 @@ var Profile = React.createClass({displayName: "Profile",
   },
 
   _onChange: function() {
-
+    var user = UserStore.getUser();
     this.setState({ 
-      user: UserStore.getUser(),
-      errors: UserStore.getErrors()
+      user: user, 
+      errors: [],
+      first_name: user.first_name,
+      last_name: user.last_name,
+      dob: user.dob,
+      sport: user.sport,
+      avatar_url: user.avatar_url
     }); 
   },
   _handleChange: function(e) {
 
     var state = {}
+    console.log(e.target.name);
+
     state[e.target.name] =  e.target.value;
-    this.setState({user: e.target.value});
+
+    console.log(state);
+    this.setState(state);
+    console.log(this.state);
+  },
+  _handleFile: function(e) {
+    var self = this;
+    var reader = new FileReader();
+    var file = e.target.files[0];
+
+    reader.onload = function(upload) {
+      self.setState({
+        data_uri: upload.target.result,
+      });
+    }
+
+    reader.readAsDataURL(file);
   },
   _onSubmit: function(e) {
     e.preventDefault();
@@ -25578,64 +25614,76 @@ var Profile = React.createClass({displayName: "Profile",
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       dob: this.state.dob,
-      sport: this.state.sport
+      sport: this.state.sport,
+      avatar: this.state.data_uri
     };
+    console.log('attributes:');
+    console.log(attributes);
     UserActions.updateUserProfile(attributes);
     UserActions.loadUser();
   },
    render: function() {
       return (
-         React.createElement("div", {className: "task-content"}, 
 
 
-          React.createElement("div", {className: "profile-view-wrapper"}, 
+          React.createElement("div", {className: "profile-view-wrapper row col-f-6"}, 
 
-          React.createElement("div", {className: "profile-header"}, 
+          React.createElement("div", {className: "profile-header col-12"}, 
             React.createElement("h2", null, "Profile")
           ), 
-               React.createElement("div", {className: "profile-left"}, 
-                React.createElement("img", {src: "/assets/images/check.png", className: "profile-img"})
+               
+               React.createElement("div", {className: "profile-left col-12"}, 
+
+                React.createElement("img", {src:  APIRoot + this.state.avatar_url, className: "profile-img"})
                ), 
-               React.createElement("div", {className: "profile-right"}, 
-                 React.createElement("div", {className: "title"}, 
-                    React.createElement("p", null, this.state.user.first_name), 
-                    React.createElement("p", null, this.state.user.last_name), 
-                    React.createElement("p", null, this.state.user.dob), 
-                    React.createElement("p", null, this.state.user.sport)
-                 )
-              )
-          ), 
 
-          React.createElement("form", {className: "profile-form", onSubmit: this._onSubmit}, 
-            React.createElement("label", null, "First Name"), 
+          React.createElement("form", {className: "profile-form col-12", onSubmit: this._onSubmit}, 
+            
 
-            React.createElement("input", {type: "text", 
-                   value: this.state.user.first_name, 
-                   name: "first_name", 
-                   onChange: this._handleChange}), 
+            React.createElement("div", {className: "form-dob col-12"}, 
+            React.createElement("label", null, "Profile Image"), 
+              React.createElement("input", {type: "file", 
+                     name: "avatar", 
+                     onChange: this._handleFile})
+            ), 
+            React.createElement("div", {className: "form-name col-6"}, 
+              React.createElement("label", null, "First Name"), 
 
+              React.createElement("input", {type: "text", 
+                     value: this.state.first_name, 
+                     name: "first_name", 
+                     onChange: this._handleChange})
+            ), 
+
+            React.createElement("div", {className: "form-name col-6"}, 
             React.createElement("label", null, "Last Name"), 
             React.createElement("input", {type: "text", 
                    value: this.state.last_name, 
                    name: "last_name", 
-                   onChange: this._handleChange}), 
-
+                   onChange: this._handleChange})
+         
+         
+            ), 
+            React.createElement("div", {className: "form-dob col-12"}, 
             React.createElement("label", null, "Date of birth"), 
             React.createElement("input", {type: "date", 
                    value: this.state.dob, 
                    name: "dob", 
-                   onChange: this._handleChange}), 
+                   onChange: this._handleChange})
+            ), 
 
+            React.createElement("div", {className: "form-sport col-12"}, 
             React.createElement("label", null, "Sport"), 
             React.createElement("input", {type: "text", 
                    value: this.state.sport, 
                    name: "sport", 
-                   onChange: this._handleChange}), 
+                   onChange: this._handleChange})
+            ), 
 
-            React.createElement("button", {type: "submit", className: "completed-btn"}, "Update")
+            React.createElement("button", {className: "std-btn"}, "Update")
          )
+          )
 
-         )
       );
    }
 
@@ -25781,7 +25829,7 @@ var SideNav = React.createClass({displayName: "SideNav",
     return (
 
 
-        React.createElement("div", {id: "side-navbar"}, 
+        React.createElement("div", {id: "side-navbar", className: "comp-side-nav col-3"}, 
             React.createElement("div", {className: "pure-menu"}, 
 
                 React.createElement("div", {className: "nav_header"}, 
@@ -25970,6 +26018,8 @@ var APIRoot = "http://localhost:3000";
 
 module.exports = {
 
+  
+
   APIEndpoints: {
     LOGIN:          APIRoot + "/v1/login",
     REGISTRATION:   APIRoot + "/v1/users",
@@ -26049,6 +26099,7 @@ var SmallAppDispatcher = require('../dispatchers/AppDispatcher.js');
 var SmallConstants = require('../constants/constants.js');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var UserStore = require('../stores/user_store.js');
 
 var Router = require('react-router');
 var routes = require('../config/routes.js');
@@ -26102,6 +26153,10 @@ var SessionStore = assign({}, EventEmitter.prototype, {
 SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
   var action = payload.action;
 
+  SmallAppDispatcher.waitFor([
+    UserStore.dispatchToken
+  ]);
+
   switch(action.type) {
 
     case ActionTypes.LOGIN_RESPONSE:
@@ -26139,7 +26194,7 @@ SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
 
 module.exports = SessionStore;
 
-},{"../components/sidenav.js":222,"../config/routes.js":225,"../constants/constants.js":226,"../dispatchers/AppDispatcher.js":227,"events":1,"object-assign":7,"react":204,"react-router":32}],230:[function(require,module,exports){
+},{"../components/sidenav.js":222,"../config/routes.js":225,"../constants/constants.js":226,"../dispatchers/AppDispatcher.js":227,"../stores/user_store.js":230,"events":1,"object-assign":7,"react":204,"react-router":32}],230:[function(require,module,exports){
 var SmallAppDispatcher = require('../dispatchers/AppDispatcher.js');
 var SmallConstants = require('../constants/constants.js');
 var EventEmitter = require('events').EventEmitter;
@@ -26156,6 +26211,7 @@ var _user =  {
                 "email": "",
                 "first_name": "",
                 "last_name": "",
+                "avatar_url": "",
                 "video_completed": false,
                 "sat_completed": false,
                 "insurance_completed": false,
@@ -26194,8 +26250,11 @@ UserStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
     
     case ActionTypes.RECEIVE_USER:
       _user = action.json;
+      console.log('RECEIVE_USER');
       UserStore.emitChange();
       break;
+
+
     
   }
 
@@ -26274,6 +26333,7 @@ module.exports = {
       .end(function(error, res){
         if (res) {
           json = JSON.parse(res.text);
+          console.log('loaded user');
           console.log(json);
           ServerActionCreators.receiveUser(json);
         }

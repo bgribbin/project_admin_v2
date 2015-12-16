@@ -1,3 +1,15 @@
+.comp-app-wrp {
+   top: 38px;
+   height: calc(100% - 58px);
+   width: calc(100% - 58px);
+   border-radius: 4px;
+   background-color: white;
+   box-shadow: 0 1px 1px 0 rgba(0,0,0,.06),0 2px 5px 0 rgba(0,0,0,.2);
+}
+.comp-main-cont {
+   height: 100%;
+   overflow: scroll;
+}
 .main_header {
    height: 50px;
    background-color: #D6DFE7;
@@ -9,20 +21,7 @@
    padding: 3rem;
 
 }
-.download-btn {
-   border-radius: 24px;
-   background-color: $main-blue;
-   a {
-      color: white;
-   }
-}
-.upload-btn {
-   border-radius: 24px;
-   background-color: $main-blue;
-   a {
-      color: white;
-   }
-}
+
 .btn-a {
    color: white;
 }
