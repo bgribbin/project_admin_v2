@@ -4,11 +4,6 @@
     margin: 0 auto;
 }
 
-.col-centered{
-    float: none;
-    margin: 0 auto;
-}
-
 $width-col: $width-max-content / 12;
 
 $offset-ratio: 1;
@@ -263,4 +258,9 @@ $offset-ratio: 1;
     .ro-lg-10 { padding-bottom: 10/12 * $perc-ratio-16x9; }
     .ro-lg-11 { padding-bottom: 11/12 * $perc-ratio-16x9; }
     .ro-lg-12 { padding-bottom: $perc-ratio-16x9; }
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
 }

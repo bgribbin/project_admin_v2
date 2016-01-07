@@ -365,10 +365,6 @@ th {
   .row:after {
     clear: both; }
 
-.col-centered {
-  float: none;
-  margin: 0 auto; }
-
 .col-1,
 .col-2,
 .col-3,
@@ -752,6 +748,10 @@ th {
   .ro-lg-12 {
     padding-bottom: 56.25%; } }
 
+.col-centered {
+  float: none;
+  margin: 0 auto; }
+
 .std-btn {
   appearance: none;
   background-color: #11aae3;
@@ -959,6 +959,9 @@ body {
 .btn-a {
   color: white; }
 
+.header {
+  text-align: center; }
+
 .task-content, .main-container {
   height: 100%;
   overflow: scroll;
@@ -1151,3 +1154,8 @@ span.true {
 .login {
   text-align: center;
   padding-top: 4rem; }
+
+.welcome {
+  margin-left: 1rem; }
+  .welcome .comp-wel-para {
+    font-size: 18px; }

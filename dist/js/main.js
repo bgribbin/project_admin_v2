@@ -25462,24 +25462,45 @@ var Main = React.createClass({displayName: "Main",
     var loggedok = (React.createElement("div", null, 
          React.createElement("div", {className: "header"}, 
              React.createElement("h1", null, "Athlete Admin Center"), 
-             React.createElement("h2", null, "Welcome to Future Elite Sports"), 
-             React.createElement("div", null, 
-               React.createElement("div", {className: "task-welcome"}, 
-               React.createElement("p", null, "Firstly I’d like to say welcome on board the Future Elite Scholarship Programme." + ' ' + 
-               "We are extremely excited to be involved in the next stage of your career."), 
-               React.createElement("p", null, 
-               "Everyone at Future Elite Sports has been through the US Scholarship process before and therefore understands how big a decision it is to leave friends and family in pursuit of your sporting and academic dreams. We will be with you before, during and after - supporting you throughout your time in the USA."), 
-               React.createElement("p", null, 
-               "We think it’s very important that each Future Elite Sports agent gets to know their clients’ needs in order to make the process as personalized as possible. Each client will be provided with their agent’s mobile number in order to contact them when they are out of the office - whether it’s advice on insurance, making that all important final decision or just to update them on a recent sporting result. They will be with you every step of the way."), 
-               React.createElement("p", null, 
-               "The process is fun and exciting and will become more real the further down the recruitment process you get."), 
-               React.createElement("p", null, 
-               "Finally we wish you all the best in this exciting period of your life. Take advantage of every opportunity you get offered in the USA, it’s a once in a lifetime opportunity that not everyone can boast to have done. You’ve already invested time, hard work and discipline to get where you’re now but it’s also important to stress the hard work starts today."), 
-               React.createElement("p", null, 
-               "I have attached a brief outline on the scholarship process, along with a CV template and a receipt for your payment.")
+             React.createElement("h2", null, "Welcome to Future Elite Sports")
+          ), 
+               React.createElement("div", {className: "welcome row col-f-12"}, 
+               React.createElement("div", {className: "col-9 col-centered"}, 
+               React.createElement("p", {className: "comp-wel-para"}, 
+               "Firstly I’d like to say welcome on board the Future Elite Scholarship Programme." + ' ' + 
+               "We are extremely excited to be involved in the next stage of your career."
+               ), 
+               React.createElement("p", {className: "comp-wel-para"}, 
+               "Everyone at Future Elite Sports has been through the US Scholarship process before" + ' ' +
+                "and therefore understands how big a decision it is to leave friends and family in" + ' ' +
+                 "pursuit of your sporting and academic dreams. We will be with you before," + ' ' +
+                  "during and after - supporting you throughout your time in the USA."
+                  ), 
+               React.createElement("p", {className: "comp-wel-para"}, 
+               "We think it’s very important that each Future Elite Sports agent gets to know their" + ' ' +
+                "clients’ needs in order to make the process as personalized as possible." + ' ' + 
+                "Each client will be provided with their agent’s mobile number in order to contact" + ' ' +
+                 "them when they are out of the office - whether it’s advice on insurance," + ' ' +
+                  "making that all important final decision or just to update them on a recent sporting result." + ' ' +
+                   "They will be with you every step of the way."
+              ), 
+               React.createElement("p", {className: "comp-wel-para"}, 
+               "The process is fun and exciting and will become more real the further down the recruitment" + ' ' +
+                "process you get."
+                ), 
+               React.createElement("p", {className: "comp-wel-para"}, 
+               "Finally we wish you all the best in this exciting period of your life." + ' ' +
+                "Take advantage of every opportunity you get offered in the USA," + ' ' + 
+                "it’s a once in a lifetime opportunity that not everyone can boast to have done." + ' ' + 
+                "You’ve already invested time, hard work and discipline to get where you’re now" + ' ' +
+                 "but it’s also important to stress the hard work starts today."
+                 ), 
+               React.createElement("p", {className: "comp-wel-para"}, 
+               "I have attached a brief outline on the scholarship process," + ' ' +
+                "along with a CV template and a receipt for your payment."
+                )
                )
-              )
-         )
+               )
       ));
 
     var loggedno = (React.createElement("div", null, 
