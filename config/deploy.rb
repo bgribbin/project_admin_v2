@@ -21,7 +21,7 @@ require 'mina/bundler'
      task :deploy do
        deploy do
          invoke :'git:clone'
-         invoke :'npm:install'
+         queue! %[npm install]
 
          to :launch do
            queue 'npm start'
