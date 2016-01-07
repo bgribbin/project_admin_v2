@@ -12,7 +12,9 @@ require 'mina/bundler'
     set :deploy_to, '/home/deployer/project_admin_frontent'
     set :repository, 'https://bgribbin@bitbucket.org/bgribbin/project_admin_frontent.git'
     set :user, 'deployer'
-    set :port, '3001'
+    #set :port, '3001'
+
+    set :term_mode, nil
 
     desc "Deploys the current version to the server."
      task :deploy do
@@ -26,13 +28,13 @@ require 'mina/bundler'
     end
 
     task :start do
-     queue %[cd #{deploy_to} && npm install && npm build && npm start]
+     queue %[cd #{deploy_to}/current && npm install && npm build && npm start]
     end
 
     task :restart do
-     queue %[cd #{deploy_to} && npm install && npm build && npm start]
+     queue %[cd #{deploy_to}/current && npm install && npm build && npm start]
     end
 
     task :stop do
-      queue %[cd #{deploy_to} && npm install && npm build && npm start]
+      queue %[cd #{deploy_to}/current && npm install && npm build && npm start]
     end
