@@ -1,6 +1,7 @@
 require 'mina/bundler'
     require 'mina/rails'
     require 'mina/git'
+    require 'mina/npm'
 
     # Basic settings:
     # domain     - The hostname to SSH to
@@ -20,8 +21,8 @@ require 'mina/bundler'
      task :deploy do
        deploy do
          invoke :'git:clone'
-         invoke :'npm install'
-         invoke :'npm build'
+         invoke :'npm:install'
+
          to :launch do
            queue 'npm start'
          end
