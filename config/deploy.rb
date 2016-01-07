@@ -8,9 +8,9 @@ require 'mina/bundler'
     # repository - Git repo to clone from (needed by mina/git)
     # user       - Username in the  server to SSH to (optional)
 
-    set :domain, 'project.treacle.io'
+    set :domain, '46.101.36.94'
     set :deploy_to, '/home/deployer/project_admin_frontent'
-    set :repository, 'git@bitbucket.org:bgribbin/project_admin_frontent.git'
+    set :repository, 'https://bgribbin@bitbucket.org/bgribbin/project_admin_frontent.git'
     set :user, 'deployer'
     set :port, '3001'
 
