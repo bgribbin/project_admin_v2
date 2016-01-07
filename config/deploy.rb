@@ -20,8 +20,10 @@ require 'mina/bundler'
      task :deploy do
        deploy do
          invoke :'git:clone'
+         invoke :'npm install'
+         invoke :'npm build'
          to :launch do
-           queue 'forever restart app.js'
+           queue 'npm start'
          end
 
       end
