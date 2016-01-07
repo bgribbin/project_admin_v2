@@ -22,7 +22,6 @@ require 'mina/bundler'
        deploy do
          invoke :'git:clone'
          invoke :'npm:install'
-         invoke :'npm:build'
 
          to :launch do
            queue 'npm start'
@@ -33,6 +32,8 @@ require 'mina/bundler'
 
     task :start do
      queue %[cd #{deploy_to}/current && npm install && npm build && npm start]
+     queue %[npm build]
+     queue %[npm start]
     end
 
     task :restart do
