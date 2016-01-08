@@ -24,6 +24,7 @@ require 'mina/bundler'
          invoke :'npm:install'
 
          to :launch do
+           queue 'npm build'
            queue 'npm start'
          end
 
@@ -31,9 +32,9 @@ require 'mina/bundler'
     end
 
     task :start do
-     queue %[cd #{deploy_to}/current && npm install && npm build && npm start]
+     queue %[cd #{deploy_to}/current]
      queue %[npm build]
-     queue %[npm start]
+
     end
 
     task :restart do
