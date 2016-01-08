@@ -31,7 +31,8 @@
   "devDependencies": {},
   "scripts": {
     "build": "gulp build",
-    "start": "forever start server.js"
+    "start": "forever start server.js",
+    "stop": "forever stop server.js"
   },
   "engines": {
     "node": "4.1.2"

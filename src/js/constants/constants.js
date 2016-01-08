@@ -1,6 +1,6 @@
 var keyMirror = require('keymirror');
 
-var APIRoot = "http://project.treacle.io";
+var APIRoot = "http://api.treacle.io";
 
 module.exports = {
 
