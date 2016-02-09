@@ -8,8 +8,7 @@ var Profile = React.createClass({
 
    getInitialState: function() {
       var user = UserStore.getUser();
-      console.log('user:');
-      console.log(user);
+
       UserStore.addChangeListener(this._onChange);
     return { 
       user: user, 
@@ -90,7 +89,7 @@ var Profile = React.createClass({
           <div className="profile-view-wrapper row col-f-6">
 
           <div className="profile-header col-12">
-            <h2>Profile</h2>
+            <h2 className="profile-title">Profile</h2>
           </div>
                
                <div className="profile-left col-12">

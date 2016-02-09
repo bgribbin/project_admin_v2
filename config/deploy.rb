@@ -42,5 +42,5 @@ require 'mina/bundler'
     end
 
     task :stop do
-      queue %[cd #{deploy_to}/current && npm stop]
+      queue %[cd #{deploy_to}/current && pwd]
     end

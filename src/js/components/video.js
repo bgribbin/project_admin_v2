@@ -16,8 +16,9 @@ var Video = React.createClass({
          It's important to spend time collecting quality footage as it
          can be the difference between a 50% and a 75% scholarship offer.</p>
          </div>
-        <Completed_form task={"video"} />
+        
       </div>
+      <Completed_form task={"video"} />
     )
   }
 });
