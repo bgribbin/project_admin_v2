@@ -18,7 +18,7 @@
 }
 
 .std-btn {
-   border: 2px solid $blue;
+
    background-color: $blue;
    border-radius: 18px;
    color: white;
@@ -27,7 +27,7 @@
    font-weight: 400;
 
    &:hover {
-      background-color: white;
+      background-color: #dedede;
       color: $blue;
       transition: all 0.3s ease;
    }

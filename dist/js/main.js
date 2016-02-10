@@ -24373,26 +24373,15 @@ Request.prototype.field = function(name, val){
 
 Request.prototype.attach = function(field, file, filename){
   if (!this._formData) this._formData = new root.FormData();
-  this._formData.append(field, file, filename);
+  this._formData.append(field, file, filename || file.name);
   return this;
 };
 
 /**
- * Send `data`, defaulting the `.type()` to "json" when
+ * Send `data` as the request body, defaulting the `.type()` to "json" when
  * an object is given.
  *
  * Examples:
- *
- *       // querystring
- *       request.get('/search')
- *         .end(callback)
- *
- *       // multiple data "writes"
- *       request.get('/search')
- *         .send({ search: 'query' })
- *         .send({ range: '1..5' })
- *         .send({ order: 'desc' })
- *         .end(callback)
  *
  *       // manual json
  *       request.post('/user')
@@ -24558,6 +24547,7 @@ Request.prototype.end = function(fn){
     if (e.total > 0) {
       e.percent = e.loaded / e.total * 100;
     }
+    e.direction = 'download';
     self.emit('progress', e);
   };
   if (this.hasListeners('progress')) {
@@ -24719,8 +24709,8 @@ function del(url, fn){
   return req;
 };
 
-request.del = del;
-request.delete = del;
+request['del'] = del;
+request['delete'] = del;
 
 /**
  * PATCH `url` with optional `data` and callback `fn(res)`.
@@ -24827,7 +24817,7 @@ function mixin(obj) {
 Emitter.prototype.on =
 Emitter.prototype.addEventListener = function(event, fn){
   this._callbacks = this._callbacks || {};
-  (this._callbacks[event] = this._callbacks[event] || [])
+  (this._callbacks['$' + event] = this._callbacks['$' + event] || [])
     .push(fn);
   return this;
 };
@@ -24843,11 +24833,8 @@ Emitter.prototype.addEventListener = function(event, fn){
  */
 
 Emitter.prototype.once = function(event, fn){
-  var self = this;
-  this._callbacks = this._callbacks || {};
-
   function on() {
-    self.off(event, on);
+    this.off(event, on);
     fn.apply(this, arguments);
   }
 
@@ -24879,12 +24866,12 @@ Emitter.prototype.removeEventListener = function(event, fn){
   }
 
   // specific event
-  var callbacks = this._callbacks[event];
+  var callbacks = this._callbacks['$' + event];
   if (!callbacks) return this;
 
   // remove all handlers
   if (1 == arguments.length) {
-    delete this._callbacks[event];
+    delete this._callbacks['$' + event];
     return this;
   }
 
@@ -24911,7 +24898,7 @@ Emitter.prototype.removeEventListener = function(event, fn){
 Emitter.prototype.emit = function(event){
   this._callbacks = this._callbacks || {};
   var args = [].slice.call(arguments, 1)
-    , callbacks = this._callbacks[event];
+    , callbacks = this._callbacks['$' + event];
 
   if (callbacks) {
     callbacks = callbacks.slice(0);
@@ -24933,7 +24920,7 @@ Emitter.prototype.emit = function(event){
 
 Emitter.prototype.listeners = function(event){
   this._callbacks = this._callbacks || {};
-  return this._callbacks[event] || [];
+  return this._callbacks['$' + event] || [];
 };
 
 /**
@@ -25265,12 +25252,12 @@ var Completed_form = require('../components/completed_form.js');
 var Eligability = React.createClass({displayName: "Eligability",
 
    getInitialState: function() {
-    return { 
-      user: UserStore.getUser(), 
+    return {
+      user: UserStore.getUser(),
       errors: []
     };
   },
- 
+
   componentDidMount: function() {
     UserStore.addChangeListener(this._onChange);
     UserActions.loadUser();
@@ -25281,10 +25268,10 @@ var Eligability = React.createClass({displayName: "Eligability",
   },
 
   _onChange: function() {
-    this.setState({ 
+    this.setState({
       user: UserStore.getUser(),
       errors: UserStore.getErrors()
-    }); 
+    });
   },
    render: function() {
       return (
@@ -25294,7 +25281,7 @@ var Eligability = React.createClass({displayName: "Eligability",
             React.createElement("hr", null)
           ), 
             React.createElement("div", {className: "task-text"}, 
-              React.createElement("p", null, "The Eligibility Centre is something that all students that wish to study out in America have to complete in order to be deemed to be of ‘amateur’ status and therefore no professionals." + ' ' + 
+              React.createElement("p", null, "The Eligibility Centre is something that all students that wish to study out in America have to complete in order to be deemed to be of ‘amateur’ status and therefore no professionals." + ' ' +
               "Further from our conversation, attached is a ‘how to guide’ for the NAIA Eligibility Centre."), 
 
               React.createElement("h4", null, "STEPS"), 
@@ -25309,25 +25296,25 @@ var Eligability = React.createClass({displayName: "Eligability",
                 React.createElement("p", {className: "step-para"}, " Create an account by clicking on 'Register to play' www.playnaia.org")
               ), 
 
-                 React.createElement("div", {className: "step-cont"}, 
-                  React.createElement("p", {className: "step-number"}, "3 "), 
-                  React.createElement("p", {className: "step-para"}, " Please refer to the  PDF as a reference point when answering these questions. ")
-                ), 
+              React.createElement("div", {className: "step-cont"}, 
+                React.createElement("p", {className: "step-number"}, "3 "), 
+                React.createElement("p", {className: "step-para"}, " Please refer to the  PDF as a reference point when answering these questions. ")
+              ), 
 
-                   React.createElement("div", {className: "step-cont"}, 
-                  React.createElement("p", {className: "step-number"}, "4 "), 
-                  React.createElement("p", {className: "step-para"}, " The main question to be careful of is 'Have you played for anyone since leaving high school or from the age of 19'" + ' ' +
+              React.createElement("div", {className: "step-cont"}, 
+                React.createElement("p", {className: "step-number"}, "4 "), 
+                React.createElement("p", {className: "step-para"}, " The main question to be careful of is 'Have you played for anyone since leaving high school or from the age of 19'" + ' ' +
                     "The answer to this questions is 'NO' as high school in the USA is until 18.")
-                ), 
+              ), 
 
-                React.createElement("div", {className: "step-cont"}, 
-                  React.createElement("p", {className: "step-number"}, "5 "), 
-                  React.createElement("p", {className: "step-para"}, " Contact your FES agent once you have completed the registration process. They will then discuss your list of tasks in greater detail.")
-                )
+              React.createElement("div", {className: "step-cont"}, 
+                React.createElement("p", {className: "step-number"}, "5 "), 
+                React.createElement("p", {className: "step-para"}, " Contact your FES agent once you have completed the registration process. They will then discuss your list of tasks in greater detail.")
+              )
 
             ), 
 
-          React.createElement(Completed_form, {task: "eligability"})
+            React.createElement(Completed_form, {task: "eligability"})
         )
       );
    }
@@ -25443,7 +25430,7 @@ var LoginPage = React.createClass({displayName: "LoginPage",
 
    var errors = (this.state.errors.length > 0) ? React.createElement("div", null, this.state.errors) : React.createElement("div", null);
     return (
-      React.createElement("div", {className: "main-container col-9"}, 
+      React.createElement("div", {className: "main-container col-12"}, 
         errors, 
         React.createElement("div", {className: "login"}, 
           React.createElement("div", {className: ""}, 
@@ -25456,9 +25443,10 @@ var LoginPage = React.createClass({displayName: "LoginPage",
                 React.createElement("label", {name: "password"}, "Password"), 
                 React.createElement("input", {type: "password", name: "password", ref: "password"})
               ), 
-              React.createElement("button", {type: "submit", className: "card--login__submit"}, "Login")
+              React.createElement("input", {type: "submit", className: "card--login__submit", value: "Login"})
             )
           )
+
         )
       )
     );
@@ -25614,8 +25602,8 @@ var Profile = React.createClass({displayName: "Profile",
       var user = UserStore.getUser();
 
       UserStore.addChangeListener(this._onChange);
-    return { 
-      user: user, 
+    return {
+      user: user,
       errors: [],
       first_name: user.first_name,
       last_name: user.last_name,
@@ -25625,7 +25613,7 @@ var Profile = React.createClass({displayName: "Profile",
       data_uri: null
     };
   },
- 
+
   componentDidMount: function() {
     UserActions.loadUser();
     UserStore.addChangeListener(this._onChange);
@@ -25637,27 +25625,23 @@ var Profile = React.createClass({displayName: "Profile",
 
   _onChange: function() {
     var user = UserStore.getUser();
-    this.setState({ 
-      user: user, 
+    this.setState({
+      user: user,
       errors: [],
       first_name: user.first_name,
       last_name: user.last_name,
       dob: user.dob,
       sport: user.sport,
       avatar_url: user.avatar_url
-    }); 
+    });
   },
+
   _handleChange: function(e) {
-
     var state = {}
-    console.log(e.target.name);
-
     state[e.target.name] =  e.target.value;
-
-    console.log(state);
     this.setState(state);
-    console.log(this.state);
   },
+
   _handleFile: function(e) {
     var self = this;
     var reader = new FileReader();
@@ -25671,6 +25655,7 @@ var Profile = React.createClass({displayName: "Profile",
 
     reader.readAsDataURL(file);
   },
+
   _onSubmit: function(e) {
     e.preventDefault();
     this.setState({ errors: [] });
@@ -25681,11 +25666,10 @@ var Profile = React.createClass({displayName: "Profile",
       sport: this.state.sport,
       avatar: this.state.data_uri
     };
-    console.log('attributes:');
-    console.log(attributes);
     UserActions.updateUserProfile(attributes);
     UserActions.loadUser();
   },
+
    render: function() {
       return (
 
@@ -25695,14 +25679,14 @@ var Profile = React.createClass({displayName: "Profile",
           React.createElement("div", {className: "profile-header col-12"}, 
             React.createElement("h2", {className: "profile-title"}, "Profile")
           ), 
-               
+
                React.createElement("div", {className: "profile-left col-12"}, 
 
                 React.createElement("img", {src:  APIRoot + this.state.avatar_url, className: "profile-img"})
                ), 
 
           React.createElement("form", {className: "profile-form col-12", onSubmit: this._onSubmit}, 
-            
+
 
             React.createElement("div", {className: "form-dob col-12"}, 
             React.createElement("label", null, "Profile Image"), 
@@ -25725,8 +25709,8 @@ var Profile = React.createClass({displayName: "Profile",
                    value: this.state.last_name, 
                    name: "last_name", 
                    onChange: this._handleChange})
-         
-         
+
+
             ), 
             React.createElement("div", {className: "form-dob col-12"}, 
             React.createElement("label", null, "Date of birth"), 
@@ -25918,18 +25902,20 @@ var Completed_form = require('../components/completed_form.js');
 var Video = React.createClass({displayName: "Video",
   render: function(){
     return (
+      React.createElement("div", null, 
+        React.createElement("div", {className: "task-content"}, 
+           React.createElement("div", {className: "title"}, 
+              React.createElement("h1", null, "Video footage")
+           ), 
+           React.createElement("div", {className: "task-text"}, 
+              React.createElement("p", null, "Video footage makes up a large section of your profile." + ' ' +
+              "The sooner you can gather footage or register for a video day," + ' ' +
+               "the sooner we can get you speaking with coaches." + ' ' +
+               "It's important to spend time collecting quality footage as it" + ' ' +
+               "can be the difference between a 50% and a 75% scholarship offer.")
+           )
 
-      React.createElement("div", {className: "task-content"}, 
-         React.createElement("div", {className: "title"}, 
-            React.createElement("h1", null, "Video footage")
-         ), 
-         React.createElement("div", {className: "task-text"}, 
-        React.createElement("p", null, "Video footage makes up a large section of your profile." + ' ' + 
-        "The sooner you can gather footage or register for a video day," + ' ' +
-         "the sooner we can get you speaking with coaches." + ' ' + 
-         "It's important to spend time collecting quality footage as it" + ' ' +
-         "can be the difference between a 50% and a 75% scholarship offer.")
-         ), 
+        ), 
         React.createElement(Completed_form, {task: "video"})
       )
     )
@@ -26082,7 +26068,7 @@ var APIRoot = "http://api.treacle.io";
 
 module.exports = {
 
-  
+
 
   APIEndpoints: {
     LOGIN:          APIRoot + "/v1/login",

@@ -752,7 +752,7 @@ th {
   float: none;
   margin: 0 auto; }
 
-.std-btn {
+.std-btn, input[type="submit"] {
   appearance: none;
   background-color: #11aae3;
   border: 0;
@@ -770,16 +770,15 @@ th {
 .completed-btn {
   border-radius: 26px; }
 
-.std-btn {
-  border: 2px solid #11aae3;
+.std-btn, input[type="submit"] {
   background-color: #11aae3;
   border-radius: 18px;
   color: white;
   line-height: 1;
   padding: 0.5rem 1rem;
   font-weight: 400; }
-  .std-btn:hover {
-    background-color: white;
+  .std-btn:hover, input[type="submit"]:hover {
+    background-color: #dedede;
     color: #11aae3;
     transition: all 0.3s ease; }
 
@@ -968,12 +967,29 @@ body {
   color: white; }
 
 .header {
-  text-align: center; }
+  text-align: center;
+  padding-top: 50px; }
+  .header h1 {
+    margin: 0;
+    margin-top: 12px; }
+  .header h2 {
+    color: #dedede;
+    font-size: 16px;
+    font-weight: 300; }
 
-.title {
-  background-color: #f2f2f2; }
-  .title h1 {
-    color: #11aae3; }
+.title h1 {
+  color: #11aae3;
+  margin: 0;
+  margin-top: 12px; }
+
+.title hr {
+  width: 60%;
+  margin: 0 auto;
+  border: 1px solid #dedede; }
+
+.step-cont {
+  display: inline-block;
+  margin: 12px 0px; }
 
 .task-content, .main-container {
   height: 100%;

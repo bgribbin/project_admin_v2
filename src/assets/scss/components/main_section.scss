@@ -31,11 +31,36 @@
 
 .header {
    text-align: center;
+   padding-top: 50px;
+   h1 {
+     margin: 0;
+     margin-top: 12px;
+
+   }
+   h2 {
+     color: #dedede;
+     font-size: 16px;
+     font-weight: 300;
+   }
+
 }
 
 .title {
-   background-color: $color-gray-3;
+
    h1 {
       color: $blue;
+      margin: 0;
+      margin-top: 12px;
    }
+
+   hr {
+     width: 60%;
+     margin: 0 auto;
+     border: 1px solid #dedede;
+   }
+}
+
+.step-cont {
+  display: inline-block;
+  margin: 12px 0px;
 }

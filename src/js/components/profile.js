@@ -10,8 +10,8 @@ var Profile = React.createClass({
       var user = UserStore.getUser();
 
       UserStore.addChangeListener(this._onChange);
-    return { 
-      user: user, 
+    return {
+      user: user,
       errors: [],
       first_name: user.first_name,
       last_name: user.last_name,
@@ -21,7 +21,7 @@ var Profile = React.createClass({
       data_uri: null
     };
   },
- 
+
   componentDidMount: function() {
     UserActions.loadUser();
     UserStore.addChangeListener(this._onChange);
@@ -33,27 +33,23 @@ var Profile = React.createClass({
 
   _onChange: function() {
     var user = UserStore.getUser();
-    this.setState({ 
-      user: user, 
+    this.setState({
+      user: user,
       errors: [],
       first_name: user.first_name,
       last_name: user.last_name,
       dob: user.dob,
       sport: user.sport,
       avatar_url: user.avatar_url
-    }); 
+    });
   },
+
   _handleChange: function(e) {
-
     var state = {}
-    console.log(e.target.name);
-
     state[e.target.name] =  e.target.value;
-
-    console.log(state);
     this.setState(state);
-    console.log(this.state);
   },
+
   _handleFile: function(e) {
     var self = this;
     var reader = new FileReader();
@@ -67,6 +63,7 @@ var Profile = React.createClass({
 
     reader.readAsDataURL(file);
   },
+
   _onSubmit: function(e) {
     e.preventDefault();
     this.setState({ errors: [] });
@@ -77,11 +74,10 @@ var Profile = React.createClass({
       sport: this.state.sport,
       avatar: this.state.data_uri
     };
-    console.log('attributes:');
-    console.log(attributes);
     UserActions.updateUserProfile(attributes);
     UserActions.loadUser();
   },
+
    render: function() {
       return (
 
@@ -91,14 +87,14 @@ var Profile = React.createClass({
           <div className="profile-header col-12">
             <h2 className="profile-title">Profile</h2>
           </div>
-               
+
                <div className="profile-left col-12">
 
                 <img src={ APIRoot + this.state.avatar_url} className="profile-img" />
                </div>
 
           <form className="profile-form col-12" onSubmit={this._onSubmit}>
-            
+
 
             <div className="form-dob col-12">
             <label>Profile Image</label>
@@ -109,33 +105,33 @@ var Profile = React.createClass({
             <div className="form-name col-6">
               <label>First Name</label>
 
-              <input type="text" 
-                     value={this.state.first_name} 
-                     name="first_name" 
+              <input type="text"
+                     value={this.state.first_name}
+                     name="first_name"
                      onChange={this._handleChange} />
             </div>
 
             <div className="form-name col-6">
             <label>Last Name</label>
-            <input type="text" 
-                   value={this.state.last_name} 
+            <input type="text"
+                   value={this.state.last_name}
                    name="last_name"
                    onChange={this._handleChange} />
-         
-         
+
+
             </div>
             <div className="form-dob col-12">
             <label>Date of birth</label>
-            <input type="date" 
-                   value={this.state.dob} 
+            <input type="date"
+                   value={this.state.dob}
                    name="dob"
                    onChange={this._handleChange} />
             </div>
 
             <div className="form-sport col-12">
             <label>Sport</label>
-            <input type="text" 
-                   value={this.state.sport} 
+            <input type="text"
+                   value={this.state.sport}
                    name="sport"
                    onChange={this._handleChange} />
             </div>

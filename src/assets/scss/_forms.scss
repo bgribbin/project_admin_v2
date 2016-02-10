@@ -2,6 +2,10 @@ form {
 
 }
 
+input[type="submit"] {
+  @extend .std-btn;
+}
+
 .confirm-form {
   position: relative;
   bottom: 0;
@@ -62,5 +66,5 @@ input {
   input {
     text-align: left;
   }
-  
+
 }
