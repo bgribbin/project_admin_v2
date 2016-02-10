@@ -24,7 +24,7 @@ require 'mina/bundler'
          invoke :'npm:install'
 
          to :launch do
-           queue 'gulp build'
+           queue 'gulp clean && gulp build'
            queue 'npm start'
          end
 

@@ -30,7 +30,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "build": "gulp build",
+    "build": "gulp clean && gulp build",
     "start": "forever start server.js",
     "stop": "forever stop server.js"
   },
