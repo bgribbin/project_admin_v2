@@ -29,6 +29,7 @@ var Visa = React.createClass({
   },
    render: function() {
       return (
+        <div>
          <div className="task-content">
 
          <div className="title">
@@ -92,7 +93,9 @@ var Visa = React.createClass({
 
           <p>- You will be asked a series of questions about why you want to study in the USA. The link below discussed the type of questions you will face in the day. Examples of Visa Questions (Please Click)</p>
   </div>
-          <Completed_form task={"visa"} />
+          
+         </div>
+         <Completed_form task={"visa"} />
          </div>
       );
    }

@@ -130,10 +130,12 @@ var Profile = React.createClass({
 
             <div className="form-sport col-12">
             <label>Sport</label>
-            <input type="text"
-                   value={this.state.sport}
-                   name="sport"
-                   onChange={this._handleChange} />
+            <select value={'1'} onChange={this._handleChange} >
+              <option value="1">Football</option>
+              <option value="2">Swimming</option>
+              <option value="3">Rugby</option>
+              <option value="4">Tennis</option>
+            </select>
             </div>
 
             <button className="std-btn">Update</button>
