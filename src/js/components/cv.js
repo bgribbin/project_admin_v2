@@ -6,12 +6,12 @@ var Completed_form = require('../components/completed_form.js');
 var CV = React.createClass({
 
    getInitialState: function() {
-    return { 
-      user: UserStore.getUser(), 
+    return {
+      user: UserStore.getUser(),
       errors: []
     };
   },
- 
+
   componentDidMount: function() {
     UserStore.addChangeListener(this._onChange);
     UserActions.loadUser();
@@ -22,13 +22,14 @@ var CV = React.createClass({
   },
 
   _onChange: function() {
-    this.setState({ 
+    this.setState({
       user: UserStore.getUser(),
       errors: UserStore.getErrors()
-    }); 
+    });
   },
    render: function() {
       return (
+         <div>
          <div className="task-content">
          <div className="title">
             <h1 className="">Sports CV</h1>
@@ -48,9 +49,7 @@ var CV = React.createClass({
            <button className="std-btn upload-btn"><a className="btn-a" href="https://www.dropbox.com/request/nXUQO5DMSoknWSooJ6jF">Upload your CV</a></button>
            </div>
          </div>
-
-         
-
+         </div>
          <Completed_form task={"cv"} />
          </div>
       );

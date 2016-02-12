@@ -17,6 +17,7 @@ var Profile = React.createClass({
       last_name: user.last_name,
       dob: user.dob,
       sport: user.first_name,
+      sport_id: user.sport_id,
       avatar_url: user.avatar_url,
       data_uri: null
     };
@@ -40,11 +41,13 @@ var Profile = React.createClass({
       last_name: user.last_name,
       dob: user.dob,
       sport: user.sport,
+      sport_id: user.sport_id,
       avatar_url: user.avatar_url
     });
   },
 
   _handleChange: function(e) {
+    console.log(e.target)
     var state = {}
     state[e.target.name] =  e.target.value;
     this.setState(state);
@@ -72,6 +75,7 @@ var Profile = React.createClass({
       last_name: this.state.last_name,
       dob: this.state.dob,
       sport: this.state.sport,
+      sport_id: this.state.sport_id,
       avatar: this.state.data_uri
     };
     UserActions.updateUserProfile(attributes);
@@ -130,7 +134,7 @@ var Profile = React.createClass({
 
             <div className="form-sport col-12">
             <label>Sport</label>
-            <select value={'1'} onChange={this._handleChange} >
+            <select value={this.state.sport_id} onChange={this._handleChange} name="sport_id" >
               <option value="1">Football</option>
               <option value="2">Swimming</option>
               <option value="3">Rugby</option>

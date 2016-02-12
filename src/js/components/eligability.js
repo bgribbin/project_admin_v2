@@ -29,6 +29,7 @@ var Eligability = React.createClass({
   },
    render: function() {
       return (
+        <div>
          <div className="task-content">
           <div className="title">
             <h1>NAIA Registration</h1>
@@ -67,7 +68,7 @@ var Eligability = React.createClass({
               </div>
 
             </div>
-
+            </div>
             <Completed_form task={"eligability"} />
         </div>
       );

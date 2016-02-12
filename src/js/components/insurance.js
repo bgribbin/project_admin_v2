@@ -6,12 +6,12 @@ var Completed_form = require('../components/completed_form.js');
 var Insurance = React.createClass({
 
    getInitialState: function() {
-    return { 
-      user: UserStore.getUser(), 
+    return {
+      user: UserStore.getUser(),
       errors: []
     };
   },
- 
+
   componentDidMount: function() {
     UserStore.addChangeListener(this._onChange);
     UserActions.loadUser();
@@ -23,10 +23,10 @@ var Insurance = React.createClass({
   },
 
   _onChange: function() {
-    this.setState({ 
+    this.setState({
       user: UserStore.getUser(),
       errors: UserStore.getErrors()
-    }); 
+    });
   },
   _onSubmit: function(e) {
     e.preventDefault();
@@ -42,7 +42,7 @@ var Insurance = React.createClass({
          <div>
            <div className="task-content">
              <div className="title">
-             <h2>Insurance</h2>
+             <h1>Insurance</h1>
              </div>
            </div>
            <Completed_form task={"insurance"} />

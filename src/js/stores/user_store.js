@@ -15,6 +15,7 @@ var _user =  {
                 "first_name": "",
                 "last_name": "",
                 "avatar_url": "",
+                "sport_id": 1,
                 "video_completed": false,
                 "sat_completed": false,
                 "insurance_completed": false,
@@ -50,7 +51,7 @@ UserStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
   var action = payload.action;
 
   switch(action.type) {
-    
+
     case ActionTypes.RECEIVE_USER:
       _user = action.json;
       console.log('RECEIVE_USER');
@@ -58,11 +59,10 @@ UserStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
       break;
 
 
-    
+
   }
 
   return true;
 });
 
 module.exports = UserStore;
-

@@ -6,12 +6,12 @@ var Completed_form = require('../components/completed_form.js');
 var Sat = React.createClass({
 
    getInitialState: function() {
-    return { 
-      user: UserStore.getUser(), 
+    return {
+      user: UserStore.getUser(),
       errors: []
     };
   },
- 
+
   componentDidMount: function() {
     UserStore.addChangeListener(this._onChange);
     UserActions.loadUser();
@@ -22,31 +22,32 @@ var Sat = React.createClass({
   },
 
   _onChange: function() {
-    this.setState({ 
+    this.setState({
       user: UserStore.getUser(),
       errors: UserStore.getErrors()
-    }); 
+    });
   },
 
-  
+
    render: function() {
 
       var isChecked = this.state.user.sat_completed;
       var checked = isChecked? 'checked' : '';
       return (
+        <div>
          <div className="task-content">
            <div className="title">
             <h1>Test Scores</h1>
            </div>
 
-           <div className="type-system-rounded">
-           <h1>This is the title</h1> 
-           <p> This is where the content will go</p>
-           <p> This is where the content will go</p>
-           <p> This is where the content will go</p>
+           <div className="task-text">
+           <p> This is where the test scores will go</p>
+
            </div>
-         <Completed_form task={"sat"} checked={checked} />
+
          </div>
+         <Completed_form task={"sat"} checked={checked} />
+       </div>
       );
    }
 

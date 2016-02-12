@@ -1,8 +1,11 @@
 .task-content, .main-container {
    overflow: scroll;
-   position: relative;
+   position: absolute;
+   height: 100%;
+   width: 100%;
+   margin-bottom: 100px;
    .title {
-      text-align: center; 
+      text-align: center;
       width: 100%;
       margin-left: -5%;
       padding-left: 5%;
@@ -48,7 +51,7 @@
   width: 70%;
   margin-left: 10%;
   text-align: left;
-  
+
   h1, h2, h3, p {
     margin: 0;
   }
