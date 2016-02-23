@@ -1,6 +1,13 @@
 var keyMirror = require('keymirror');
 
-var APIRoot = "http://api.treacle.io";
+// if (process.env.NODE_ENV == 'production') {
+//   var APIRoot = process.env.BACK_END_PROD
+// }
+// else {
+//   var APIRoot = process.env.BACK_END_DEV
+// }
+
+var APIRoot = 'http://api.treacle.io'
 
 module.exports = {
 

@@ -1,7 +1,7 @@
 /*@import url(https://fonts.googleapis.com/css?family=Muli:400,300);*/
 
 body {
-  color: $base-font-color;
+  color: white;
   font-family: $base-font-family;
   font-feature-settings: "kern", "liga", "pnum";
   font-size: $base-font-size;
@@ -12,7 +12,7 @@ h1,h2,h3,h4,h5,h6 {
   font-family: $heading-font-family;
   line-height: $heading-line-height;
   margin: 0 0 $small-spacing;
-  font-weight: 500;
+  font-weight: 400;
   /*color: $medium-gray;*/
 }
 h1 {

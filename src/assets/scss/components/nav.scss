@@ -1,5 +1,5 @@
 span {
-   
+
    &.false {
    background: url('/assets/images/nope.png') no-repeat;
    background-size: cover;
@@ -26,7 +26,7 @@ span {
 .comp-side-nav {
 
    height: 100%;
-   background-color: $main-blue;
+   background-color: rgba(0,0,0,0.2);
    overflow: scroll;
    border-bottom-left-radius: 4px;
    border-top-left-radius: 4px;
@@ -176,13 +176,13 @@ span {
 .pure-menu-active > .pure-menu-link,
 .pure-menu-link:hover,
 .pure-menu-link:focus {
-    background-color: $color-white-trans;
-    color: #125688;
+    background-color: rgba(0,0,0,0.2);
+    color: white;
 }
 
 .pure-menu-selected .pure-menu-link,
 .pure-menu-selected .pure-menu-link:visited {
-    background-color: #fafafa;
-    color: #125688;
+    background-color: rgba(0,0,0,0.2);
+    color: white;
     font-weight: 300;
 }
