@@ -8,10 +8,10 @@ input[type="submit"] {
 
 .confirm-form {
   position: absolute;
-  bottom: -100px;
+  bottom: 0px;
   width: 100%;
   text-align: center;
-  background-color: $color-gray-3;
+  background-color: rgba(255,255,255,0.4);
 
 }
 fieldset {

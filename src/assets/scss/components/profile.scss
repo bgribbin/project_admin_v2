@@ -1,7 +1,7 @@
 .task-content, .main-container {
    overflow: scroll;
    position: absolute;
-   height: 100%;
+   height: calc(100% - 100px);
    width: 100%;
    margin-bottom: 100px;
    .title {
