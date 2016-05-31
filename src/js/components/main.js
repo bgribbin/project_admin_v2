@@ -14,7 +14,7 @@ function getStateFromStores() {
 }
 
 var Main = React.createClass({
-  
+
   getInitialState: function() {
     return getStateFromStores();
   },
@@ -33,15 +33,17 @@ var Main = React.createClass({
 
   render: function () {
 
-    var loggedok = (<div>
+    var loggedok = (
+      <div>
          <div className="header">
              <h1>Athlete Admin Center</h1>
              <h2>Welcome to Future Elite Sports</h2>
+             <br/>
           </div>
                <div className="welcome row col-f-12">
                <div className="col-9 col-centered">
                <p className="comp-wel-para">
-               Firstly I’d like to say welcome on board the Future Elite Scholarship Programme. 
+               Firstly I’d like to say welcome on board the Future Elite Scholarship Programme.
                We are extremely excited to be involved in the next stage of your career.
                </p>
                <p className="comp-wel-para">
@@ -52,7 +54,7 @@ var Main = React.createClass({
                   </p>
                <p className="comp-wel-para">
                We think it’s very important that each Future Elite Sports agent gets to know their
-                clients’ needs in order to make the process as personalized as possible. 
+                clients’ needs in order to make the process as personalized as possible.
                 Each client will be provided with their agent’s mobile number in order to contact
                  them when they are out of the office - whether it’s advice on insurance,
                   making that all important final decision or just to update them on a recent sporting result.
@@ -64,8 +66,8 @@ var Main = React.createClass({
                 </p>
                <p className="comp-wel-para">
                Finally we wish you all the best in this exciting period of your life.
-                Take advantage of every opportunity you get offered in the USA, 
-                it’s a once in a lifetime opportunity that not everyone can boast to have done. 
+                Take advantage of every opportunity you get offered in the USA,
+                it’s a once in a lifetime opportunity that not everyone can boast to have done.
                 You’ve already invested time, hard work and discipline to get where you’re now
                  but it’s also important to stress the hard work starts today.
                  </p>
@@ -75,28 +77,28 @@ var Main = React.createClass({
                 </p>
                </div>
                </div>
-      </div>);
+      </div>
+    );
 
-    var loggedno = (<div>
+    var loggedno = (
+      <div>
         <div className="header">
             <h1>Athlete Admin Center</h1>
             <h2>Welcome to Future Elite Sports</h2>
             <Login />
         </div>
-      </div>);
+      </div>
+    );
 
     var homeScreen = this.state.isLoggedIn ? (
       {loggedok}
     ) : (
       {loggedno}
     );
-
     return (
-
     <div className="task-content">{homeScreen}</div>
     );
   }
-
 });
 
 module.exports = Main;

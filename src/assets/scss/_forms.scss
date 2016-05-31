@@ -7,13 +7,12 @@ input[type="submit"] {
 }
 
 .confirm-form {
-  position: absolute;
+  position: relative;
   bottom: 0px;
   width: 100%;
   text-align: center;
-  background-color: rgba(255,255,255,0.4);
-
 }
+
 fieldset {
   background-color: $secondary-background-color;
   border: $base-border;
@@ -34,26 +33,24 @@ textarea {
 }
 
 input {
-  border: 1px solid $main-gray;
-  width: 50%;
-  margin: 0 auto;
-  border-radius: 3px;
-  margin-bottom: 1rem;
+  margin: 14px auto;
+  border-radius: 4px;
   padding: 0.5rem 0rem;
+  color: $light-gray;
+  background-color: rgba(0,0,0,0.2)
 
 }
 
 .form-name {
   label {
     text-transform: uppercase;
-    color: $color-gray-2;
+    color: $main-gray;
     font-size: 1.0rem;
     letter-spacing: 1px;
 
   }
   input {
     border: none;
-    border-bottom: 1px solid $main-gray;
     width: 100%;
   }
 }
@@ -66,5 +63,8 @@ input {
   input {
     text-align: left;
   }
+}
 
+.form-name {
+  margin-right: 12px
 }

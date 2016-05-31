@@ -8,7 +8,6 @@ var Profile = React.createClass({
 
    getInitialState: function() {
       var user = UserStore.getUser();
-
       UserStore.addChangeListener(this._onChange);
     return {
       user: user,
@@ -47,7 +46,6 @@ var Profile = React.createClass({
   },
 
   _handleChange: function(e) {
-    console.log(e.target)
     var state = {}
     state[e.target.name] =  e.target.value;
     this.setState(state);
@@ -84,45 +82,35 @@ var Profile = React.createClass({
 
    render: function() {
       return (
-
-
           <div className="profile-view-wrapper row col-f-6">
-
           <div className="profile-header col-12">
             <h2 className="profile-title">Profile</h2>
           </div>
-
                <div className="profile-left col-12">
-
                 <img src={ APIRoot + this.state.avatar_url} className="profile-img" />
                </div>
-
           <form className="profile-form col-12" onSubmit={this._onSubmit}>
-
-
             <div className="form-dob col-12">
             <label>Profile Image</label>
               <input type="file"
                      name="avatar"
-                     onChange={this._handleFile} />
+                     onChange={this._handleFile}
+              />
             </div>
             <div className="form-name col-6">
               <label>First Name</label>
-
               <input type="text"
                      value={this.state.first_name}
                      name="first_name"
-                     onChange={this._handleChange} />
+                     onChange={this._handleChange}
+              />
             </div>
-
             <div className="form-name col-6">
             <label>Last Name</label>
             <input type="text"
                    value={this.state.last_name}
                    name="last_name"
                    onChange={this._handleChange} />
-
-
             </div>
             <div className="form-dob col-12">
             <label>Date of birth</label>
@@ -131,7 +119,6 @@ var Profile = React.createClass({
                    name="dob"
                    onChange={this._handleChange} />
             </div>
-
             <div className="form-sport col-12">
             <label>Sport</label>
             <select value={this.state.sport_id} onChange={this._handleChange} name="sport_id" >
@@ -141,11 +128,9 @@ var Profile = React.createClass({
               <option value="4">Tennis</option>
             </select>
             </div>
-
             <button className="std-btn">Update</button>
          </form>
           </div>
-
       );
    }
 

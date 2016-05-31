@@ -13,14 +13,6 @@ module.exports = {
     WebAPIUtils.loadUser();
   },
   
-  loadStory: function(storyId) {
-    SmallAppDispatcher.handleViewAction({
-      type: ActionTypes.LOAD_STORY,
-      storyId: storyId
-    });
-    WebAPIUtils.loadStory(storyId);
-  },
-
   updateSAT: function(checkbox) {
     SmallAppDispatcher.handleViewAction({
       type: ActionTypes.UPDATE_SAT,
