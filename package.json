@@ -32,7 +32,7 @@
   "devDependencies": {},
   "scripts": {
     "build": "gulp clean && gulp build",
-    "start": "forever start server.js",
+    "start": "forever stopall && forever start server.js",
     "stop": "forever stop server.js"
   },
   "engines": {
