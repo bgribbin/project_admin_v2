@@ -55,6 +55,8 @@ var Sat = React.createClass({
              </iframe>
             </div>
 
+            <p>Please enter your SAT scores in the profile page and then mark as completed here</p>
+
            </div>
 
          </div>

@@ -70,7 +70,7 @@ var SideNav = React.createClass({
     ) : (
       <ul className="pure-menu-list">
         <li className="pure-menu-item">
-            <Link to="login" className="pure-menu-link">Login</Link>
+            {/*<Link to="login" className="pure-menu-link">Login</Link>*/}
         </li>
       </ul>
     );
