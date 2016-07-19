@@ -39,7 +39,7 @@ var SessionStore = assign({}, EventEmitter.prototype, {
   },
 
   isLoggedIn: function() {
-    return _accessToken ? true : false;    
+    return _accessToken ? true : false;
   },
 
   getAccessToken: function() {
@@ -74,7 +74,7 @@ SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
         sessionStorage.setItem('accessToken', _accessToken);
         sessionStorage.setItem('email', _email);
         SessionStore.emitChange();
-        router.transitionTo('/profile');
+        router.transitionTo('/');
       }
       if (action.errors) {
         _errors = action.errors;
