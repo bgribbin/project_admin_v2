@@ -14,7 +14,7 @@ function getStateFromStores() {
 }
 
 var SideNav = React.createClass({
-  
+
   propTypes: {
   	isLoggedIn: ReactPropTypes.bool,
   	email: ReactPropTypes.string,
@@ -49,10 +49,10 @@ var SideNav = React.createClass({
       <ul className="pure-menu-list">
         <li className="pure-menu-item">
         <Link to="app" className="pure-menu-link">Welcome</Link>
-        </li> 
+        </li>
         <li className="pure-menu-item">
-        <Link to="profile" className="pure-menu-link">Profile</Link>
-        </li> 
+        <Link to="profile" className="pure-menu-link">Profile & SAT</Link>
+        </li>
         <li className="pure-menu-item">
           <a href='#' className="pure-menu-link" onClick={this.logout}>Logout</a>
         </li>
@@ -60,11 +60,11 @@ var SideNav = React.createClass({
       <ul className="pure-menu-list nav-tasks">
          <li className="pure-menu-heading">Tasks</li>
          <Menu_item name={"Athletic CV"} link_to={"cv"} completed={this.state.user.cv_completed} />
-         <Menu_item name={"SAT Scores"} link_to={"sat"} completed={this.state.user.sat_completed} />
-         <Menu_item name={"NCAA/NAIA Eligability"} link_to={"eligability"} completed={this.state.user.eligability_completed} />
-         <Menu_item name={"Insurance"} link_to={"insurance"} completed={this.state.user.insurance_completed} />
-         <Menu_item name={"Visa"} link_to={"visa"} completed={this.state.user.visa_completed} />
          <Menu_item name={"Video Upload"} link_to={"video"} completed={this.state.user.video_completed} />
+         <Menu_item name={"SAT Scores"} link_to={"sat"} completed={this.state.user.sat_completed} />
+         <Menu_item name={"Coach contact"} link_to={"insurance"} completed={this.state.user.insurance_completed} />
+         <Menu_item name={"NCAA/NAIA Eligability"} link_to={"eligability"} completed={this.state.user.eligability_completed} />
+         <Menu_item name={"Visa"} link_to={"visa"} completed={this.state.user.visa_completed} />
       </ul>
       </div>
     ) : (
@@ -88,7 +88,7 @@ var SideNav = React.createClass({
                 {rightNav}
             </div>
         </div>
-  
+
 
     )
   }

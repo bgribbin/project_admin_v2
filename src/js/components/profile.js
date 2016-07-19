@@ -68,14 +68,27 @@ var Profile = React.createClass({
   _onSubmit: function(e) {
     e.preventDefault();
     this.setState({ errors: [] });
-    var attributes = {
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-      dob: this.state.dob,
-      sport: this.state.sport,
-      sport_id: this.state.sport_id,
-      avatar: this.state.data_uri
-    };
+    if (this.state.data_uri) {
+      var attributes = {
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
+        dob: this.state.dob,
+        sport: this.state.sport,
+        sport_id: this.state.sport_id,
+        sat: this.state.sat_score,
+        avatar: this.state.data_uri
+      };
+    }
+    else {
+      var attributes = {
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
+        dob: this.state.dob,
+        sport: this.state.sport,
+        sport_id: this.state.sport_id,
+      };
+    }
+
     UserActions.updateUserProfile(attributes);
     UserActions.loadUser();
   },
@@ -90,14 +103,14 @@ var Profile = React.createClass({
                 <img src={ APIRoot + this.state.avatar_url} className="profile-img" />
                </div>
           <form className="profile-form col-12" onSubmit={this._onSubmit}>
-            <div className="form-dob col-12">
+            <div className="form-dob col-8">
             <label>Profile Image</label>
               <input type="file"
                      name="avatar"
                      onChange={this._handleFile}
               />
             </div>
-            <div className="form-name col-6">
+            <div className="form-name col-8">
               <label>First Name</label>
               <input type="text"
                      value={this.state.first_name}
@@ -105,21 +118,21 @@ var Profile = React.createClass({
                      onChange={this._handleChange}
               />
             </div>
-            <div className="form-name col-6">
+            <div className="form-name col-8">
             <label>Last Name</label>
             <input type="text"
                    value={this.state.last_name}
                    name="last_name"
                    onChange={this._handleChange} />
             </div>
-            <div className="form-dob col-12">
+            <div className="form-dob col-8">
             <label>Date of birth</label>
             <input type="date"
                    value={this.state.dob}
                    name="dob"
                    onChange={this._handleChange} />
             </div>
-            <div className="form-sport col-12">
+            <div className="form-sport col-8">
             <label>Sport</label>
             <select value={this.state.sport_id} onChange={this._handleChange} name="sport_id" >
               <option value="1">Football</option>
@@ -128,7 +141,18 @@ var Profile = React.createClass({
               <option value="4">Tennis</option>
             </select>
             </div>
-            <button className="std-btn">Update</button>
+
+            <div className="form-name col-8">
+            <label>SAT Scores</label>
+            <input type="date"
+                   value={this.state.sat}
+                   name="dob"
+                   onChange={this._handleChange} />
+            </div>
+
+            <div className="form-submit col-8">
+              <button className="std-btn">Update</button>
+            </div>
          </form>
           </div>
       );

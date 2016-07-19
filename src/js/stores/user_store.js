@@ -49,17 +49,12 @@ var UserStore = assign({}, EventEmitter.prototype, {
 
 UserStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
   var action = payload.action;
-
   switch(action.type) {
-
     case ActionTypes.RECEIVE_USER:
       _user = action.json;
       console.log('RECEIVE_USER');
       UserStore.emitChange();
       break;
-
-
-
   }
 
   return true;

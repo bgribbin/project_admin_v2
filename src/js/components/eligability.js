@@ -33,39 +33,30 @@ var Eligability = React.createClass({
          <div className="task-content">
           <div className="title">
             <h1>NAIA Registration</h1>
-            <hr/>
           </div>
             <div className="task-text">
-              <p>The Eligibility Centre is something that all students that wish to study out in America have to complete in order to be deemed to be of ‘amateur’ status and therefore no professionals.
-              Further from our conversation, attached is a ‘how to guide’ for the NAIA Eligibility Centre.</p>
+              The Eligibility Centre is an online form that all students that wish to study in America have to complete in order to be deemed to be of ‘amateur’ status, therefore no professionals are able to compete at Collegiate level. attached is information on how to complete the NCAA & NAIA eligibility Centres respectively.  The eligibility centre isn’t a time to sell yourself, please ensure that you are precise with any teams that you have represented, i.e Crystal Palace U17, not Crystal Palace F.C.
+              <br />
+              <br />
+              Please read through the attached PDF document for either the NCAA or NAIA eligibility Centre as each one will ask different questions. Only complete the Eligibility Centre that your Future Elite Rep has asked you to.
+              <br />
+              <br />
+              Before completing the form and sending it for review, please speak with your Future Elite Rep so that they can ensure that the form is completed correctly as once it is submitted, no changes can be made.
+              <br />
+              <br />
+              Once you have completed the Eligibility Centre form, it will be sent for review and you will subsequently be sent ‘Tasks’ to complete. Refer to the relevant PDF (NAIA or NCAA) for help with any tasks you may be required to complete.
+              <br />
+              <br />
+               N.B After submission be sure to log onto your profile at least once a week to check with the status of your application.
+               <br />
+               <br />
 
-              <h4>STEPS</h4>
-              <div className="step-cont">
-                <p className="step-number">1 </p>
-                <p className="step-para"> Click on the link below. This will open up an online PDF that provides you with information/tips for registering with the NAIA
-                   NAIA Registration Process (please click)</p>
-              </div>
+             <div className="task-video">
+              <iframe width="420" height="315" className="youtube"
+                src="https://www.youtube.com/embed/T5cwzGHuHB8">
+              </iframe>
+             </div>
 
-              <div className="step-cont">
-                <p className="step-number">2 </p>
-                <p className="step-para"> Create an account by clicking on 'Register to play' www.playnaia.org</p>
-              </div>
-
-              <div className="step-cont">
-                <p className="step-number">3 </p>
-                <p className="step-para"> Please refer to the  PDF as a reference point when answering these questions. </p>
-              </div>
-
-              <div className="step-cont">
-                <p className="step-number">4 </p>
-                <p className="step-para"> The main question to be careful of is 'Have you played for anyone since leaving high school or from the age of 19'
-                    The answer to this questions is 'NO' as high school in the USA is until 18.</p>
-              </div>
-
-              <div className="step-cont">
-                <p className="step-number">5 </p>
-                <p className="step-para"> Contact your FES agent once you have completed the registration process. They will then discuss your list of tasks in greater detail.</p>
-              </div>
 
             </div>
             </div>

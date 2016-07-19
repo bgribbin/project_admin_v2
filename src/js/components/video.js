@@ -10,16 +10,30 @@ var Video = React.createClass({
               <h1>Video footage</h1>
            </div>
            <div className="task-text">
-              <p>Video footage makes up a large section of your profile.
-              The sooner you can gather footage or register for a video day,
-               the sooner we can get you speaking with coaches.
-               It's important to spend time collecting quality footage as it
-               can be the difference between a 50% and a 75% scholarship offer.</p>
-           </div>
+              <p>We hold ‘Video Days’ throughout the year, however it is important that coaches are able to view you playing in your own surroundings, in fixtures that are competitive.
+              We like our athletes to get at least 2 games worth of footage which we can then add to our video day footage.</p>
+            <br />
+            <p>For help on how to obtain good footage, Please look through the
+              <a className="" href="assets/video.pdf" download="/assets/video.pdf"> attached PDF </a>
+              throughly and have a look at an example video.
+            </p>
+          <br />
+          <div className="task-video">
+           <iframe width="420" height="315" className="youtube"
+             src="https://www.youtube.com/embed/zxPi5GUggLE">
+           </iframe>
+         </div>
+
+         <div className="task-upload">
+            <button className="std-btn upload-btn">
+              <a className="btn-a" href="https://www.dropbox.com/request/IKubpsr2DT0uaGyekhBW">Upload your video</a>
+            </button>
+         </div>
 
         </div>
-        <Completed_form task={"video"} />
+        <Completed_form task="video" />
       </div>
+    </div>
     )
   }
 });
