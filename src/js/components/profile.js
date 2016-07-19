@@ -2,7 +2,7 @@ var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
 
-var APIRoot = "http://localhost:3000";
+var APIRoot = "http://api.treacle.io";
 
 var Profile = React.createClass({
 
@@ -144,7 +144,7 @@ var Profile = React.createClass({
 
             <div className="form-name col-8">
             <label>SAT Scores</label>
-            <input type="date"
+            <input type="number"
                    value={this.state.sat}
                    name="dob"
                    onChange={this._handleChange} />
