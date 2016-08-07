@@ -16,7 +16,7 @@ var App = React.createClass({
 	getInitialState: function() {
     return getStateFromStores();
   },
-  
+
   componentDidMount: function() {
     SessionStore.addChangeListener(this._onChange);
   },
@@ -33,13 +33,13 @@ var App = React.createClass({
     return (
       <div className="comp-app-wrp row">
 
-        <SideNav 
+        <SideNav
           isLoggedIn={this.state.isLoggedIn}
           email={this.state.email} />
 
         <div className="comp-main-cont col-9">
- 	 		     <RouteHandler />  
-        </div> 
+ 	 		     <RouteHandler />
+        </div>
 
       </div>
     );
