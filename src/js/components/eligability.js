@@ -38,13 +38,13 @@ var Eligability = React.createClass({
                The Eligibility Centre is something that all students that wish to study out in America have to complete in order to be deemed to be of ‘amateur’ status. Follow the steps on this page and if youb have any questions, please contact your FES rep.
                <br />
                <br />
-               <a href="http://content.yudu.com/Library/A3b7zp/registeringwiththeNC/resources/index.htm?referrerUrl=http%3A%2F%2Ffree.yudu.com%2Fitem%2Fdetails%2F2631544%2Fregistering-with-the-NCAA">
+               <a href="http://content.yudu.com/Library/A3b7zp/registeringwiththeNC/resources/index.htm?referrerUrl=http%3A%2F%2Ffree.yudu.com%2Fitem%2Fdetails%2F2631544%2Fregistering-with-the-NCAA" target="_blank">
               Please click on the online PDF</a> to use as a reference point throughout the registration process
 
                <br />
                <br />
                1) Click on the link below. This will open up the NCAA eligibility centre website. Once you have then opened the link, click on the 'NCAA College Bound Athletes' tab
-   http://web3.ncaa.org/ECWR2/NCAA_EMS/NCAA.jsp (please click)
+   <a href="http://web3.ncaa.org/ECWR2/NCAA_EMS/NCAA.jsp"> (please click)</a>
              <br />
              <br />
               2) You will be brought to the 'Eligibility Home Page'  Please click 'New Account' in the top right hand corner and create an account. Please then enter your 'Verification Code' and complete your basic information
@@ -88,7 +88,7 @@ var Eligability = React.createClass({
 <br />
 <br />
 1) Please click on the link below. This will then bring up the NAIA Eligibility Centre details.
- http://www.playnaia.org
+ <a href="http://www.playnaia.org">(Click here)</a>
  <br />
  <br />
 2) Click ‘Register' on the top bar<br />
