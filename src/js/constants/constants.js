@@ -7,7 +7,7 @@ var keyMirror = require('keymirror');
 //   var APIRoot = process.env.BACK_END_DEV
 // }
 
-var APIRoot = 'http://localhost:3000'
+var APIRoot = 'http://api.treacle.io'
 
 module.exports = {
 
