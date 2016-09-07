@@ -18,7 +18,8 @@ var Profile = React.createClass({
       sport: user.first_name,
       sport_id: user.sport_id,
       avatar_url: user.avatar_url,
-      data_uri: null
+      data_uri: null,
+      sat: user.sat_score
     };
   },
 
@@ -41,6 +42,7 @@ var Profile = React.createClass({
       dob: user.dob,
       sport: user.sport,
       sport_id: user.sport_id,
+      sat_score: user.sat_score,
       avatar_url: user.avatar_url
     });
   },
@@ -75,7 +77,7 @@ var Profile = React.createClass({
         dob: this.state.dob,
         sport: this.state.sport,
         sport_id: this.state.sport_id,
-        sat: this.state.sat_score,
+        sat_score: this.state.sat_score,
         avatar: this.state.data_uri
       };
     }
@@ -85,6 +87,7 @@ var Profile = React.createClass({
         last_name: this.state.last_name,
         dob: this.state.dob,
         sport: this.state.sport,
+        sat_score: this.state.sat_score,
         sport_id: this.state.sport_id,
       };
     }
@@ -135,18 +138,19 @@ var Profile = React.createClass({
             <div className="form-sport col-8">
             <label>Sport</label>
             <select value={this.state.sport_id} onChange={this._handleChange} name="sport_id" >
-              <option value="1">Football</option>
+              <option value="1">Soccer</option>
               <option value="2">Swimming</option>
               <option value="3">Rugby</option>
               <option value="4">Tennis</option>
+              <option value="5">Other</option>
             </select>
             </div>
 
             <div className="form-name col-8">
             <label>SAT Scores</label>
             <input type="number"
-                   value={this.state.sat}
-                   name="dob"
+                   value={this.state.sat_score}
+                   name="sat_score"
                    onChange={this._handleChange} />
             </div>
 

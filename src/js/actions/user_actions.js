@@ -12,7 +12,7 @@ module.exports = {
     });
     WebAPIUtils.loadUser();
   },
-  
+
   updateSAT: function(checkbox) {
     SmallAppDispatcher.handleViewAction({
       type: ActionTypes.UPDATE_SAT,
@@ -34,7 +34,7 @@ module.exports = {
       type: ActionTypes.UPDATE_USER
     });
     console.log("here");
-    console.log(profile);
+    console.log(profile.sat_score);
     WebAPIUtils.updateUserProfile(profile);
   }
 

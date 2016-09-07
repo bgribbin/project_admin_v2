@@ -55,10 +55,11 @@ var Sat = React.createClass({
                src="https://www.youtube.com/embed/WDYyFqdOIso">
              </iframe>
             </div>
-
+            <br />
             <h2>SAT Registration Steps</h2>
+            <br />
 
-          <p>  1) The College board website can be found at  https://collegereadiness.collegeboard.org/sat (This is the website where you will book your SAT exam)</p><br />
+          <p>  1) The College board website can be found at  <a href="https://collegereadiness.collegeboard.org/sat">https://collegereadiness.collegeboard.org/sat</a> (This is the website where you will book your SAT exam)</p><br />
 
   <p>2) Click on the link and create a college board profile.</p><br />
 
@@ -76,20 +77,20 @@ var Sat = React.createClass({
 
 
     <h3>Useful Links</h3>
+    <br />
   <p>Below are a few useful links that will help when booking/taking the SAT exam.</p>
 
   <p>- We recommend booking two SAT exams in the later part of this year. Students always do better on the second attempt and a good score on the SAT can be the difference between getting into the school of your choice or not. </p>
 
   <p>- Right Click on the link below and follow the link to open up an online PDF which will also help with the registration process.</p>
-  <p>- SAT Registration Process (Please Click)</p>
+  <p>- SAT Registration Process <a className="btn-a" href="assets/sat.png" download="/assets/sat.png">Click here</a></p>
 
-  <p>- Official new SAT revision guide - Please visit www.wordery.com to pick up the ‘Official NEW SAT Guide’ March 2016 and beyond.</p>
+  <p>- Official new SAT revision guide - Please visit <a href="www.wordery.com">www.wordery.com</a> to pick up the ‘Official NEW SAT Guide’ March 2016 and beyond.</p>
 
-  <p>- International Test Dates
-  http://sat.collegeboard.org/register/sat-international-dates</p>
+  <p>- International Test Dates <a href="http://sat.collegeboard.org/register/sat-international-dates">http://sat.collegeboard.org/register/sat-international-dates</a></p>
 
 <p>- SAT Practice Tests
-  http://blog.prepscholar.com/printable-sat-practice-tests-4-free-official-tests</p>
+  <a href="http://blog.prepscholar.com/printable-sat-practice-tests-4-free-official-tests">http://blog.prepscholar.com/printable-sat-practice-tests-4-free-official-tests</a></p>
 
             <p>Please enter your SAT scores in the profile page and then mark as completed here</p><br />
 
