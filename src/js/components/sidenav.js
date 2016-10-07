@@ -62,8 +62,9 @@ var SideNav = React.createClass({
          <Menu_item name={"Athletic CV"} link_to={"cv"} completed={this.state.user.cv_completed} />
          <Menu_item name={"Video Upload"} link_to={"video"} completed={this.state.user.video_completed} />
          <Menu_item name={"SAT Registration"} link_to={"sat"} completed={this.state.user.sat_completed} />
-         <Menu_item name={"Coach contact"} link_to={"insurance"} completed={this.state.user.insurance_completed} />
-         <Menu_item name={"NCAA/NAIA Eligibility"} link_to={"eligability"} completed={this.state.user.eligability_completed} />
+         <Menu_item name={"Coach contact"} link_to={"coach"} completed={this.state.user.insurance_completed} />
+         <Menu_item name={"NAIA Eligability"} link_to={"eligability"} completed={this.state.user.eligability_completed} />
+         <Menu_item name={"NCAA Eligability"} link_to={"ncaa"} completed={this.state.user.ncaa_completed} />
          <Menu_item name={"Visa"} link_to={"visa"} completed={this.state.user.visa_completed} />
       </ul>
       </div>

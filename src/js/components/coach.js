@@ -1,13 +1,13 @@
 var React = require('react');
-
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
+
 var PageActions = require('../actions/page_actions.js');
 var PageStore = require('../stores/page_store.js');
 
 var Completed_form = require('../components/completed_form.js');
 
-var Video = React.createClass({
+var Insurance = React.createClass({
 
   getInitialState: function() {
    return {
@@ -22,37 +22,34 @@ var Video = React.createClass({
    UserActions.loadUser();
 
    PageStore.addChangeListener(this._onChange);
-   PageActions.receivePage(2);
+   PageActions.receivePage(4);
  },
 
  componentWillUnmount: function() {
    UserStore.removeChangeListener(this._onChange);
  },
 
- _onChange: function() {
-   this.setState({
-     user: UserStore.getUser(),
-     errors: UserStore.getErrors(),
-     page: PageStore.getPage(),
-   });
- },
+  _onChange: function() {
+    this.setState({
+      user: UserStore.getUser(),
+      errors: UserStore.getErrors(),
+      page: PageStore.getPage(),
+    });
+  },
+   render: function() {
 
-  render: function(){
-    return (
-      <div>
-        <div className="task-content">
-           <div className="title">
-              <h1>Video footage</h1>
-           </div>
-           <div className="task-text">
+      console.log(this.state.user);
+      return (
+         <div>
+           <div className="task-content">
 
              <div className="content" dangerouslySetInnerHTML={{__html: this.state.page.body}}></div>
-        </div>
-        <Completed_form task="video" />
-      </div>
-    </div>
-    )
-  }
+           </div>
+           <Completed_form task={"insurance"} />
+         </div>
+      );
+   }
+
 });
 
-module.exports = Video;
+module.exports = Insurance;

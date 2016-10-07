@@ -19,5 +19,12 @@ module.exports = {
       json: json,
       errors: errors
     });
+  },
+  receivePage: function(json, errors) {
+    SmallAppDispatcher.handleServerAction({
+      type: ActionTypes.RECEIVE_PAGE,
+      json: json,
+      errors: errors
+    });
   }
 };

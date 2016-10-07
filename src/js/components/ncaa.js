@@ -1,5 +1,4 @@
 var React = require('react');
-
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
 
@@ -8,7 +7,7 @@ var PageStore = require('../stores/page_store.js');
 
 var Completed_form = require('../components/completed_form.js');
 
-var Eligability = React.createClass({
+var Ncaa = React.createClass({
 
   getInitialState: function() {
    return {
@@ -24,7 +23,7 @@ var Eligability = React.createClass({
      UserActions.loadUser();
 
      PageStore.addChangeListener(this._onChange);
-     PageActions.receivePage(7);
+     PageActions.receivePage(5);
    },
 
    componentWillUnmount: function() {
@@ -41,19 +40,19 @@ var Eligability = React.createClass({
    render: function() {
       return (
         <div>
-         <div className="task-content">
+         <div className="task-text">
            <div className="title">
-             <h1>NAIA Registration</h1>
+              <h1>NCAA</h1>
            </div>
 
-              <div className="task-text" dangerouslySetInnerHTML={{__html: this.state.page.body}}></div>
+           <div className="content" dangerouslySetInnerHTML={{__html: this.state.page.body}}></div>
 
-            </div>
-            <Completed_form task={"eligability"} />
-        </div>
+          </div>
+          <Completed_form task={"ncaa"} />
+         </div>
+
       );
    }
-
 });
 
-module.exports = Eligability;
+module.exports = Ncaa;

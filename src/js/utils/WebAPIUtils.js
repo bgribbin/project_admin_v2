@@ -20,8 +20,8 @@ module.exports = {
 
   signup: function(email, username, password, passwordConfirmation) {
     request.post(APIEndpoints.REGISTRATION)
-      .send({ user: { 
-        email: email, 
+      .send({ user: {
+        email: email,
         username: username,
         password: password,
         password_confirmation: passwordConfirmation
@@ -70,6 +70,21 @@ module.exports = {
           console.log('loaded user');
           console.log(json);
           ServerActionCreators.receiveUser(json);
+        }
+      });
+  },
+  receivePage: function(id) {
+    console.log('rec page');
+    request.get(APIEndpoints.PAGE)
+      .query({ id: id})
+      .set('Accept', 'application/json')
+      .set('Authorization', sessionStorage.getItem('accessToken'))
+      .end(function(error, res){
+        if (res) {
+          json = JSON.parse(res.text);
+          console.log('loaded page');
+          console.log(json);
+          ServerActionCreators.receivePage(json);
         }
       });
   },

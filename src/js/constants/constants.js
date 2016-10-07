@@ -7,7 +7,7 @@ var keyMirror = require('keymirror');
 //   var APIRoot = process.env.BACK_END_DEV
 // }
 
-var APIRoot = 'http://api.treacle.io'
+var APIRoot = 'http://localhost:3000'
 
 module.exports = {
 
@@ -16,6 +16,7 @@ module.exports = {
     REGISTRATION:   APIRoot + "/v1/users",
     USER:           APIRoot + "/v1/profile",
     VIDEO:          APIRoot + "/v1/video",
+    PAGE:         APIRoot + "/v1/page",
     SAT:          APIRoot + "/v1/sat"
   },
 
@@ -37,6 +38,10 @@ module.exports = {
     LOAD_USER: null,
     UPDATE_SAT: null,
     RECEIVE_USER: null,
+
+    //page
+    LOAD_PAGE: null,
+    RECEIVE_PAGE: null,
   })
 
 };

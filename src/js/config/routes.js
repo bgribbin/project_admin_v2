@@ -5,8 +5,9 @@ var VideoPage = require('../components/video');
 var ProfilePage = require('../components/profile');
 var SatPage = require('../components/sat');
 var CVPage = require('../components/cv');
-var InsurancePage = require('../components/insurance');
+var CoachPage = require('../components/coach');
 var EligabilityPage = require('../components/eligability');
+var NcaaPage = require('../components/ncaa');
 var VisaPage = require('../components/visa');
 var App = require('../components/app');
 var LoginPage = require('../components/login');
@@ -21,8 +22,9 @@ module.exports = (
     <Route name="profile" path="/profile" handler={ProfilePage} />
     <Route name="sat" path="/sat" handler={SatPage} />
     <Route name="cv" path="/cv" handler={CVPage} />
-    <Route name="insurance" path="/insurance" handler={InsurancePage} />
+    <Route name="coach" path="/coach" handler={CoachPage} />
     <Route name="eligability" path="/eligability" handler={EligabilityPage} />
+    <Route name="ncaa" path="/ncaa" handler={NcaaPage} />
     <Route name="visa" path="/visa" handler={VisaPage} />
     <Route name="about" path="/about" handler={HomePage} />
     <Route name="login" path="/login" handler={LoginPage} />

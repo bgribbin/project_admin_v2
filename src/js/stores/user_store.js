@@ -21,7 +21,8 @@ var _user =  {
                 "insurance_completed": false,
                 "cv_completed": false,
                 "eligability_completed": false,
-                "visa_completed": false
+                "visa_completed": false,
+                "ncaa_completed": false
              };
 
 var UserStore = assign({}, EventEmitter.prototype, {
