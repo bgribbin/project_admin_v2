@@ -40,7 +40,7 @@ var Ncaa = React.createClass({
    render: function() {
       return (
         <div>
-         <div className="task-text">
+         <div className="task-content">
            <div className="title">
               <h1>NCAA</h1>
            </div>
