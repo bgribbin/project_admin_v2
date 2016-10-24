@@ -2,7 +2,7 @@ var React = require('react');
 var UserActions = require('../actions/user_actions.js');
 var UserStore = require('../stores/user_store.js');
 
-var APIRoot = "http://api.treacle.io";
+var APIRoot = "http://admin.futureelitesports.com";
 
 var Profile = React.createClass({
 
