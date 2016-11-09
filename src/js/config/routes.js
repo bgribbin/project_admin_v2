@@ -18,7 +18,7 @@ var Route = Router.Route;
 module.exports = (
 
   <Route name="app" path="/" handler={App}>
-    <DefaultRoute handler={Main} />
+    <DefaultRoute handler={Main}/>
     <Route name="profile" path="/profile" handler={ProfilePage} />
     <Route name="sat" path="/sat" handler={SatPage} />
     <Route name="cv" path="/cv" handler={CVPage} />
